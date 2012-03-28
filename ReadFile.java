@@ -118,7 +118,6 @@ public class ReadFile{
                 int filledSeats = input.nextInt();
                 String professor = input.nextLine();
                 professor = professor.substring(1, professor.length());
-                int permission = input.nextInt();
                 
                 Course newCourse = new Course(crn, course, section, title, prer, credits, time, days, building, room, professor,
                     totalSeats, filledSeats);

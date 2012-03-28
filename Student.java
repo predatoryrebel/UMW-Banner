@@ -4,7 +4,8 @@ import java.io.*;
 public class Student extends User {
     
     Student(String yourIDNumber, String firstName, String lastName, String userName, String password, String email, String yourMajor, 
-            String yourMinor, int yourApprovedCredits, int yourCreditHoursEnrolled, String yourCurrentSchudule, boolean yourHolds){
+            String yourMinor, int yourApprovedCredits, int yourCreditHoursEnrolled, String yourCurrentSchudule, 
+            boolean yourHolds){
     
         super ( userName, password, email, firstName, lastName);
         
@@ -17,8 +18,7 @@ public class Student extends User {
         holds = yourHolds;
         currentSchudule = new LinkedList<Course>();
     }
-    
-    
+   
     public void buildCurrentScudule(LinkedList<Course> courseList)
     {
         String temp = tempCurrentSchudule;
@@ -27,38 +27,14 @@ public class Student extends User {
         
         while (input.hasNext()){
         
-            String courseName = input.next();
-            Course tempCourse = search(courseList, courseName);
-            currentSchudule.add(tempCourse);
+            String crn = input.next();
+            Course tempCourse = new Course();
+            tempCourse.setCRN(crn);        
+            Collections.sort(courseList, Course.comparatorByCRN());
+            int index = Collections.binarySearch(courseList, tempCourse , Course.comparatorByCRN());
+            currentSchudule.add(courseList.get(index));
         }
         
-    }
-    
-     private Course search(LinkedList<Course> courseList, String courseName)
-    {
-        Course tempCourse = new Course(courseName);
-        int low = 0;
-        int high = courseList.size();
-        int mid;
-
-        while( low <= high )
-        {
-            mid = ( low + high ) / 2;
-
-            if( courseList.get(mid).compareTo(tempCourse) < 0 ){
-                low = mid + 1;
-            }
-            else if (courseList.get(mid).compareTo(tempCourse) > 0 ){
-                high = mid - 1;
-            }
-            else
-            {
-                return courseList.get(mid);
-            }
-        }
-
-        return null;    
-    
     }
     
     
@@ -67,20 +43,85 @@ public class Student extends User {
     {
         String contents = "";
         
-        contents = idNumber + " " + firstName + " " + lastName + " " + email  + " " + major + " " + minor + " " + approvedCredits + " " +
+        contents = idNumber + " " + getFirstName() + " " + getLastName() + " " + getEmail()  + " " + major + " " + minor + " " + approvedCredits + " " +
                 creditHoursEnrolled + " " + tempCurrentSchudule + " " + holds;
         
         return contents;
     }
     
-    String idNumber;
-    String major;
-    String minor;
-    int approvedCredits;
-    int creditHoursEnrolled;
-    LinkedList<Course> currentSchudule;
-    String tempCurrentSchudule;
-    boolean holds;
+    public void setIDNumber(String id)
+    {
+        idNumber = id;
+    }
+    
+    public String getIDNumber()
+    {
+        return idNumber;
+    }
+    
+    public void setMajor(String yourMajor)
+    {
+        major = yourMajor;
+    }
+    
+    public String getMajor()
+    {
+        return major;
+    }
+    
+    public void setMinor(String yourMinor)
+    {
+        minor = yourMinor;
+    }
+    
+    public String getMinor()
+    {
+        return minor;
+    }
+    
+    public void setApprovedCredits(int yourApprovedCredits)
+    {
+        approvedCredits = yourApprovedCredits;
+    }
+    
+    public int getApprovedCredits()
+    {
+        return approvedCredits;
+    }
+    
+    public void setCreditHoursEnrolled(int yourCreditHoursEnrolled)
+    {
+        creditHoursEnrolled = yourCreditHoursEnrolled;
+    }
+    
+    public int getCreditHoursEnrolled()
+    {
+        return creditHoursEnrolled;
+    }
+    
+    public LinkedList<Course> getCurrentSchudule()
+    {
+        return currentSchudule;
+    }
+    
+    public void setHolds(boolean yourHolds)
+    {
+        holds = yourHolds;
+    }
+    
+    public boolean getHolds()
+    {
+        return holds;
+    }        
+            
+    private String idNumber;
+    private String major;
+    private String minor;
+    private int approvedCredits;
+    private int creditHoursEnrolled;
+    private LinkedList<Course> currentSchudule;
+    private String tempCurrentSchudule;
+    private boolean holds;
 
    
 }

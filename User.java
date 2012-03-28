@@ -11,6 +11,11 @@ public class User implements Comparable<User>{
             lastName = yourLastName;
     }
     
+    User()
+    {
+    
+    }
+    
     public int compareTo(User u)
     {
         return lastName.compareToIgnoreCase(u.lastName);
@@ -26,11 +31,58 @@ public class User implements Comparable<User>{
         return contents;
     }
     
-    String userName;
-    String password;
-    String email;
-    String firstName;
-    String lastName;
-
+    public void setUserName(String yourUserName)
+    {
+        userName = yourUserName;
+    }
     
+    public String getUserName()
+    {
+        return userName;
+    }
+    
+    public void setPassword(String yourPassword)
+    {
+        password = yourPassword;
+    }
+    
+    public String getPassword()
+    {
+        return password;
+    }
+    
+    public void setEmail(String yourEmail)
+    {
+        email = yourEmail;
+    }
+    
+    public String getEmail()
+    {
+        return email;
+    }
+    
+    public void setFirstName(String yourFirstName)
+    {
+        firstName = yourFirstName;
+    }
+    
+    public String getFirstName()
+    {
+        return firstName;
+    }
+    
+    public void setLastName(String yourLastName)
+    {
+        lastName = yourLastName;
+    }
+    
+    public String getLastName()
+    {
+        return lastName;
+    }
+    private String userName;
+    private String password;
+    private String email;
+    private String firstName;
+    private String lastName;    
 }

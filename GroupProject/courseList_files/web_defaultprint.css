@@ -1,0 +1,135 @@
+/*
+  AUDIT TRAIL: 6.0	
+  1. Hide HR tag for printing					Rk 3/26/2003
+  2. Reduce font sizes for datadisplay tables to fit in page. This will be useful
+     for pages which have lot of content.
+
+  AUDIT TRAIL: 5.3
+  1. Initial release.                        rk 6/14/2002
+
+	This style sheet will be used for print media. 
+	Use this style sheet to define print tags.
+        This style sheet can also be used to override styles from application pages.
+
+  AUDIT TRAIL END
+
+  FILE NAME..: web_defaultprint.css
+  RELEASE....: 5.3
+  PRODUCT....: WTLWEB
+  COPYRIGHT..: Copyright (C) SCT Corporation 2002. All rights reserved.
+
+CHANGES TO UMW STYLESHEETS: Catherine Derecki, 06/29/04:
+
+Global Change: reduced font sizes by 10% throughout;
+Body style: Changed "arial" to "Verdana";
+
+
+*/
+
+
+@media print 
+{
+  /* style sheet for print goes here */
+
+BODY {
+font-family: Arial;
+font-style: normal;
+text-align: left;
+width:90%;/* BROWSER CONSIDERATION - Override browser settings for BODY margin */
+margin-top: 0%;
+margin-left: 0%;
+letter-spacing:0em;
+}
+
+
+DIV.backlinkdiv {
+display:none
+}
+
+DIV.pageheaderdiv2 {
+display: none 
+}
+
+DIV.headerlinksdiv {
+display: none 
+}
+DIV.poweredbydiv {
+display: none 
+}
+
+DIV.footerlinksdiv{
+display: none 
+}
+
+HR {
+color: #FFFFFF;
+text-align: left;
+vertical-align: top;
+margin-top: 0px;
+}
+
+Table.datadisplaytable{
+font-family: Arial;
+font-size :100%
+}
+
+
+TABLE TD.dddefault {
+font-family: Arial;
+font-size:95%;
+}
+
+TABLE TH.dddefault {
+font-family: Arial;
+font-size: 100%;
+}
+
+Table TH.ddlabel
+{
+font-family: Arial;
+font-size: 100%;
+}
+Table TH.ddheader
+{
+text-align: right;
+}
+@page {
+  /*size: 11in 8.5in;  width height  */
+  size: 8.5in 11in;  width height
+}
+.fieldmediumtext {
+font-family: Arial;
+  font-size:85%;
+  text-transform: none;
+  letter-spacing:0em;
+}
+.fieldsmalltext {
+  font-family: Arial;
+  font-size:70%;
+  text-transform: none;
+  letter-spacing:0em;
+}
+
+.fieldmediumtextbold {
+  font-family: Arial;
+  font-size:80%;
+  text-transform: capitalize;
+  font-weight:bold;
+  letter-spacing:0em;
+}
+.fieldsmallboldtext {
+  font-family: Arial;
+  font-size:55%;
+  text-transform: uppercase;
+  font-weight:bold;
+  letter-spacing:0em;
+}
+.plaintable {
+	width:90%;
+}
+.plheader  {
+	border-bottom: 1px solid #cccccc;
+}
+.dddefault {
+	font-size: 110%;
+}
