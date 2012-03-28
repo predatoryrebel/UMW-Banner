@@ -10,6 +10,7 @@ public class Faculty extends User {
         office = yourOffice;
         phoneNumber = yourPhoneNumber;
         courses = new LinkedList<Course>();
+        permission = 1;
     }
     
    Faculty()
@@ -39,6 +40,15 @@ public class Faculty extends User {
         
         return contents;
     }
+
+    public String backup()
+    {
+        String backup = "";
+
+        backup =  getFirstName() + "," + getLastName() +  "," + getUserName() + "," + getPassword()  + ","  + getEmail()  + "," + office + "," + phoneNumber + '\n';
+
+        return backup;
+    }
     
     public void setOffice(String yourOffice)
     {
@@ -67,6 +77,7 @@ public class Faculty extends User {
    
     String office;
     String phoneNumber;
+    int permission;
     LinkedList<Course> courses;
 
 }
