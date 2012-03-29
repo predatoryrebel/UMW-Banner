@@ -49,6 +49,17 @@ public class Faculty extends User {
 
         return backup;
     }
+
+
+    public int compareTo(Faculty faculty2){
+
+
+        if(this.getFirstName() != null && faculty2.getFirstName() != null){
+            return this.getFirstName().compareToIgnoreCase(faculty2.getFirstName());
+        }
+        return 0;
+
+    }
     
     public void setOffice(String yourOffice)
     {
