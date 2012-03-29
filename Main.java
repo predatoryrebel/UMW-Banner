@@ -1,5 +1,7 @@
 import java.io.*;
 import java.util.*;
+import java.awt.event.*;
+import javax.swing.Timer;
 
 public class Main {
     
@@ -16,9 +18,27 @@ public class Main {
         
        // Login login = new Login(studentList, courseList);
         //login.setVisible(true);
-    }
 
-    public static int systemBackup(final LinkedList<Course> courseList, final LinkedList<Student> studentList, final LinkedList<Faculty> facultyList){
+        /* Create timer and set to backup every ten mins */
+        ActionListener listener = new ActionListener()
+         {
+            public void actionPerformed(ActionEvent event)
+            {
+                
+                //PROBLEM HERE - WORKING ON IT
+                //systemBackup(courseList, studentList, facultyList);
+            }
+         };
+
+      final int DELAY = 10 * (60 * 1000);
+         // Milliseconds between timer ticks
+      Timer t = new Timer(DELAY, listener);
+      t.start();
+
+        
+    }
+    
+    private static int systemBackup(final LinkedList<Course> courseList, final LinkedList<Student> studentList, final LinkedList<Faculty> facultyList){
 
            /******** BACKUP STUDENTLIST.CSV ***********/
             ListIterator<Course> iterator = courseList.listIterator();
@@ -78,7 +98,7 @@ public class Main {
 
         /******** END RENAME COURSELIST.CSV *********/
 
-        /******** RENAME STUDENTLIST.CSV ***********/
+        /******** BACKUP STUDENTLIST.CSV ***********/
 
             /* Declare a new student iterator */
             ListIterator<Student> iteratorStudent = studentList.listIterator();
@@ -96,7 +116,7 @@ public class Main {
                     Student element = iteratorStudent.next();
 
                     /* Write the comma delimited backup method reult out to a file */
-                    out.write((element.backup()));
+                    out.write(element.backup());
 
                }
            }
@@ -105,7 +125,7 @@ public class Main {
 
           }
 
-        /******** END RENAME STUDENTLIST.CSV *********/
+        /******** END BACKUP STUDENTLIST.CSV *********/
 
         /****** Rename the current courseList.csv file *****/
 
@@ -138,36 +158,62 @@ public class Main {
 
         /******** END RENAME COURSELIST.CSV *********/
 
-        iterator = courseList.listIterator(0);
+        /******** END BACKUP STUDENTLIST.CSV *********/
 
-        while (iterator.hasNext())
-        {
-            Course element = iterator.next();
-            element.buildEnrolledStudents(studentList);
-        }
+            ListIterator<Faculty> iteratorFaculty = facultyList.listIterator();
 
-        ListIterator<Faculty> iteratorFaculty = facultyList.listIterator();
+            try{
 
-        while(iteratorFaculty.hasNext())
-        {
-            Faculty element = iteratorFaculty.next();
-            System.out.println(element.toString());
-            element.buildCourseList(courseList);
-            iterator = element.courses.listIterator(0);
-            while (iterator.hasNext())
-            {
-                Course courseElement = iterator.next();
-                System.out.println(courseElement.toString());
-                System.out.println(courseElement.getEnrolledStudents().toString());
+            /* Make a buffered file writer with a tmp file facultyList.csv.tmp */
+            BufferedWriter out = new BufferedWriter(new FileWriter("facultyList.csv.tmp"));
+
+                /* For each faculty member */
+                while(iteratorFaculty.hasNext())
+                {
+                    /* Temporarily store them in a variable */
+                    Faculty element = iteratorFaculty.next();
+
+                    /* And write the backup out to the file */
+                    out.write(element.backup());
+
+                }
+
+            }catch (IOException e){
+
             }
-            System.out.println();
-        }
 
+        /****** Rename the current facultyList.csv file *****/
 
+            // File (or directory) with old name
+            file = new File("facultyList.csv");
 
+            // File (or directory) with new name
+            file2 = new File("facultyList.csv.bak");
+
+            // Rename file (or directory)
+            success = file.renameTo(file2);
+            if (!success) {
+                 // File was not successfully renamed
+            }
+            file.delete();
+
+            /* Rename the temp file we made to courselist.csv */
+
+            // File (or directory) with old name
+            file = new File("facultyList.csv.tmp");
+
+            // File (or directory) with new name
+            file2 = new File("facultyList.csv");
+
+            // Rename file (or directory)
+            success = file.renameTo(file2);
+            if (!success) {
+                // File was not successfully renamed
+            }
+
+        /******** END RENAME FACULTYLIST.CSV *********/
 
             return 0;
-
         }
 }
 

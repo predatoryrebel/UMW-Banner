@@ -94,12 +94,12 @@ public class Course implements  Comparable<Course>{
 
     public String backup(){
 
-        String contents;
+        String backup;
 
-        contents = crn + "," + course + "," + section + "," + title + "," + prer + ","  + credits + "," + time + ","
+        backup = crn + "," + course + "," + section + "," + title + "," + prer + ","  + credits + "," + time + ","
                 + days + "," + building + "," + room  + "," + totalSeats + "," + filledSeats + "," + professor +"\n";
 
-        return contents;
+        return backup;
     }
     
     public void setCRN(String yourCRN)

@@ -15,15 +15,10 @@ public class User implements Comparable<User>{
     {
     
     }
-    
-    public int compareTo(User u){
 
-
-        if(this.getFirstName() != null && u.getFirstName() != null){
-            return this.getFirstName().compareToIgnoreCase(u.getFirstName());
-        }
-        return 0;
-
+       public int compareTo(User u)
+    {
+        return lastName.compareToIgnoreCase(u.lastName);
     }
     
    
