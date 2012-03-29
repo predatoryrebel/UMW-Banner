@@ -1,7 +1,18 @@
 import java.util.*;
 
 public class Faculty extends User {
-    
+
+    /**
+     * The Parameter constructor that sets up the entire Faculty object
+     *
+     * @param userName
+     * @param password
+     * @param email
+     * @param firstName
+     * @param lastName
+     * @param yourOffice
+     * @param yourPhoneNumber
+     */
     Faculty(String userName, String password, String email, String firstName, String lastName, String yourOffice, 
             String yourPhoneNumber){
         
@@ -30,7 +41,12 @@ public class Faculty extends User {
             }
         }
     }
-    
+    /**
+     * Overridden toString method that returns the information of
+     * this faculty member as a string
+     *
+     * @return contents
+     */
     @Override
     public String toString()
     {
@@ -41,6 +57,12 @@ public class Faculty extends User {
         return contents;
     }
 
+    /**
+     * Backup method used to backup all the information in this faculty
+     * member object to a comma delimited string used for writing to a file
+     * 
+     * @return
+     */
     public String backup()
     {
         String backup = "";
@@ -50,7 +72,12 @@ public class Faculty extends User {
         return backup;
     }
 
-
+    /**
+     * A comparing method used to compare two
+     * faculty member objects with each other
+     * @param faculty2
+     * @return
+     */
     public int compareTo(Faculty faculty2){
 
 
@@ -60,17 +87,30 @@ public class Faculty extends User {
         return 0;
 
     }
-    
+
+    /**
+     * Sets the faculty member's office number
+     * @param yourOffice
+     */
     public void setOffice(String yourOffice)
     {
         office = yourOffice;
     }
-    
+
+    /**
+     * Returns the faculty member's office number
+     * @return
+     */
     public String getOffice()
     {
         return office;
     }
-    
+
+    /**
+     * Sets the phone number of this faculty
+     * member
+     * @param yourPhoneNumber
+     */
     public void setPhoneNumber(String yourPhoneNumber)
     {
         phoneNumber = yourPhoneNumber;
