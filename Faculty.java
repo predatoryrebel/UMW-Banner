@@ -115,20 +115,30 @@ public class Faculty extends User {
     {
         phoneNumber = yourPhoneNumber;
     }
-    
+
+    /**
+     * MEthod that returns the phone number of this faculty members
+     * @return
+     */
     public String getPhoneNumber()
     {
         return phoneNumber;
     }
-    
+
+    /**
+     * This method returns a list of courses that this faculty member
+     * teaches
+     * @return
+     */
     public LinkedList<Course> getCourses()
     {
         return courses;
     }
-   
-    String office;
-    String phoneNumber;
-    int permission;
-    LinkedList<Course> courses;
+
+/******** DATA MEMBERS ********/
+    private String office;
+    private String phoneNumber;
+    private int permission;
+    private LinkedList<Course> courses;
 
 }
