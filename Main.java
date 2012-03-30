@@ -16,8 +16,24 @@ public class Main {
         studentList = start.readStudentList();
         facultyList = start.readFacultyList();
         
-       // Login login = new Login(studentList, courseList);
-        //login.setVisible(true);
+        ListIterator<Student> siterator = studentList.listIterator();
+        
+        while (siterator.hasNext())
+        {
+            User element = siterator.next();
+            userList.add(element);
+        }
+        
+        ListIterator<Faculty> fiterator = facultyList.listIterator();
+        
+        while (fiterator.hasNext())
+        {
+            User element = fiterator.next();
+            userList.add(element);
+        }
+               
+        Login login = new Login(studentList, courseList, facultyList, userList);
+        login.setVisible(true);
 
         /* Create timer and set to backup every ten mins */
         ActionListener listener = new ActionListener()

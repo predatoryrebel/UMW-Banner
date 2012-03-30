@@ -80,9 +80,21 @@ public class User implements Comparable<User>{
     {
         return lastName;
     }
+    
+    public void setPermission(int yourPermission)
+    {
+        permission = yourPermission;
+    }
+    
+    public int getPermission()
+    {
+        return permission;
+    }
+    
     private String userName;
     private String password;
     private String email;
     private String firstName;
     private String lastName;    
+    private int permission;
 }

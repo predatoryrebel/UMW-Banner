@@ -15,8 +15,8 @@ public class User implements Comparable<User>{
     {
     
     }
-    
-    public int compareTo(User u)
+
+       public int compareTo(User u)
     {
         return lastName.compareToIgnoreCase(u.lastName);
     }
@@ -80,9 +80,21 @@ public class User implements Comparable<User>{
     {
         return lastName;
     }
+    
+    public void setPermission(int yourPermission)
+    {
+        permission = yourPermission;
+    }
+    
+    public int getPermission()
+    {
+        return permission;
+    }
+    
     private String userName;
     private String password;
     private String email;
     private String firstName;
     private String lastName;    
+    private int permission;
 }

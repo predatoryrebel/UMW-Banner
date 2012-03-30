@@ -21,7 +21,7 @@ public class Faculty extends User {
         office = yourOffice;
         phoneNumber = yourPhoneNumber;
         courses = new LinkedList<Course>();
-        permission = 1;
+        setPermission(1);
     }
     
    Faculty()
@@ -138,7 +138,6 @@ public class Faculty extends User {
 /******** DATA MEMBERS ********/
     private String office;
     private String phoneNumber;
-    private int permission;
     private LinkedList<Course> courses;
 
 }

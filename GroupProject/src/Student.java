@@ -17,6 +17,7 @@ public class Student extends User {
         tempCurrentSchudule = yourCurrentSchudule;
         holds = yourHolds;
         currentSchudule = new LinkedList<Course>();
+        setPermission(0);
     }
    
     public void buildCurrentScudule(LinkedList<Course> courseList)
@@ -47,6 +48,16 @@ public class Student extends User {
                 creditHoursEnrolled + " " + tempCurrentSchudule + " " + holds;
         
         return contents;
+    }
+    
+    public String backup()
+    {
+        String backup = "";
+
+        backup = idNumber + "," + getFirstName() + "," + getLastName() + "," + getEmail() + "," + major + "," + minor + "," + approvedCredits + "," +
+                creditHoursEnrolled + "," + tempCurrentSchudule + "," + holds + "\n";
+
+        return backup;
     }
     
     public void setIDNumber(String id)
@@ -122,6 +133,6 @@ public class Student extends User {
     private LinkedList<Course> currentSchudule;
     private String tempCurrentSchudule;
     private boolean holds;
-
+    
    
 }

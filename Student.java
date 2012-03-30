@@ -17,7 +17,7 @@ public class Student extends User {
         tempCurrentSchudule = yourCurrentSchudule;
         holds = yourHolds;
         currentSchudule = new LinkedList<Course>();
-        permission = 0;
+        setPermission(0);
     }
    
     public void buildCurrentScudule(LinkedList<Course> courseList)
@@ -133,6 +133,6 @@ public class Student extends User {
     private LinkedList<Course> currentSchudule;
     private String tempCurrentSchudule;
     private boolean holds;
-    private int permission;
+    
    
 }
