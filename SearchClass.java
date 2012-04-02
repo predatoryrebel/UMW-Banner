@@ -27,6 +27,7 @@ public class SearchClass extends javax.swing.JFrame {
         {
             courseList = course;
         }
+        setDefaultCloseOperation(HIDE_ON_CLOSE);
       
     }
     
@@ -44,8 +45,6 @@ public class SearchClass extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Search");
 
