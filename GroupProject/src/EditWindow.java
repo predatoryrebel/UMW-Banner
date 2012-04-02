@@ -6,7 +6,11 @@ import java.awt.event.*;
  *
  * @author Steve
  */
+<<<<<<< HEAD
 public abstract class EditWindow extends JFrame implements ActionListener
+=======
+public class EditWindow extends JFrame implements ActionListener
+>>>>>>> 90d43d4647ee8f731df59e8de8bf24c80541b03b
 {
     public JLabel editLabel;
     public JButton okButton;
@@ -23,4 +27,11 @@ public abstract class EditWindow extends JFrame implements ActionListener
         cancelButton = new JButton("Cancel");
         //textBox
     }
+<<<<<<< HEAD
+=======
+
+    public void actionPerformed(ActionEvent ex)
+  {
+  }
+>>>>>>> 90d43d4647ee8f731df59e8de8bf24c80541b03b
 }

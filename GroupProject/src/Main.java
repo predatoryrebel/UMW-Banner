@@ -5,7 +5,7 @@ import javax.swing.Timer;
 
 public class Main {
     
-    public static void main(String[] args) throws FileNotFoundException{   
+    public static void main(String[] args) throws FileNotFoundException {
         
         ReadFile start = new ReadFile();
         LinkedList<Course> courseList = new LinkedList<Course>();
@@ -31,6 +31,7 @@ public class Main {
             User element = fiterator.next();
             userList.add(element);
         }
+<<<<<<< HEAD
         
         siterator = studentList.listIterator(0);
         
@@ -57,14 +58,18 @@ public class Main {
                 //systemBackup(courseList, studentList, facultyList);
             }
          };
+=======
+>>>>>>> 90d43d4647ee8f731df59e8de8bf24c80541b03b
 
-      final int DELAY = 10 * (60 * 1000);
-         // Milliseconds between timer ticks
-      Timer t = new Timer(DELAY, listener);
-      t.start();
+        Backup backup = new Backup(courseList, studentList, facultyList);
+               
+        // Create MainGUI here and pass Login parameters to it
+        MainGUI mainWindow = new MainGUI(studentList, courseList, facultyList, userList);
+        mainWindow.setVisible(true);
 
         
     }
+<<<<<<< HEAD
     
     private static int systemBackup(LinkedList<Course> courseList, LinkedList<Student> studentList, LinkedList<Faculty> facultyList){
 
@@ -243,5 +248,8 @@ public class Main {
 
             return 0;
         }
+=======
+   
+>>>>>>> 90d43d4647ee8f731df59e8de8bf24c80541b03b
 }
 

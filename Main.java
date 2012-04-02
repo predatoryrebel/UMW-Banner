@@ -32,8 +32,12 @@ public class Main {
             userList.add(element);
         }
                
-        Login login = new Login(studentList, courseList, facultyList, userList);
-        login.setVisible(true);
+        // Create MainGUI here and pass Login parameters to it
+        MainGUI mainWindow = new MainGUI(studentList, courseList, facultyList, userList);
+        mainWindow.setVisible(true);
+        
+        //Login login = new Login(studentList, courseList, facultyList, userList);
+        //login.setVisible(true);
 
         /* Create timer and set to backup every ten mins */
         ActionListener listener = new ActionListener()
@@ -54,7 +58,7 @@ public class Main {
         
     }
     
-    private static int systemBackup(final LinkedList<Course> courseList, final LinkedList<Student> studentList, final LinkedList<Faculty> facultyList){
+    private static int systemBackup(LinkedList<Course> courseList, LinkedList<Student> studentList, LinkedList<Faculty> facultyList){
 
            /******** BACKUP STUDENTLIST.CSV ***********/
             ListIterator<Course> iterator = courseList.listIterator();
