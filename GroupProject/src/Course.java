@@ -89,10 +89,16 @@ public class Course implements  Comparable<Course>{
     
    /**
     * addStudent method adds a student to this course
+    * @return booleen true if student is added
     */
-    public void addStudent(){
+    public boolean addStudent(){
         if (totalSeats != filledSeats)
+        {
             filledSeats++;
+            return true;
+        }    
+        else
+            return false;
     }
 
     /**
