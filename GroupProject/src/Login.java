@@ -12,18 +12,23 @@ import java.util.*;
 import javax.swing.JPanel;
 public class Login extends javax.swing.JFrame {
 
+    // Can be used as a link to the main window
+    // If you need to change the main window, write a new method in MainGUI and call it from your class
+    private MainGUI mainWindow;
+    
     /**
      * Creates new form Login
      */
     
-    public Login(LinkedList<Student> student, LinkedList<Course> course, LinkedList<Faculty> faculty, LinkedList<User> user) {
+    public Login(LinkedList<Student> student, LinkedList<Course> course, LinkedList<Faculty> faculty, LinkedList<User> user, MainGUI mw) {
         initComponents();
         studentList = student;
         courseList = course;
         facultyList = faculty;
         userList = user;
+        mainWindow = mw;    // The Main GUI. mainWindow can be used to call methods in the MainGUI object.
+        setDefaultCloseOperation(HIDE_ON_CLOSE);
     }
-
    
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -105,7 +110,7 @@ public class Login extends javax.swing.JFrame {
 
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
         ListIterator<User> iterator = userList.listIterator();
-        
+       
         while (iterator.hasNext())
         {
             User element = iterator.next();
@@ -113,8 +118,9 @@ public class Login extends javax.swing.JFrame {
             {
                 if (element.getPassword().equalsIgnoreCase(passwordTextBox.getText()));
                 {
-                    SearchClass search = new SearchClass(courseList, studentList, facultyList, element);
-                    search.setVisible(true);
+                    mainWindow.setActiveUser(element);    // Set the active account to the user who just logged in.
+                    //SearchClass search = new SearchClass(courseList, studentList, facultyList, element);
+                    //search.setVisible(true);
                     this.setVisible(false);
                 }
             }

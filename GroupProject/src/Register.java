@@ -26,6 +26,7 @@ public class Register extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        group1 = new javax.swing.ButtonGroup();
         userNameLabel = new javax.swing.JLabel();
         userNameTextBox = new javax.swing.JTextField();
         passwordLabel = new javax.swing.JLabel();
@@ -40,6 +41,9 @@ public class Register extends javax.swing.JFrame {
         firstNameTextBox = new javax.swing.JTextField();
         lastNameLabel = new javax.swing.JLabel();
         lastNameTextBox = new javax.swing.JTextField();
+        administrator = new javax.swing.JRadioButton();
+        faculty = new javax.swing.JRadioButton();
+        student = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,6 +73,16 @@ public class Register extends javax.swing.JFrame {
 
         lastNameLabel.setText("Enter Last Name");
 
+        group1.add(administrator);
+        administrator.setText("Administrator");
+
+        group1.add(faculty);
+        faculty.setText("Faculty");
+
+        group1.add(student);
+        student.setSelected(true);
+        student.setText("Student");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -96,16 +110,26 @@ public class Register extends javax.swing.JFrame {
                             .addComponent(canelButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(emailLabel)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(lastNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(firstNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(emailTextBox)
-                            .addComponent(firstNameTextBox)
-                            .addComponent(lastNameTextBox, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(emailLabel)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(lastNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(firstNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(emailTextBox)
+                                    .addComponent(firstNameTextBox)
+                                    .addComponent(lastNameTextBox, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(student)
+                                .addGap(18, 18, 18)
+                                .addComponent(faculty)
+                                .addGap(18, 18, 18)
+                                .addComponent(administrator)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap(24, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
@@ -137,7 +161,12 @@ public class Register extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lastNameLabel)
                     .addComponent(lastNameTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(administrator)
+                    .addComponent(faculty)
+                    .addComponent(student))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         pack();
@@ -170,8 +199,16 @@ public class Register extends javax.swing.JFrame {
             person = new User(userNameTextBox.getText(), passwordTextBox.getText(), emailTextBox.getText(), firstNameTextBox.getText(),
                         lastNameTextBox.getText());
             userList.add(person);
+            
+            if (student.isSelected() == true)
+                person.setPermission(0);
+            if (administrator.isSelected() == true)
+                person.setPermission(2);
+            if (faculty.isSelected() == true)
+                person.setPermission(1);
+            
             JFrame frame = new JFrame();
-            JOptionPane.showMessageDialog(frame, userNameTextBox.getText() + " has been created. Click canel to return to login.");
+            JOptionPane.showMessageDialog(frame, userNameTextBox.getText() + " has been created. Please login.");
             this.setVisible(false);
         }
             
@@ -189,12 +226,15 @@ public class Register extends javax.swing.JFrame {
     private LinkedList<User> userList;
     private User person;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton administrator;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton canelButton;
     private javax.swing.JLabel emailLabel;
     private javax.swing.JTextField emailTextBox;
+    private javax.swing.JRadioButton faculty;
     private javax.swing.JLabel firstNameLabel;
     private javax.swing.JTextField firstNameTextBox;
+    private javax.swing.ButtonGroup group1;
     private javax.swing.JLabel lastNameLabel;
     private javax.swing.JTextField lastNameTextBox;
     private javax.swing.JLabel password2Label;
@@ -202,6 +242,7 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JPasswordField passwordTextBox;
     private javax.swing.JButton registerButton;
+    private javax.swing.JRadioButton student;
     private javax.swing.JLabel userNameLabel;
     private javax.swing.JTextField userNameTextBox;
     // End of variables declaration//GEN-END:variables

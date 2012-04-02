@@ -8,6 +8,7 @@
  * @author cjoyner
  */
 import java.util.*;
+import javax.swing.*;
 public class SearchClass extends javax.swing.JFrame {
 
     /**
@@ -26,7 +27,9 @@ public class SearchClass extends javax.swing.JFrame {
         if (user.getPermission() == 1 || user.getPermission() == 0)
         {
             courseList = course;
+            studentList = student;
         }
+        setDefaultCloseOperation(HIDE_ON_CLOSE);
       
     }
     
@@ -41,24 +44,37 @@ public class SearchClass extends javax.swing.JFrame {
 
         jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        searchButton = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        searchCourseList = new javax.swing.JList();
+        jLabel2 = new javax.swing.JLabel();
+        addList = new javax.swing.JScrollPane();
+        addCourseList = new javax.swing.JList();
+        addButton = new javax.swing.JButton();
 
         jLabel1.setText("Search");
 
-        jScrollPane1.setFocusable(false);
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
-        jButton1.setText("search");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        searchButton.setText("Search");
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                searchButtonActionPerformed(evt);
+            }
+        });
+
+        searchCourseList.setToolTipText("");
+        searchCourseList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                searchCourseListMouseReleased(evt);
+            }
+        });
+        jScrollPane2.setViewportView(searchCourseList);
+
+        addList.setViewportView(addCourseList);
+
+        addButton.setText("Add Course");
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
             }
         });
 
@@ -69,14 +85,21 @@ public class SearchClass extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(62, 62, 62)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1)))
-                .addContainerGap(25, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
+                                .addComponent(addList)))
+                        .addGap(58, 58, 58)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(addButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(searchButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -85,24 +108,99 @@ public class SearchClass extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
-                    .addComponent(jButton1))
-                .addGap(33, 33, 33)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                    .addComponent(searchButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addComponent(addList, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(addButton))
+                .addContainerGap(142, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         
         SearchCourse search = new SearchCourse(courseList);
         LinkedList<Course> searchList = search.searchCourseByCourseName(jTextField1.getText());
-        jTextArea1.setText(searchList.toString());
+        ListIterator<Course> iterator = searchList.listIterator();
+        DefaultListModel listModel = new DefaultListModel();
         
+        while (iterator.hasNext())
+        {
+            Course element = iterator.next();
+            listModel.addElement(element);
+        }
         
+        searchCourseList.setModel(listModel);
        
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_searchButtonActionPerformed
+
+    private void searchCourseListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchCourseListMouseReleased
+        //get index of click object
+        int index = searchCourseList.getSelectedIndex();
+        ListModel<Course> listModel = searchCourseList.getModel();
+        //get course
+        Course course = listModel.getElementAt(index);
+        DefaultListModel addListModel = new DefaultListModel();
+        //add course to addCourseList
+        addListModel.addElement(course);
+        addCourseList.setModel(addListModel);
+    }//GEN-LAST:event_searchCourseListMouseReleased
+
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        ListModel<Course> listModel = addCourseList.getModel();
+        Course course = listModel.getElementAt(0);
+        ListIterator<Student> iterator = studentList.listIterator();
+        
+        //seach student list for student
+        while (iterator.hasNext())
+        {
+            Student element = iterator.next();
+            //check username of user to student user name
+            if (user.getUserName().equalsIgnoreCase(element.getUserName()))
+            {
+                ListIterator<Course> courseIterator = element.getCurrentSchudule().listIterator();
+                boolean courseAlreadyAdded = false;
+                //checks to make sure the student isn't already enrolled in the class
+                while (courseIterator.hasNext())
+                {    
+                    Course courseElement = courseIterator.next();
+                    if (courseElement.getName().equalsIgnoreCase(course.getName()))
+                        courseAlreadyAdded = true;
+                }
+                //makes sure class is not full and student will not go over approved credits
+                boolean addAStudent = course.addStudent();
+                int totalCredits = element.getCreditHoursEnrolled();
+                totalCredits = totalCredits + course.getCredits();
+                //checks number of seats for course, student will not go over approved credits, student is not already enrolled
+                //in the class and holds
+                if (addAStudent == true  && totalCredits <= element.getApprovedCredits()  && !courseAlreadyAdded  && 
+                        element.getHolds())
+                {
+                    //add course and set credits enrolled
+                    element.getCurrentSchudule().add(course);
+                    element.setCreditHoursEnrolled(totalCredits);
+                }
+                //message to tell use course was not added
+                else
+                {
+                    JFrame frame = new JFrame();
+                    JOptionPane.showMessageDialog(frame, "Course was not added check credits, holds and make sure you are not "
+                            + "alreay enrolled in the course.");
+                }
+                System.out.println(element.getCurrentSchudule());
+            }
+          
+        }
+        
+        
+    }//GEN-LAST:event_addButtonActionPerformed
 
     private LinkedList<Student> studentList;
     private LinkedList<Faculty> facultyList;
@@ -110,10 +208,14 @@ public class SearchClass extends javax.swing.JFrame {
     private User user;
     private LinkedList<Course> courseList;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton addButton;
+    private javax.swing.JList addCourseList;
+    private javax.swing.JScrollPane addList;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton searchButton;
+    private javax.swing.JList searchCourseList;
     // End of variables declaration//GEN-END:variables
 }
