@@ -51,10 +51,6 @@ public class SearchClass extends javax.swing.JFrame {
         addList = new javax.swing.JScrollPane();
         addCourseList = new javax.swing.JList();
         addButton = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
-
 
         jLabel1.setText("Search");
 
