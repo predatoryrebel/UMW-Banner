@@ -20,9 +20,9 @@ public class Backup {
 
     Backup(final LinkedList<Course> courses, final LinkedList<Student> students, final LinkedList<Faculty> faculty, final int backupTime){
         
-        LinkedList<Course> courseList = courses;
-        LinkedList<Student> studentList = students;
-        LinkedList<Faculty> facultyList = faculty;
+        setCourses(courses);
+        setStudents(students);
+        setFaculty(faculty);
 
         time = backupTime;
 
@@ -31,11 +31,12 @@ public class Backup {
              {
                 public void actionPerformed(ActionEvent event)
                 {
-
+                    backupAll();
+                    System.out.println("Backed up");
                 }
              };
 
-          int DELAY = (1 * (60 * 1000));
+          int DELAY = (time * (60 * 1000));
              // Milliseconds between timer ticks
           Timer t = new Timer(DELAY, listener);
           t.start();
@@ -54,11 +55,12 @@ public class Backup {
              {
                 public void actionPerformed(ActionEvent event)
                 {
-
+                    backupAll();
+                    System.out.println("Backed up");
                 }
              };
 
-          int DELAY = (1 * (60 * 1000));
+          int DELAY = (2 * (60 * 1000));
              // Milliseconds between timer ticks
           Timer t = new Timer(DELAY, listener);
           t.start();
@@ -204,7 +206,7 @@ public class Backup {
             try {
 
                 /* Declare and intanitate a new bffered writer named out */
-                BufferedWriter out = new BufferedWriter(new FileWriter("courselist.csv.tmp"));
+                BufferedWriter out = new BufferedWriter(new FileWriter("courseList.csv.tmp"));
 
                 /* While the list isn't empty */
                 while (iterator.hasNext()) {
@@ -227,10 +229,10 @@ public class Backup {
         /****** Rename the current coureList.csv file *****/
 
             // File (or directory) with old name
-            File file = new File("courselist.csv");
+            File file = new File("courseList.csv");
 
             // File (or directory) with new name
-            File file2 = new File("courselist.csv.bak");
+            File file2 = new File("courseList.csv.bak");
 
             // Rename file (or directory)
             boolean success = file.renameTo(file2);
@@ -242,10 +244,10 @@ public class Backup {
             /* Rename the temp file we made to courselist.csv */
 
             // File (or directory) with old name
-            file = new File("courselist.csv.tmp");
+            file = new File("courseList.csv.tmp");
 
             // File (or directory) with new name
-            file2 = new File("courselist.csv");
+            file2 = new File("courseList.csv");
 
             // Rename file (or directory)
             boolean success2 = file.renameTo(file2);
@@ -257,12 +259,6 @@ public class Backup {
 
             return 0;
     }
-
-   public static void main(String [ ] args){
-
-
-    }
-
 
 
     private int backupAll(){
@@ -297,6 +293,20 @@ public class Backup {
 
     }
 
+    private void setCourses(LinkedList<Course> list){
+
+        courseList = list;
+    }
+
+    private void setStudents(LinkedList<Student> list){
+
+        studentList = list;
+    }
+
+    private void setFaculty(LinkedList<Faculty> list){
+
+        facultyList = list;
+    }
 /************ DATA MEMBERS *****************/
 
 private int time = 0;

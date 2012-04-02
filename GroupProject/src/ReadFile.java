@@ -10,7 +10,7 @@ public class ReadFile{
     }
     
     public LinkedList<Faculty> readFacultyList()throws FileNotFoundException{
-        FileInputStream fstream = new FileInputStream("faculty.csv");
+        FileInputStream fstream = new FileInputStream("facultyList.csv");
         LinkedList<Faculty> facultyList = new LinkedList<Faculty>();
         Scanner input = new Scanner(fstream);
         input.useDelimiter(",");
@@ -93,7 +93,7 @@ public class ReadFile{
     }
             
     public LinkedList<Course> readCourseList() throws FileNotFoundException{
-        FileInputStream fstream = new FileInputStream("courselist.csv");
+        FileInputStream fstream = new FileInputStream("courseList.csv");
         LinkedList<Course> courseList = new LinkedList<Course>();
         Scanner input = new Scanner(fstream);
 
