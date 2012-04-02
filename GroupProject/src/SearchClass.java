@@ -44,7 +44,6 @@ public class SearchClass extends javax.swing.JFrame {
 
         jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-<<<<<<< HEAD
         searchButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         searchCourseList = new javax.swing.JList();
@@ -52,11 +51,10 @@ public class SearchClass extends javax.swing.JFrame {
         addList = new javax.swing.JScrollPane();
         addCourseList = new javax.swing.JList();
         addButton = new javax.swing.JButton();
-=======
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
->>>>>>> 90d43d4647ee8f731df59e8de8bf24c80541b03b
+
 
         jLabel1.setText("Search");
 
