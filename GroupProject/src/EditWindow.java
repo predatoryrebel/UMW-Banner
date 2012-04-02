@@ -23,4 +23,8 @@ public class EditWindow extends JFrame implements ActionListener
         cancelButton = new JButton("Cancel");
         //textBox
     }
+
+    public void actionPerformed(ActionEvent ex)
+  {
+  }
 }
