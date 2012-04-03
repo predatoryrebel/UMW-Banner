@@ -41,7 +41,7 @@ public class Main {
             element.buildCurrentScudule(courseList);
         }
 
-        Backup backup = new Backup(courseList, studentList, facultyList, 1);
+        //Backup backup = new Backup(courseList, studentList, facultyList, 1);
         // Create MainGUI here and pass Login parameters to it
         MainGUI mainWindow = new MainGUI(studentList, courseList, facultyList, userList);
         mainWindow.setVisible(true);
