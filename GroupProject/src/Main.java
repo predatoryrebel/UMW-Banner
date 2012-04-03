@@ -12,9 +12,11 @@ public class Main {
         LinkedList<Student> studentList = new LinkedList<Student>();
         LinkedList<Faculty> facultyList = new LinkedList<Faculty>();
         LinkedList<User> userList = new LinkedList<User>();
+        LinkedList<Admin> adminList = new LinkedList<Admin>();
         courseList = start.readCourseList();
         studentList = start.readStudentList();
         facultyList = start.readFacultyList();
+        adminList = start.readAdminList();
         
         ListIterator<Student> siterator = studentList.listIterator();
         
@@ -45,7 +47,7 @@ public class Main {
         /* Create a new backup object that wil automaticaly backup an interval
          * which is the fourth parameter
          */
-        Backup backup = new Backup(courseList, studentList, facultyList, 1);
+        Backup backup = new Backup(courseList, studentList, facultyList, adminList, 1);
 
 
 

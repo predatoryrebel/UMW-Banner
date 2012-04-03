@@ -18,11 +18,12 @@ import javax.swing.Timer;
  */
 public class Backup {
 
-    Backup(final LinkedList<Course> courses, final LinkedList<Student> students, final LinkedList<Faculty> faculty, final int backupTime){
+    Backup(final LinkedList<Course> courses, final LinkedList<Student> students, final LinkedList<Faculty> faculty, final LinkedList<Admin> admin, final int backupTime){
         
         setCourses(courses);
         setStudents(students);
         setFaculty(faculty);
+        setAdmin(admin);
 
         time = backupTime;
 
@@ -44,7 +45,7 @@ public class Backup {
 
     }
 
-    Backup (final LinkedList<Course> courses, final LinkedList<Student> students, final LinkedList<Faculty> faculty){
+    Backup (final LinkedList<Course> courses, final LinkedList<Student> students, final LinkedList<Faculty> faculty, final LinkedList<Admin> admin){
         
         LinkedList<Course> courseList = courses;
         LinkedList<Student> studentList = students;
@@ -127,6 +128,67 @@ public class Backup {
             }
 
         /******** END RENAME FACULTYLIST.CSV *********/
+
+            return 0;
+    }
+
+    public int backupAdmin(){
+
+         /******** BACKUP ADMINLIST.CSV *********/
+
+            ListIterator<Admin> iteratorAdmin = adminList.listIterator();
+
+            try{
+
+            /* Make a buffered file writer with a tmp file facultyList.csv.tmp */
+            BufferedWriter out2 = new BufferedWriter(new FileWriter("adminList.csv.tmp"));
+
+                /* For each faculty member */
+                while(iteratorAdmin.hasNext())
+                {
+                    /* Temporarily store them in a variable */
+                    Admin element = iteratorAdmin.next();
+
+                    /* And write the backup out to the file */
+                    out2.write(element.backup());
+                    out2.flush();
+
+                }
+
+            }catch (IOException e){
+
+            }
+
+        /****** Rename the current adminList.csv file *****/
+
+            // File (or directory) with old name
+            File file = new File("adminList.csv");
+
+            // File (or directory) with new name
+            File file2 = new File("adminList.csv.bak");
+
+            // Rename file (or directory)
+            boolean success = file.renameTo(file2);
+            if (!success) {
+                 // File was not successfully renamed
+            }
+            file.delete();
+
+            /* Rename the temp file we made to courselist.csv */
+
+            // File (or directory) with old name
+            file = new File("adminList.csv.tmp");
+
+            // File (or directory) with new name
+            file2 = new File("adminList.csv");
+
+            // Rename file (or directory)
+            success = file.renameTo(file2);
+            if (!success) {
+                // File was not successfully renamed
+            }
+
+        /******** END RENAME ADMINLIST.CSV *********/
 
             return 0;
     }
@@ -270,6 +332,7 @@ public class Backup {
         int x = -999;
         int y = -999;
         int z = -999;
+        int w = -999;
 
 
         /* Call each method of this class to backup each list and store
@@ -278,11 +341,12 @@ public class Backup {
         x = this.backupCourses();
         y = this.backupFaculty();
         z = this.backupStudents();
+        w = this.backupAdmin();
 
         /* If any variable isn't equal to zero than we know the backup script
          * failed to execute sucessfully
          */
-        if ((x != 0) || (y != 0) || z != 0){
+        if ((x != 0) || (y != 0) || z != 0 || w != 0){
 
             /* So return a -1 */
             return -1;
@@ -310,6 +374,10 @@ public class Backup {
 
         facultyList = list;
     }
+    private void setAdmin(LinkedList<Admin> list){
+
+        adminList = list;
+    }
 /************ DATA MEMBERS *****************/
 
 private int time = 0;
@@ -317,6 +385,7 @@ private int time = 0;
 private LinkedList<Course> courseList;
 private LinkedList<Student> studentList;
 private LinkedList<Faculty> facultyList;
+private LinkedList<Admin> adminList;
 
 
 

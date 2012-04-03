@@ -140,4 +140,44 @@ public class ReadFile{
        
             return courseList;
     }
+    
+    /**
+     * The read admin list reads in admin objects from a readfile
+     * @return
+     * @throws FileNotFoundException
+     */
+    public LinkedList<Admin> readAdminList()throws FileNotFoundException{
+        FileInputStream fstream = new FileInputStream("adminList.csv");
+        LinkedList<Admin> adminList = new LinkedList<Admin>();
+        Scanner input = new Scanner(fstream);
+        input.useDelimiter(",");
+
+        try
+        {
+            while (input.hasNext())
+            {
+                String firstName = input.next();
+                String lastName = input.next();
+                String userName = input.next();
+                String password = input.next();
+                String email = input.next();
+                String office = input.next();
+                String phoneNumber = input.nextLine();
+
+                Admin newAdmin = new Admin(userName, password, email, firstName, lastName, office, phoneNumber);
+
+                adminList.add(newAdmin);
+            }
+            fstream.close();
+        }
+        catch (Exception e)
+        {
+            adminList = null;
+        }
+
+        Collections.sort(adminList);
+
+        return adminList;
+    }
+
 }

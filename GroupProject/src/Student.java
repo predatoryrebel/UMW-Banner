@@ -54,7 +54,7 @@ public class Student extends User {
     {
         String backup = "";
 
-        backup = idNumber + "," + getFirstName() + "," + getLastName() + "," + getEmail() + "," + major + "," + minor + "," + approvedCredits + "," +
+        backup = idNumber + "," + getFirstName() + "," + getLastName() + "," + getUserName() + getPassword() + getEmail() + "," + major + "," + minor + "," + approvedCredits + "," +
                 creditHoursEnrolled + "," + tempCurrentSchudule + "," + holds + "\n";
 
         return backup;
