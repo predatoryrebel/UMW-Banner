@@ -58,7 +58,7 @@ public class Admin extends User{
         String backup = "";
 
         /* Build the conctenated string */
-        backup =  getFirstName() + "," + getLastName() +  "," + getUserName() + "," + getPassword()  + ","  + getEmail()  + "," + office + "," + phoneNumber + '\n';
+        backup =  getFirstName() + "," + getLastName() +  "," + getUserName() + "," + getPassword()  + ","  + getEmail()  + "," + office  + phoneNumber + "\n";
 
         return backup;
     }
