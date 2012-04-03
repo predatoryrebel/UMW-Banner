@@ -41,7 +41,14 @@ public class Main {
             element.buildCurrentScudule(courseList);
         }
 
+
+        /* Create a new backup object that wil automaticaly backup an interval
+         * which is the fourth parameter
+         */
         Backup backup = new Backup(courseList, studentList, facultyList, 1);
+
+
+
         // Create MainGUI here and pass Login parameters to it
         MainGUI mainWindow = new MainGUI(studentList, courseList, facultyList, userList);
         mainWindow.setVisible(true);
