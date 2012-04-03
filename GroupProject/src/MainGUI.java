@@ -95,6 +95,7 @@ public class MainGUI extends JFrame implements ActionListener
                 // Create the profile panel
                 profile = new JPanel();
                 profileText = new JTextArea();
+                profileText.setEditable(false);
                 
                 contentPane.setLayout(new FlowLayout());
                 profile.setLayout(new FlowLayout());
@@ -111,7 +112,8 @@ public class MainGUI extends JFrame implements ActionListener
         // Change the GUI to logged in state
         public void setActiveUser(User currentUser)
         {
-            this.setActiveAccount(currentUser);
+            this.activeUser = currentUser;
+            
             fileMenu.remove(loginItem);
             fileMenu.add(logoutItem, 0);
             mainMenu.add(editMenu);
@@ -123,21 +125,20 @@ public class MainGUI extends JFrame implements ActionListener
                 fileMenu.add(createAccount, 0);
             }
             
-            // Add the current profile's text to the text box
-            profileText.setText(activeUser.toString());
+            refreshWindow();
         }
         
         // Set the current user's profile to the active account
-        private void setActiveAccount(User currentUser)
+        private void refreshWindow()
         {
-            this.activeUser = currentUser;
-            this.setTitle(currentUser.getFirstName() + " " + currentUser.getLastName() + " - " + currentUser.getEmail());
-        }
-        
-        // Edit the active profile
-        private void editProfile(String command)
-        {
+            this.setVisible(false);
             
+            // Add the current profile's text to the text box
+            profileText.setText(activeUser.toString());
+            // Set the title bar
+            this.setTitle(activeUser.getFirstName() + " " + activeUser.getLastName() + " - " + activeUser.getEmail());
+            
+            this.setVisible(true);
         }
         
         // Actions for the MainGUI
@@ -179,7 +180,16 @@ public class MainGUI extends JFrame implements ActionListener
             
             if(action.equals("Edit First Name"))
             {
-                editProfile(action);
+                // Get the new name from the JOptionPane
+                String newFirstName = JOptionPane.showInputDialog("Edit First Name", activeUser.getFirstName());
+                
+                // If the user presses OK, change the name and refresh the window.
+                // Otherwise, do nothing.
+                if(newFirstName != null)
+                {
+                    activeUser.setFirstName(newFirstName);
+                    refreshWindow();
+                }
             }
             
             if(action.equals("Exit"))
