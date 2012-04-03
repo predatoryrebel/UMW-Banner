@@ -32,7 +32,7 @@ public class Backup {
                 public void actionPerformed(ActionEvent event)
                 {
                     backupAll();
-                    System.out.println("Backed up");
+                 
                 }
              };
 
@@ -56,7 +56,7 @@ public class Backup {
                 public void actionPerformed(ActionEvent event)
                 {
                     backupAll();
-                    System.out.println("Backed up");
+                    
                 }
              };
 
@@ -79,7 +79,7 @@ public class Backup {
             try{
 
             /* Make a buffered file writer with a tmp file facultyList.csv.tmp */
-            BufferedWriter out = new BufferedWriter(new FileWriter("facultyList.csv.tmp"));
+            BufferedWriter out2 = new BufferedWriter(new FileWriter("facultyList.csv.tmp"));
 
                 /* For each faculty member */
                 while(iteratorFaculty.hasNext())
@@ -88,7 +88,8 @@ public class Backup {
                     Faculty element = iteratorFaculty.next();
 
                     /* And write the backup out to the file */
-                    out.write(element.backup());
+                    out2.write(element.backup());
+                    out2.flush();
 
                 }
 
@@ -141,7 +142,7 @@ public class Backup {
             try {
 
             /* Declare and instantiate a new Buffered writer for studentList.csv.temp */
-            BufferedWriter out = new BufferedWriter(new FileWriter("studentList.csv.tmp"));
+            BufferedWriter out1 = new BufferedWriter(new FileWriter("studentList.csv.tmp"));
 
                 /* While there are still students */
                 while (iteratorStudent.hasNext()){
@@ -150,7 +151,8 @@ public class Backup {
                     Student element = iteratorStudent.next();
 
                     /* Write the comma delimited backup method reult out to a file */
-                    out.write(element.backup());
+                    out1.write(element.backup());
+                    out1.flush();
 
                }
            }
@@ -216,6 +218,7 @@ public class Backup {
 
                     /* Write the comma delimited backup method result to file */
                     out.write(element.backup());
+                    out.flush();
                 }
 
                 /* Close the file */
