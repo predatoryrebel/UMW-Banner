@@ -25,7 +25,7 @@ public class Backup {
         setFaculty(faculty);
         setAdmin(admin);
 
-        time = backupTime;
+        /* time = backupTime;
 
                 ActionListener listener = new
              ActionListener()
@@ -41,17 +41,18 @@ public class Backup {
              // Milliseconds between timer ticks
           Timer t = new Timer(DELAY, listener);
           t.start();
-
+        */
 
     }
 
     Backup (final LinkedList<Course> courses, final LinkedList<Student> students, final LinkedList<Faculty> faculty, final LinkedList<Admin> admin){
         
-        LinkedList<Course> courseList = courses;
-        LinkedList<Student> studentList = students;
-        LinkedList<Faculty> facultyList = faculty;
+        setCourses(courses);
+        setStudents(students);
+        setFaculty(faculty);
+        setAdmin(admin);
 
-                ActionListener listener = new
+       /*         ActionListener listener = new
              ActionListener()
              {
                 public void actionPerformed(ActionEvent event)
@@ -66,14 +67,17 @@ public class Backup {
           Timer t = new Timer(DELAY, listener);
           t.start();
 
-    
+*/
+
     }
 
     Backup(){}
 
-    public int backupFaculty(){
+    public int backupFaculty(final LinkedList<Faculty> faculty){
 
          /******** BACKUP FACULTYLIST.CSV *********/
+
+            setFaculty(faculty);
 
             ListIterator<Faculty> iteratorFaculty = facultyList.listIterator();
 
@@ -132,9 +136,11 @@ public class Backup {
             return 0;
     }
 
-    public int backupAdmin(){
+    public int backupAdmin(final LinkedList<Admin> admin){
 
          /******** BACKUP ADMINLIST.CSV *********/
+
+            setAdmin(admin);
 
             ListIterator<Admin> iteratorAdmin = adminList.listIterator();
 
@@ -193,9 +199,11 @@ public class Backup {
             return 0;
     }
 
-    public int backupStudents(){
+    public int backupStudents(final LinkedList<Student> students){
 
         /******** BACKUP STUDENTLIST.CSV ***********/
+
+            setStudents(students);
 
             /* Declare a new student iterator */
             ListIterator<Student> iteratorStudent = studentList.listIterator();
@@ -260,7 +268,9 @@ public class Backup {
 
     }
 
-    public int backupCourses(){
+    public int backupCourses(final LinkedList<Course> courses){
+
+            setCourses(courses);
 
 
            /******** BACKUP courselist.CSV ***********/
@@ -326,7 +336,13 @@ public class Backup {
     }
 
 
-    private int backupAll(){
+    public int backupAll(final LinkedList<Course> courses, final LinkedList<Student> students, final LinkedList<Faculty> faculty, final LinkedList<Admin> admin){
+
+        setCourses(courses);
+        setStudents(students);
+        setFaculty(faculty);
+        setAdmin(admin);
+
 
         /* Some temp variables and initialize them to something outside the return scope */
         int x = -999;
@@ -338,10 +354,10 @@ public class Backup {
         /* Call each method of this class to backup each list and store
          * the result in the temp variables
          */
-        x = this.backupCourses();
-        y = this.backupFaculty();
-        z = this.backupStudents();
-        w = this.backupAdmin();
+        x = this.backupCourses(courses);
+        y = this.backupFaculty(faculty);
+        z = this.backupStudents(students);
+        w = this.backupAdmin(admin);
 
         /* If any variable isn't equal to zero than we know the backup script
          * failed to execute sucessfully

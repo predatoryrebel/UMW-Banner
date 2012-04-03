@@ -4,7 +4,7 @@ import java.awt.event.*;
 import javax.swing.Timer;
 
 public class Main {
-    
+
     public static void main(String[] args) throws FileNotFoundException {
         
         ReadFile start = new ReadFile();
@@ -34,6 +34,14 @@ public class Main {
             userList.add(element);
         }
 
+        ListIterator<Admin> aiterator = adminList.listIterator();
+
+        while (aiterator.hasNext())
+        {
+            User element = aiterator.next();
+            userList.add(element);
+        }
+
         
         siterator = studentList.listIterator(0);
         
@@ -47,18 +55,24 @@ public class Main {
         /* Create a new backup object that wil automaticaly backup an interval
          * which is the fourth parameter
          */
-        Backup backup = new Backup(courseList, studentList, facultyList, adminList, 1);
 
+        Backup backup = new Backup(courseList, studentList, facultyList, adminList);
 
+        backup.backupAll(courseList, studentList, facultyList, adminList);
 
         // Create MainGUI here and pass Login parameters to it
         MainGUI mainWindow = new MainGUI(studentList, courseList, facultyList, userList);
         mainWindow.setVisible(true);
+
+
+
        
 
         
     }
-   
+
+
+
 
 }
 
