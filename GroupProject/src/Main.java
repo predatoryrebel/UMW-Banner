@@ -61,7 +61,7 @@ public class Main {
         
 
         // Create MainGUI here and pass Login parameters to it
-        MainGUI mainWindow = new MainGUI(studentList, courseList, facultyList, userList);
+        MainGUI mainWindow = new MainGUI(studentList, courseList, facultyList, userList, adminList);
         mainWindow.setVisible(true);
 
         backup.backupAll(courseList, studentList, facultyList, adminList);

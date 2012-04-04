@@ -13,6 +13,7 @@ public class MainGUI extends JFrame implements ActionListener
 	public JMenu fileMenu;
         public JMenu editMenu;
         public JMenu searchMenu;
+        public JMenuItem dropItem;
         public JMenuItem searchForClassesItem;
 	public JMenuItem loginItem;
 	public JMenuItem logoutItem;
@@ -32,9 +33,11 @@ public class MainGUI extends JFrame implements ActionListener
         private LinkedList<Student> studentList;
         private LinkedList<Course> courseList;
         private LinkedList<Faculty> facultyList;
+        private LinkedList<Admin> adminList;
         private LinkedList<User> userList;
 	
-	public MainGUI(LinkedList<Student> student, LinkedList<Course> course, LinkedList<Faculty> faculty, LinkedList<User> user)
+	public MainGUI(LinkedList<Student> student, LinkedList<Course> course, LinkedList<Faculty> faculty, LinkedList<User> user,
+                LinkedList<Admin> admin)
 	{
 		setSize(680,300);
 		contentPane = getContentPane();
@@ -44,6 +47,8 @@ public class MainGUI extends JFrame implements ActionListener
 		// Create File Menu buttons
 		fileMenu = new JMenu("File");
                 searchMenu = new JMenu("Search");
+                dropItem = new JMenuItem("Drop");
+                dropItem.addActionListener(this);
 		loginItem = new JMenuItem("Login");
 		loginItem.addActionListener(this);
 		logoutItem = new JMenuItem("Logout");
@@ -75,6 +80,7 @@ public class MainGUI extends JFrame implements ActionListener
                 
                 // Add Items to the search menu
                 searchMenu.add(searchForClassesItem);
+                searchMenu.add(dropItem);
                 
                 // Add items to the edit menu
                 editMenu.add(editFirstName);
@@ -106,6 +112,7 @@ public class MainGUI extends JFrame implements ActionListener
                 studentList = student;
                 courseList = course;
                 facultyList = faculty;
+                adminList = admin;
                 userList = user;
 	}
         
@@ -176,6 +183,14 @@ public class MainGUI extends JFrame implements ActionListener
             {
                 SearchClass s = new SearchClass(courseList, studentList, activeUser);
                 s.setVisible(true);
+            }
+            
+            if(action.equals("Drop"))
+            {
+                FindUser find = new FindUser(activeUser, adminList, studentList, facultyList);
+                Student user = find.findStudent();
+                DropClass d = new DropClass(user);
+                d.setVisible(true);
             }
             
             if(action.equals("Edit First Name"))
