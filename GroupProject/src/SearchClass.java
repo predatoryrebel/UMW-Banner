@@ -15,16 +15,11 @@ public class SearchClass extends javax.swing.JFrame {
      * Creates new form SearchClass
      */
    
-    public SearchClass(LinkedList<Course> course, LinkedList<Student> student, LinkedList<Faculty> faculty, User person) {
+    public SearchClass(LinkedList<Course> course, LinkedList<Student> student, User person) {
         initComponents();
         user = person;
-        if (user.getPermission() == 2)
-        {
-            studentList = student;
-            facultyList = faculty;
-            courseList = course;
-        }
-        if (user.getPermission() == 1 || user.getPermission() == 0)
+        
+        if (user.getPermission() == 0)
         {
             courseList = course;
             studentList = student;
@@ -354,8 +349,6 @@ public class SearchClass extends javax.swing.JFrame {
     }//GEN-LAST:event_exitButtonActionPerformed
 
     private LinkedList<Student> studentList;
-    private LinkedList<Faculty> facultyList;
-    private LinkedList<Admin> adminList;
     private User user;
     private LinkedList<Course> courseList;
     // Variables declaration - do not modify//GEN-BEGIN:variables

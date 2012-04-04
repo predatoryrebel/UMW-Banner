@@ -174,7 +174,7 @@ public class MainGUI extends JFrame implements ActionListener
             
             if(action.equals("Search For Classes"))
             {
-                SearchClass s = new SearchClass(courseList, studentList, facultyList, activeUser);
+                SearchClass s = new SearchClass(courseList, studentList, activeUser);
                 s.setVisible(true);
             }
             
