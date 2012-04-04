@@ -67,7 +67,7 @@ public class Faculty extends User {
     {
         String backup = "";
 
-        backup =  getFirstName() + "," + getLastName() +  "," + getUserName() + "," + getPassword()  + ","  + getEmail()  + "," + office + "," + phoneNumber + '\n';
+        backup =  getFirstName() + "," + getLastName() +  "," + getUserName() + "," + getPassword()  + ","  + getEmail()  + "," + office + phoneNumber + '\n';
 
         return backup;
     }
