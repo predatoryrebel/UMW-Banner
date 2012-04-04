@@ -79,12 +79,17 @@ public class Backup {
 
             setFaculty(faculty);
 
+            File file = new File("facultyList.csv");
+
+            file.delete();
+
+
             ListIterator<Faculty> iteratorFaculty = facultyList.listIterator();
 
             try{
 
             /* Make a buffered file writer with a tmp file facultyList.csv.tmp */
-            BufferedWriter out2 = new BufferedWriter(new FileWriter("facultyList.csv.tmp"));
+            BufferedWriter out2 = new BufferedWriter(new FileWriter("facultyList.csv"));
 
                 /* For each faculty member */
                 while(iteratorFaculty.hasNext())
@@ -105,20 +110,19 @@ public class Backup {
         /****** Rename the current facultyList.csv file *****/
 
             // File (or directory) with old name
-            File file = new File("facultyList.csv");
-
+            
             // File (or directory) with new name
-            File file2 = new File("facultyList.csv.bak");
+            //File file2 = new File("facultyList.csv.bak");
 
             // Rename file (or directory)
-            boolean success = file.renameTo(file2);
-            if (!success) {
+            ///boolean success = file.renameTo(file2);
+            //if (!success) {
                  // File was not successfully renamed
-            }
-            file.delete();
+            //}
+            //file.delete();
 
             /* Rename the temp file we made to courselist.csv */
-
+            /*
             // File (or directory) with old name
             file = new File("facultyList.csv.tmp");
 
@@ -129,7 +133,7 @@ public class Backup {
             success = file.renameTo(file2);
             if (!success) {
                 // File was not successfully renamed
-            }
+            }*/
 
         /******** END RENAME FACULTYLIST.CSV *********/
 
@@ -142,12 +146,15 @@ public class Backup {
 
             setAdmin(admin);
 
+            File file = new File("adminList.csv");
+            file.delete();
+
             ListIterator<Admin> iteratorAdmin = adminList.listIterator();
 
             try{
 
             /* Make a buffered file writer with a tmp file facultyList.csv.tmp */
-            BufferedWriter out2 = new BufferedWriter(new FileWriter("adminList.csv.tmp"));
+            BufferedWriter out2 = new BufferedWriter(new FileWriter("adminList.csv"));
 
                 /* For each faculty member */
                 while(iteratorAdmin.hasNext())
@@ -167,35 +174,6 @@ public class Backup {
 
         /****** Rename the current adminList.csv file *****/
 
-            // File (or directory) with old name
-            File file = new File("adminList.csv");
-
-            // File (or directory) with new name
-            File file2 = new File("adminList.csv.bak");
-
-            // Rename file (or directory)
-            boolean success = file.renameTo(file2);
-            if (!success) {
-                 // File was not successfully renamed
-            }
-            file.delete();
-
-            /* Rename the temp file we made to courselist.csv */
-
-            // File (or directory) with old name
-            file = new File("adminList.csv.tmp");
-
-            // File (or directory) with new name
-            file2 = new File("adminList.csv");
-
-            // Rename file (or directory)
-            success = file.renameTo(file2);
-            if (!success) {
-                // File was not successfully renamed
-            }
-
-        /******** END RENAME ADMINLIST.CSV *********/
-
             return 0;
     }
 
@@ -205,6 +183,9 @@ public class Backup {
 
             setStudents(students);
 
+            File file = new File("studentList.csv");
+            file.delete();
+
             /* Declare a new student iterator */
             ListIterator<Student> iteratorStudent = studentList.listIterator();
 
@@ -212,7 +193,7 @@ public class Backup {
             try {
 
             /* Declare and instantiate a new Buffered writer for studentList.csv.temp */
-            BufferedWriter out1 = new BufferedWriter(new FileWriter("studentList.csv.tmp"));
+            BufferedWriter out1 = new BufferedWriter(new FileWriter("studentList.csv"));
 
                 /* While there are still students */
                 while (iteratorStudent.hasNext()){
@@ -233,36 +214,7 @@ public class Backup {
 
         /******** END BACKUP STUDENTLIST.CSV *********/
 
-        /****** Rename the current studentlist.csv file *****/
-
-            // File (or directory) with old name
-            File file = new File("studentList.csv");
-
-            // File (or directory) with new name
-            File file2 = new File("studentList.csv.bak");
-
-            // Rename file (or directory)
-            boolean success = file.renameTo(file2);
-            if (!success) {
-                 // File was not successfully renamed
-            }
-            file.delete();
-
-            /* Rename the temp file we made to courselist.csv */
-
-            // File (or directory) with old name
-            file = new File("studentList.csv.tmp");
-
-            // File (or directory) with new name
-            file2 = new File("studentList.csv");
-
-            // Rename file (or directory)
-            success = file.renameTo(file2);
-            if (!success) {
-                // File was not successfully renamed
-            }
-
-        /******** END RENAME STUDENTLIST.CSV *********/
+        
 
             return 0;
 
@@ -272,6 +224,8 @@ public class Backup {
 
             setCourses(courses);
 
+            File file = new File("courseList.csv");
+            file.delete();
 
            /******** BACKUP courselist.CSV ***********/
             ListIterator<Course> iterator = courseList.listIterator();
@@ -280,7 +234,7 @@ public class Backup {
             try {
 
                 /* Declare and intanitate a new bffered writer named out */
-                BufferedWriter out = new BufferedWriter(new FileWriter("courseList.csv.tmp"));
+                BufferedWriter out = new BufferedWriter(new FileWriter("courseList.csv"));
 
                 /* While the list isn't empty */
                 while (iterator.hasNext()) {
@@ -301,37 +255,7 @@ public class Backup {
         }
         /******** END BACKUP STUDENTLIST.CSV ***********/
 
-        /****** Rename the current coureList.csv file *****/
-
-            // File (or directory) with old name
-            File file = new File("courseList.csv");
-
-            // File (or directory) with new name
-            File file2 = new File("courseList.csv.bak");
-
-            // Rename file (or directory)
-            boolean success = file.renameTo(file2);
-            if (!success) {
-                 // File was not successfully renamed
-            }
-            file.delete();
-
-            /* Rename the temp file we made to courselist.csv */
-
-            // File (or directory) with old name
-            file = new File("courseList.csv.tmp");
-
-            // File (or directory) with new name
-            file2 = new File("courseList.csv");
-
-            // Rename file (or directory)
-            boolean success2 = file.renameTo(file2);
-            if (!success) {
-                // File was not successfully renamed
-            }
-
-        /******** END RENAME COURSELIST.CSV *********/
-
+       
             return 0;
     }
 

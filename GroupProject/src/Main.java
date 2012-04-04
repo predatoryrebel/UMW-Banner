@@ -58,13 +58,13 @@ public class Main {
 
         Backup backup = new Backup(courseList, studentList, facultyList, adminList);
 
-        backup.backupAll(courseList, studentList, facultyList, adminList);
+        
 
         // Create MainGUI here and pass Login parameters to it
         MainGUI mainWindow = new MainGUI(studentList, courseList, facultyList, userList);
         mainWindow.setVisible(true);
 
-
+        backup.backupAll(courseList, studentList, facultyList, adminList);
 
        
 
