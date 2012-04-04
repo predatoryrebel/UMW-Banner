@@ -65,7 +65,7 @@ public class Main {
         mainWindow.setVisible(true);
 
         backup.backupAll(courseList, studentList, facultyList, adminList);
-
+        System.out.println("BACKED UP");
        
 
         
