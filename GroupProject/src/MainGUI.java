@@ -90,7 +90,7 @@ public class MainGUI extends JFrame implements ActionListener
 		setJMenuBar(mainMenu);
                 
                 // Create login window
-                login = new Login(student, course, faculty, user, this);
+                login = new Login(user, this);
                 
                 // Create the profile panel
                 profile = new JPanel();

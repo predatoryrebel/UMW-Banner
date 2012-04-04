@@ -20,11 +20,8 @@ public class Login extends javax.swing.JFrame {
      * Creates new form Login
      */
     
-    public Login(LinkedList<Student> student, LinkedList<Course> course, LinkedList<Faculty> faculty, LinkedList<User> user, MainGUI mw) {
+    public Login(LinkedList<User> user, MainGUI mw) {
         initComponents();
-        studentList = student;
-        courseList = course;
-        facultyList = faculty;
         userList = user;
         mainWindow = mw;    // The Main GUI. mainWindow can be used to call methods in the MainGUI object.
         setDefaultCloseOperation(HIDE_ON_CLOSE);
@@ -134,9 +131,6 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_registerButtonActionPerformed
 
     
-    private LinkedList<Student> studentList;
-    private LinkedList<Course> courseList;
-    private LinkedList<Faculty> facultyList;
     private LinkedList<User> userList;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton LoginButton;
