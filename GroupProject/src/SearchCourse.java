@@ -10,11 +10,12 @@ public class SearchCourse {
     {
         ListIterator<Course> iterator = courseList.listIterator();
         LinkedList<Course> courseNameList = new LinkedList<Course>();
+        courseName = courseName.toUpperCase();
         
         while (iterator.hasNext())
         {
             Course element = iterator.next();
-            if (element.getName().equalsIgnoreCase(courseName))
+            if (element.getName().toUpperCase().contains(courseName))
             {
                 courseNameList.add(element);
             }
@@ -29,11 +30,11 @@ public class SearchCourse {
     {
         ListIterator<Course> iterator = courseList.listIterator();
         LinkedList<Course> courseTitleList = new LinkedList<Course>();
-        
+        title = title.toUpperCase();
         while (iterator.hasNext())
         {
             Course element = iterator.next();
-            if (element.getTitle().equalsIgnoreCase(title))
+            if (element.getTitle().toUpperCase().contains(title))
             {
                 courseTitleList.add(element);
             }
@@ -52,7 +53,7 @@ public class SearchCourse {
         while (iterator.hasNext())
         {
             Course element = iterator.next();
-            if (element.getTime().equalsIgnoreCase(time) && element.getDays().equalsIgnoreCase(days))
+            if (element.getTime().contains(time) && element.getDays().contains(days))
             {
                 courseTimeAndDayList.add(element);
             }
@@ -67,11 +68,12 @@ public class SearchCourse {
     {
         ListIterator<Course> iterator = courseList.listIterator();
         LinkedList<Course> courseTimeList = new LinkedList<Course>();
+        time = time.toUpperCase();
         
         while (iterator.hasNext())
         {
             Course element = iterator.next();
-            if (element.getTime().equalsIgnoreCase(time))
+            if (element.getTime().toUpperCase().contains(time))
             {
                 courseTimeList.add(element);
             }
@@ -90,7 +92,7 @@ public class SearchCourse {
         while (iterator.hasNext())
         {
             Course element = iterator.next();
-            if (element.getDays().equalsIgnoreCase(days))
+            if (element.getDays().contains(days))
             {
                 courseDaysList.add(element);
             }

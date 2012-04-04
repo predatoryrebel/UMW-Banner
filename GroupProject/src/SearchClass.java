@@ -51,6 +51,14 @@ public class SearchClass extends javax.swing.JFrame {
         addList = new javax.swing.JScrollPane();
         addCourseList = new javax.swing.JList();
         addButton = new javax.swing.JButton();
+        courseNameCheckBox = new javax.swing.JCheckBox();
+        titleCheckBox = new javax.swing.JCheckBox();
+        timeBox = new javax.swing.JComboBox();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        timeText = new javax.swing.JTextField();
+        clearButton = new javax.swing.JButton();
+        exitButton = new javax.swing.JButton();
 
         jLabel1.setText("Search");
 
@@ -78,6 +86,37 @@ public class SearchClass extends javax.swing.JFrame {
             }
         });
 
+        courseNameCheckBox.setSelected(true);
+        courseNameCheckBox.setText("Course Name");
+
+        titleCheckBox.setText("Title");
+
+        timeBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "M", "T", "W", "R", "F" }));
+        timeBox.setSelectedIndex(-1);
+        timeBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                timeBoxActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Day");
+
+        jLabel4.setText("Time");
+
+        clearButton.setText("Clear");
+        clearButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearButtonActionPerformed(evt);
+            }
+        });
+
+        exitButton.setText("Exit");
+        exitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -98,7 +137,23 @@ public class SearchClass extends javax.swing.JFrame {
                         .addGap(58, 58, 58)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(addButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(searchButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(searchButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(clearButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(exitButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(titleCheckBox)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel4))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(courseNameCheckBox)
+                                .addGap(71, 71, 71)
+                                .addComponent(jLabel3)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(timeBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(timeText, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(44, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -117,8 +172,24 @@ public class SearchClass extends javax.swing.JFrame {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34)
                         .addComponent(addList, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(addButton))
-                .addContainerGap(142, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(addButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(clearButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(exitButton)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(courseNameCheckBox)
+                    .addComponent(jLabel3)
+                    .addComponent(timeBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(titleCheckBox)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel4)
+                        .addComponent(timeText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         pack();
@@ -127,18 +198,69 @@ public class SearchClass extends javax.swing.JFrame {
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         
         SearchCourse search = new SearchCourse(courseList);
-        LinkedList<Course> searchList = search.searchCourseByCourseName(jTextField1.getText());
-        ListIterator<Course> iterator = searchList.listIterator();
-        DefaultListModel listModel = new DefaultListModel();
+        LinkedList<Course> searchList = null;
+         DefaultListModel listModel; 
         
-        while (iterator.hasNext())
-        {
-            Course element = iterator.next();
-            listModel.addElement(element);
+        if (titleCheckBox.isSelected()){
+            searchList = search.searchCourseByTitle(jTextField1.getText());
+            search = new SearchCourse(searchList);
+        }
+            
+        if (courseNameCheckBox.isSelected()){
+            searchList = search.searchCourseByCourseName(jTextField1.getText());
+            search = new SearchCourse(searchList);
         }
         
-        searchCourseList.setModel(listModel);
-       
+        if (timeBox.getSelectedItem() == "M"){
+            searchList = search.searchCourseByDay("M");
+            search = new SearchCourse(searchList);
+        }
+        
+        if (timeBox.getSelectedItem() == "T"){
+            searchList = search.searchCourseByDay("T");
+            search = new SearchCourse(searchList);
+        }
+        
+        if (timeBox.getSelectedItem() == "W"){
+            searchList = search.searchCourseByDay("W");
+            search = new SearchCourse(searchList);
+        }
+        
+        if (timeBox.getSelectedItem() == "R"){
+            searchList = search.searchCourseByDay("R");
+            search = new SearchCourse(searchList);
+        }
+        
+        if (timeBox.getSelectedItem() == "F"){
+            searchList = search.searchCourseByDay("F");
+            search = new SearchCourse(searchList);
+        }
+        
+        if (timeText.getText() != "")
+        {
+            searchList = search.searchCourseByTime(timeText.getText());
+           
+        }
+        
+        
+        if (!searchList.isEmpty()){
+            ListIterator<Course> iterator = searchList.listIterator();
+            listModel = new DefaultListModel();
+
+            while (iterator.hasNext())
+            {
+                Course element = iterator.next();
+                listModel.addElement(element);
+            }   
+        }
+        else
+        {
+            listModel = new DefaultListModel();
+            String noneFound = "Search item not found";
+            listModel.addElement(noneFound);
+        }
+        
+         searchCourseList.setModel(listModel);
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void searchCourseListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchCourseListMouseReleased
@@ -148,6 +270,11 @@ public class SearchClass extends javax.swing.JFrame {
         //get course
         Course course = listModel.getElementAt(index);
         DefaultListModel addListModel = new DefaultListModel();
+        listModel = addCourseList.getModel();
+        //adds items already in addCourseList to addListModel
+        for (int a = 0; a < listModel.getSize(); a++){
+            addListModel.addElement(listModel.getElementAt(a));
+        }
         //add course to addCourseList
         addListModel.addElement(course);
         addCourseList.setModel(addListModel);
@@ -155,52 +282,76 @@ public class SearchClass extends javax.swing.JFrame {
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         ListModel<Course> listModel = addCourseList.getModel();
-        Course course = listModel.getElementAt(0);
-        ListIterator<Student> iterator = studentList.listIterator();
         
-        //seach student list for student
-        while (iterator.hasNext())
-        {
-            Student element = iterator.next();
-            //check username of user to student user name
-            if (user.getUserName().equalsIgnoreCase(element.getUserName()))
+        for (int a = 0; a < listModel.getSize(); a++){
+            Course course = listModel.getElementAt(a);
+            ListIterator<Student> iterator = studentList.listIterator();
+            //seach student list for student
+            while (iterator.hasNext())
             {
-                ListIterator<Course> courseIterator = element.getCurrentSchudule().listIterator();
-                boolean courseAlreadyAdded = false;
-                //checks to make sure the student isn't already enrolled in the class
-                while (courseIterator.hasNext())
-                {    
-                    Course courseElement = courseIterator.next();
-                    if (courseElement.getName().equalsIgnoreCase(course.getName()))
-                        courseAlreadyAdded = true;
-                }
-                //makes sure class is not full and student will not go over approved credits
-                boolean addAStudent = course.addStudent();
-                int totalCredits = element.getCreditHoursEnrolled();
-                totalCredits = totalCredits + course.getCredits();
-                //checks number of seats for course, student will not go over approved credits, student is not already enrolled
-                //in the class and holds
-                if (addAStudent == true  && totalCredits <= element.getApprovedCredits()  && !courseAlreadyAdded  && 
-                        element.getHolds())
+                Student element = iterator.next();
+                //check username of user to student user name
+                if (user.getUserName().equalsIgnoreCase(element.getUserName()))
                 {
-                    //add course and set credits enrolled
-                    element.getCurrentSchudule().add(course);
-                    element.setCreditHoursEnrolled(totalCredits);
+                    ListIterator<Course> courseIterator = element.getCurrentSchudule().listIterator();
+                    boolean courseAlreadyAdded = false;
+                    //checks to make sure the student isn't already enrolled in the class
+                    while (courseIterator.hasNext())
+                    {    
+                        Course courseElement = courseIterator.next();
+                        if (courseElement.getName().equalsIgnoreCase(course.getName()))
+                            courseAlreadyAdded = true;
+                    }
+                    //makes sure class is not full and student will not go over approved credits
+                    boolean addAStudent = course.addStudent();
+                    int totalCredits = element.getCreditHoursEnrolled();
+                    totalCredits = totalCredits + course.getCredits();
+                    //checks number of seats for course, student will not go over approved credits, student is not already enrolled
+                    //in the class and holds
+                    if (addAStudent == true  && totalCredits <= element.getApprovedCredits()  && !courseAlreadyAdded  && 
+                            element.getHolds() == false)
+                    {
+                        //add course and set credits enrolled
+                        element.getCurrentSchudule().add(course);
+                        element.setCreditHoursEnrolled(totalCredits);
+                        JFrame frame = new JFrame();
+                        JOptionPane.showMessageDialog(frame, "Course " + course.getName() + " has been added." );
+                    }
+                    //message to tell use course was not added
+                    else
+                    {
+                        JFrame frame = new JFrame();
+                        JOptionPane.showMessageDialog(frame, "Course was not added check credits, holds and make sure you are not "
+                                + "alreay enrolled in the course.");
+                    }
+                    System.out.println(element.getCurrentSchudule());
+                    System.out.println(element);
                 }
-                //message to tell use course was not added
-                else
-                {
-                    JFrame frame = new JFrame();
-                    JOptionPane.showMessageDialog(frame, "Course was not added check credits, holds and make sure you are not "
-                            + "alreay enrolled in the course.");
-                }
-                System.out.println(element.getCurrentSchudule());
+
             }
-          
         }
         
+        Backup backup = new Backup();
+        backup.backupStudents(studentList);
         
     }//GEN-LAST:event_addButtonActionPerformed
+
+    private void timeBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timeBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_timeBoxActionPerformed
+
+    private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
+        DefaultListModel listModel = new DefaultListModel();
+        
+        String clear = "";
+        listModel.addElement(clear);
+        addCourseList.setModel(listModel);
+        searchCourseList.setModel(listModel);
+    }//GEN-LAST:event_clearButtonActionPerformed
+
+    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_exitButtonActionPerformed
 
     private LinkedList<Student> studentList;
     private LinkedList<Faculty> facultyList;
@@ -211,11 +362,19 @@ public class SearchClass extends javax.swing.JFrame {
     private javax.swing.JButton addButton;
     private javax.swing.JList addCourseList;
     private javax.swing.JScrollPane addList;
+    private javax.swing.JButton clearButton;
+    private javax.swing.JCheckBox courseNameCheckBox;
+    private javax.swing.JButton exitButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JButton searchButton;
     private javax.swing.JList searchCourseList;
+    private javax.swing.JComboBox timeBox;
+    private javax.swing.JTextField timeText;
+    private javax.swing.JCheckBox titleCheckBox;
     // End of variables declaration//GEN-END:variables
 }
