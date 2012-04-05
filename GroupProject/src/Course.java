@@ -22,6 +22,7 @@ public class Course implements  Comparable<Course>{
         filledSeats = theFilledSeats;
         prerequisites = new LinkedList<Course>();
         enrolledStudents = new LinkedList<Student>();
+        waitingList = new LinkedList<Student>();
         next = null;
     }
     
@@ -29,6 +30,7 @@ public class Course implements  Comparable<Course>{
     {
        prerequisites = new LinkedList<Course>();
        enrolledStudents = new LinkedList<Student>(); 
+       waitingList = new LinkedList<Student>();
        next = null;
     }
 
@@ -367,10 +369,19 @@ public class Course implements  Comparable<Course>{
     {
         return filledSeats;
     }
+    
+    /**
+     * Get waiting list for the course
+     * @return list of students waiting on the course
+     */
+    public LinkedList<Student> getWaitingList()
+    {
+        return waitingList;
+    }
 
 
 /****** DATA MEMBERS *****************/
-
+    private LinkedList<Student> waitingList;
     private String crn;
     private String course;
     private int section;

@@ -320,6 +320,14 @@ public class SearchClass extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(frame, "Course was not added check credits, holds and make sure you are not "
                                 + "alreay enrolled in the course.");
                     }
+                    //adds student to waitng list if course is full
+                    if (!availableSeat)
+                    {
+                        course.getWaitingList().add(element);
+                         JFrame frame = new JFrame();
+                        JOptionPane.showMessageDialog(frame, course.getName() + " is full.  You have been put on the waiting list.");
+                    }
+                    
                 }
 
             }
