@@ -319,8 +319,6 @@ public class SearchClass extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(frame, "Course was not added check credits, holds and make sure you are not "
                                 + "alreay enrolled in the course.");
                     }
-                    System.out.println(element.getCurrentSchudule());
-                    System.out.println(element);
                 }
 
             }

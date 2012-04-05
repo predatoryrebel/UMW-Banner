@@ -1,5 +1,7 @@
 import java.util.ListIterator;
 import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 
 /*
@@ -19,6 +21,11 @@ public class DropClass extends javax.swing.JFrame {
     public DropClass(Student user) {
         initComponents();
         student = user;
+        resetCurrentSchedule();
+    }
+    
+    private void resetCurrentSchedule()
+    {
         DefaultListModel listModel = new DefaultListModel();
         ListIterator<Course> iterator = student.getCurrentSchudule().listIterator();
         
@@ -75,6 +82,11 @@ public class DropClass extends javax.swing.JFrame {
         });
 
         exit.setText("Exit");
+        exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -125,13 +137,25 @@ public class DropClass extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void dropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropActionPerformed
-        ListModel listModel = dropList.getModel();
+        ListModel<Course> listModel = dropList.getModel();
         
         for (int a = 0; a < listModel.getSize(); a++)
         {
+            Course course = listModel.getElementAt(a);
+          
+            boolean remove = student.getCurrentSchudule().remove(course);
+            if (remove)
+            {
+                student.setCreditHoursEnrolled(student.getCreditHoursEnrolled() - course.getCredits());
+            }
+            JFrame frame = new JFrame();
+            JOptionPane.showMessageDialog(frame, "Course " + course.getName() + " has been removed." );
             
+           
         }
-        
+       
+        resetCurrentSchedule();
+       
     }//GEN-LAST:event_dropActionPerformed
 
     private void currentList1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_currentList1MouseReleased
@@ -150,6 +174,10 @@ public class DropClass extends javax.swing.JFrame {
         dropListModel.addElement(course);
         dropList.setModel(dropListModel);
     }//GEN-LAST:event_currentList1MouseReleased
+
+    private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_exitActionPerformed
 
     
     private Student student;

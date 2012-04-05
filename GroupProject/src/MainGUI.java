@@ -187,10 +187,13 @@ public class MainGUI extends JFrame implements ActionListener
             
             if(action.equals("Drop"))
             {
+                if (activeUser.getPermission() == 0)
+                {    
                 FindUser find = new FindUser(activeUser, adminList, studentList, facultyList);
                 Student user = find.findStudent();
                 DropClass d = new DropClass(user);
                 d.setVisible(true);
+                }
             }
             
             if(action.equals("Edit First Name"))
