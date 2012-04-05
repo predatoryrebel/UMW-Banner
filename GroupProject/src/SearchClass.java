@@ -298,17 +298,18 @@ public class SearchClass extends javax.swing.JFrame {
                             courseAlreadyAdded = true;
                     }
                     //makes sure class is not full and student will not go over approved credits
-                    boolean addAStudent = course.addStudent();
                     int totalCredits = element.getCreditHoursEnrolled();
                     totalCredits = totalCredits + course.getCredits();
+                    boolean availableSeat = course.addStudent();
                     //checks number of seats for course, student will not go over approved credits, student is not already enrolled
                     //in the class and holds
-                    if (addAStudent == true  && totalCredits <= element.getApprovedCredits()  && !courseAlreadyAdded  && 
-                            element.getHolds() == false)
+                    if (totalCredits <= element.getApprovedCredits()  && !courseAlreadyAdded  && element.getHolds() == false 
+                            && availableSeat == true)
                     {
                         //add course and set credits enrolled
                         element.getCurrentSchudule().add(course);
                         element.setCreditHoursEnrolled(totalCredits);
+                        course.getEnrolledStudents().add(element);
                         JFrame frame = new JFrame();
                         JOptionPane.showMessageDialog(frame, "Course " + course.getName() + " has been added." );
                     }
@@ -324,8 +325,8 @@ public class SearchClass extends javax.swing.JFrame {
             }
         }
         
-        Backup backup = new Backup();
-        backup.backupStudents(studentList);
+        //Backup backup = new Backup();
+        //backup.backupStudents(studentList);
         
     }//GEN-LAST:event_addButtonActionPerformed
 

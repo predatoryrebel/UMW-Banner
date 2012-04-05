@@ -41,16 +41,32 @@ public class Main {
             User element = aiterator.next();
             userList.add(element);
         }
-
         
-        siterator = studentList.listIterator(0);
-        
+         siterator = studentList.listIterator(0);
+        //adds courses to a student
         while (siterator.hasNext())
         {
             Student element = siterator.next();
             element.buildCurrentScudule(courseList);
         }
 
+        ListIterator<Course> citerator = courseList.listIterator();
+        //adds students to a course
+        while (citerator.hasNext())
+        {
+            Course element = citerator.next();
+            element.buildEnrolledStudents(studentList);
+        }
+        
+        fiterator = facultyList.listIterator(0);
+        //adds courses to faculty member 
+        while (fiterator.hasNext())
+        {
+            Faculty element = fiterator.next();
+            element.buildCourseList(courseList);
+        }
+        
+       
 
         /* Create a new backup object that wil automaticaly backup an interval
          * which is the fourth parameter

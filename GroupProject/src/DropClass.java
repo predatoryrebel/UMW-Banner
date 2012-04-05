@@ -142,12 +142,16 @@ public class DropClass extends javax.swing.JFrame {
         for (int a = 0; a < listModel.getSize(); a++)
         {
             Course course = listModel.getElementAt(a);
-          
+            
             boolean remove = student.getCurrentSchudule().remove(course);
             if (remove)
             {
                 student.setCreditHoursEnrolled(student.getCreditHoursEnrolled() - course.getCredits());
+                //drop student from course
+                course.getEnrolledStudents().remove(student);            
+                course.dropStudent();
             }
+       
             JFrame frame = new JFrame();
             JOptionPane.showMessageDialog(frame, "Course " + course.getName() + " has been removed." );
             

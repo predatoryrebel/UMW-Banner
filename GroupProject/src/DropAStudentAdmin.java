@@ -161,17 +161,19 @@ public class DropAStudentAdmin extends javax.swing.JFrame {
         for (int a = 0; a < listModel.getSize(); a++)
         {
             Course course = listModel.getElementAt(a);
-          
             boolean remove = student.getCurrentSchudule().remove(course);
             //removes course credits from approved credits
             if (remove)
             {
                 student.setCreditHoursEnrolled(student.getCreditHoursEnrolled() - course.getCredits());
+                //drop student from course
+                course.getEnrolledStudents().remove(student);            
+                course.dropStudent();
             }
+            
             //display remove course
             JFrame frame = new JFrame();
             JOptionPane.showMessageDialog(frame, "Course " + course.getName() + " has been removed." );
-            
         }
         
         reset();

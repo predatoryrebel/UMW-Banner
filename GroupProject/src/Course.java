@@ -53,6 +53,7 @@ public class Course implements  Comparable<Course>{
                 if (studentCourse == this)
                 {
                     enrolledStudents.add(person);
+                    addStudent();
                 }
             }
         }

@@ -24,10 +24,7 @@ public class Faculty extends User {
         setPermission(1);
     }
     
-   Faculty()
-   {
-   
-   }        
+          
     public void buildCourseList(LinkedList<Course> courseList)
     {
         ListIterator<Course> iterator = courseList.listIterator();
