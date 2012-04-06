@@ -188,6 +188,7 @@ public class DropAStudentAdmin extends javax.swing.JFrame {
         }
         
         reset();
+        
     }//GEN-LAST:event_dropActionPerformed
 
     private void selectListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_selectListMouseReleased

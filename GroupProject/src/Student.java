@@ -13,7 +13,7 @@ public class Student extends User {
         major = yourMajor;
         minor = yourMinor;
         approvedCredits = yourApprovedCredits;
-        creditHoursEnrolled = 0;
+        creditHoursEnrolled =  yourCreditHoursEnrolled;
         tempCurrentSchudule = yourCurrentSchudule;
         holds = yourHolds;
         currentSchudule = new LinkedList<Course>();
@@ -25,7 +25,7 @@ public class Student extends User {
         String temp = tempCurrentSchudule;
         Scanner input = new Scanner(temp);
         input.useDelimiter(" ");
-        
+        creditHoursEnrolled = 0;
         while (input.hasNext()){
         
             String crn = input.next();
@@ -40,12 +40,24 @@ public class Student extends User {
         
     }
     
+    private void buildTempCurrentSchudule()
+    {
+       ListIterator<Course> iterator = currentSchudule.listIterator();
+       tempCurrentSchudule = "";
+       while (iterator.hasNext())
+       {
+           Course element = iterator.next();
+           tempCurrentSchudule = tempCurrentSchudule + " " + element.getCRN();
+       }
+       
+    }
+    
     
     @Override
     public String toString()
     {
         String contents = "";
-        
+        this.buildTempCurrentSchudule();
         contents = idNumber + " " + getFirstName() + " " + getLastName() + " " + getEmail()  + " " + major + " " + minor + " " + approvedCredits + " " +
                 creditHoursEnrolled + " " + tempCurrentSchudule + " " + holds;
         
@@ -55,7 +67,7 @@ public class Student extends User {
     public String backup()
     {
         String backup = "";
-
+        this.buildTempCurrentSchudule();
         backup = idNumber + "," + this.getFirstName() + "," + this.getLastName() + "," + this.getUserName() + "," + this.getPassword() + "," + this.getEmail() + "," + major + "," + minor + "," + approvedCredits + "," +
                 creditHoursEnrolled + "," + tempCurrentSchudule + "," + holds + "\n";
 

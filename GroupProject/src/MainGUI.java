@@ -240,6 +240,8 @@ public class MainGUI extends JFrame implements ActionListener
             
             if(action.equals("Exit"))
             {
+                Backup backup = new Backup();
+                backup.backupAll(courseList, studentList, facultyList, adminList);
                 System.exit(0);
             }
         }

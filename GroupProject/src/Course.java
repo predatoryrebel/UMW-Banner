@@ -55,7 +55,6 @@ public class Course implements  Comparable<Course>{
                 if (studentCourse == this)
                 {
                     enrolledStudents.add(person);
-                    addStudent();
                 }
             }
         }
@@ -95,7 +94,7 @@ public class Course implements  Comparable<Course>{
     * @return booleen true if student is added
     */
     public boolean addStudent(){
-        if (totalSeats != filledSeats)
+        if (totalSeats >= filledSeats)
         {
             filledSeats++;
             return true;

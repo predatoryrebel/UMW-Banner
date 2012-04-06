@@ -300,18 +300,28 @@ public class SearchClass extends javax.swing.JFrame {
                     //makes sure class is not full and student will not go over approved credits
                     int totalCredits = element.getCreditHoursEnrolled();
                     totalCredits = totalCredits + course.getCredits();
-                    boolean availableSeat = course.addStudent();
+                    
                     //checks number of seats for course, student will not go over approved credits, student is not already enrolled
                     //in the class and holds
-                    if (totalCredits <= element.getApprovedCredits()  && !courseAlreadyAdded  && element.getHolds() == false 
-                            && availableSeat == true)
+                    if (totalCredits <= element.getApprovedCredits()  && !courseAlreadyAdded  && element.getHolds() == false )
                     {
-                        //add course and set credits enrolled
-                        element.getCurrentSchudule().add(course);
-                        element.setCreditHoursEnrolled(totalCredits);
-                        course.getEnrolledStudents().add(element);
-                        JFrame frame = new JFrame();
-                        JOptionPane.showMessageDialog(frame, "Course " + course.getName() + " has been added." );
+                        boolean availableSeat = course.addStudent();
+                        if (availableSeat)
+                        {//add course and set credits enrolled
+                            element.getCurrentSchudule().add(course);
+                            element.setCreditHoursEnrolled(totalCredits);
+                            course.getEnrolledStudents().add(element);
+                            JFrame frame = new JFrame();
+                            JOptionPane.showMessageDialog(frame, "Course " + course.getName() + " has been added." );
+                        }
+                        else
+                        {
+                            //add student to waiting list
+                            course.getWaitingList().add(element);
+                            JFrame frame = new JFrame();
+                            JOptionPane.showMessageDialog(frame, course.getName() + " is full.  You have been put on the "
+                                    + "waiting list.");
+                        }
                     }
                     //message to tell use course was not added
                     else
@@ -320,21 +330,14 @@ public class SearchClass extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(frame, "Course was not added check credits, holds and make sure you are not "
                                 + "alreay enrolled in the course.");
                     }
-                    //adds student to waitng list if course is full
-                    if (!availableSeat)
-                    {
-                        course.getWaitingList().add(element);
-                        JFrame frame = new JFrame();
-                        JOptionPane.showMessageDialog(frame, course.getName() + " is full.  You have been put on the waiting list.");
-                    }
-                    
+                   
                 }
 
             }
         }
         
-        //Backup backup = new Backup();
-        //backup.backupStudents(studentList);
+        Backup backup = new Backup();
+        backup.backupStudents(studentList);
         
     }//GEN-LAST:event_addButtonActionPerformed
 
