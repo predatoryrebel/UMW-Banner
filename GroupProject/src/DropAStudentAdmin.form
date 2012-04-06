@@ -40,6 +40,7 @@
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="exit" max="32767" attributes="0"/>
                           <Component id="drop" max="32767" attributes="0"/>
+                          <Component id="clear" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
@@ -48,7 +49,7 @@
                   </Group>
                   <Component id="jLabel3" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="37" max="32767" attributes="0"/>
+              <EmptySpace pref="35" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -69,6 +70,8 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
                       <Component id="drop" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                      <Component id="clear" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="exit" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -167,6 +170,14 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Drop Course"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="clear">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Clear"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clearActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

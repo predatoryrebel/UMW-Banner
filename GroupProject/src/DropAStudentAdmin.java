@@ -61,6 +61,7 @@ public class DropAStudentAdmin extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         dropList = new javax.swing.JList();
         jLabel3 = new javax.swing.JLabel();
+        clear = new javax.swing.JButton();
 
         jButton1.setText("jButton1");
 
@@ -102,6 +103,13 @@ public class DropAStudentAdmin extends javax.swing.JFrame {
 
         jLabel3.setText("Drop Course");
 
+        clear.setText("Clear");
+        clear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -116,12 +124,13 @@ public class DropAStudentAdmin extends javax.swing.JFrame {
                         .addGap(73, 73, 73)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(exit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(drop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(drop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(clear)))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING))
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,6 +148,8 @@ public class DropAStudentAdmin extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(69, 69, 69)
                         .addComponent(drop)
+                        .addGap(16, 16, 16)
+                        .addComponent(clear)
                         .addGap(18, 18, 18)
                         .addComponent(exit)))
                 .addGap(23, 23, 23)
@@ -220,8 +231,17 @@ public class DropAStudentAdmin extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_exitActionPerformed
 
+    private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
+        DefaultListModel listModel = new DefaultListModel();
+        listModel.clear();
+        courseList.setModel(listModel);
+        dropList.setModel(listModel);
+        selectList.setModel(listModel);
+    }//GEN-LAST:event_clearActionPerformed
+
     private LinkedList<Student> studentList;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton clear;
     private javax.swing.JList courseList;
     private javax.swing.JButton drop;
     private javax.swing.JList dropList;

@@ -56,6 +56,7 @@ public class DropClass extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         drop = new javax.swing.JButton();
         exit = new javax.swing.JButton();
+        clear = new javax.swing.JButton();
 
         jButton1.setText("jButton1");
 
@@ -88,6 +89,13 @@ public class DropClass extends javax.swing.JFrame {
             }
         });
 
+        clear.setText("Clear");
+        clear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -104,7 +112,8 @@ public class DropClass extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(drop, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
-                    .addComponent(exit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(exit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(clear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(47, 47, 47))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -119,9 +128,11 @@ public class DropClass extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(drop)
-                .addGap(32, 32, 32)
+                .addGap(18, 18, 18)
+                .addComponent(clear)
+                .addGap(18, 18, 18)
                 .addComponent(exit)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -183,9 +194,17 @@ public class DropClass extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_exitActionPerformed
 
+    private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
+        DefaultListModel listModel = new DefaultListModel();
+        listModel.clear();
+        currentList1.setModel(listModel);
+        dropList.setModel(listModel);
+    }//GEN-LAST:event_clearActionPerformed
+
     
     private Student student;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton clear;
     private javax.swing.JList currentList1;
     private javax.swing.JButton drop;
     private javax.swing.JList dropList;

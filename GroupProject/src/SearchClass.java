@@ -324,7 +324,7 @@ public class SearchClass extends javax.swing.JFrame {
                     if (!availableSeat)
                     {
                         course.getWaitingList().add(element);
-                         JFrame frame = new JFrame();
+                        JFrame frame = new JFrame();
                         JOptionPane.showMessageDialog(frame, course.getName() + " is full.  You have been put on the waiting list.");
                     }
                     
@@ -345,8 +345,8 @@ public class SearchClass extends javax.swing.JFrame {
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
         DefaultListModel listModel = new DefaultListModel();
         
-        String clear = "";
-        listModel.addElement(clear);
+        
+        listModel.clear();
         addCourseList.setModel(listModel);
         searchCourseList.setModel(listModel);
     }//GEN-LAST:event_clearButtonActionPerformed

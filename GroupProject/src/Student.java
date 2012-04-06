@@ -13,7 +13,7 @@ public class Student extends User {
         major = yourMajor;
         minor = yourMinor;
         approvedCredits = yourApprovedCredits;
-        creditHoursEnrolled = yourCreditHoursEnrolled; 
+        creditHoursEnrolled = 0;
         tempCurrentSchudule = yourCurrentSchudule;
         holds = yourHolds;
         currentSchudule = new LinkedList<Course>();
@@ -34,6 +34,8 @@ public class Student extends User {
             Collections.sort(courseList, Course.comparatorByCRN());
             int index = Collections.binarySearch(courseList, tempCourse , Course.comparatorByCRN());
             currentSchudule.add(courseList.get(index));
+            Course course = courseList.get(index);
+           creditHoursEnrolled =  creditHoursEnrolled + course.getCredits();
         }
         
     }

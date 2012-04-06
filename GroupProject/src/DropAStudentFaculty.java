@@ -220,11 +220,11 @@ public class DropAStudentFaculty extends javax.swing.JFrame {
     private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
         DefaultListModel listModel = new DefaultListModel();
         //clear all list boxes
-        String clear = "";
-        listModel.addElement(clear);
+        listModel.clear();
         courseList.setModel(listModel);
         studentList.setModel(listModel);
         dropList.setModel(listModel);
+        reset();
     }//GEN-LAST:event_clearActionPerformed
 
     
