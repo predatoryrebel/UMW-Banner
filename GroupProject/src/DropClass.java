@@ -199,6 +199,7 @@ public class DropClass extends javax.swing.JFrame {
         listModel.clear();
         currentList1.setModel(listModel);
         dropList.setModel(listModel);
+        resetCurrentSchedule();
     }//GEN-LAST:event_clearActionPerformed
 
     
