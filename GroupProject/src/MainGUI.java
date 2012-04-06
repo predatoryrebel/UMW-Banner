@@ -139,6 +139,11 @@ public class MainGUI extends JFrame implements ActionListener
                 searchMenu.add(dropItem);
             }
             
+            if (activeUser.getPermission() == 1)
+            {
+                searchMenu.add(dropAStudent);
+            }
+            
             refreshWindow();
         }
         
@@ -209,6 +214,13 @@ public class MainGUI extends JFrame implements ActionListener
                 {
                    DropAStudentAdmin d = new DropAStudentAdmin(studentList);
                    d.setVisible(true);
+                }
+                if (activeUser.getPermission() == 1)
+                {
+                    FindUser find = new FindUser(activeUser, adminList, studentList, facultyList);
+                    Faculty professor = find.findFaculty();
+                    DropAStudentFaculty d = new DropAStudentFaculty(professor);
+                    d.setVisible(true);
                 }
             }
             
