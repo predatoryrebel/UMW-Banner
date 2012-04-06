@@ -2,6 +2,8 @@
 import java.util.LinkedList;
 import java.util.ListIterator;
 import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 
 /*
@@ -179,6 +181,9 @@ public class DropAStudentFromTheUniversityAdmin extends javax.swing.JFrame {
             }
             //drop student from student list
             studentList.remove(student);
+            
+            JFrame frame = new JFrame();
+            JOptionPane.showMessageDialog(frame, student.getFirstName()+ " " + student.getLastName() + " has been removed." );
         }
     }//GEN-LAST:event_dropActionPerformed
 

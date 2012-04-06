@@ -18,7 +18,8 @@ import javax.swing.Timer;
  */
 public class Backup {
 
-    Backup(final LinkedList<Course> courses, final LinkedList<Student> students, final LinkedList<Faculty> faculty, final LinkedList<Admin> admin, final int backupTime){
+    Backup(final LinkedList<Course> courses, final LinkedList<Student> students, final LinkedList<Faculty> faculty, 
+            final LinkedList<Admin> admin, final int backupTime){
         
         setCourses(courses);
         setStudents(students);
@@ -45,12 +46,14 @@ public class Backup {
 
     }
 
-    Backup (final LinkedList<Course> courses, final LinkedList<Student> students, final LinkedList<Faculty> faculty, final LinkedList<Admin> admin){
+    Backup (final LinkedList<Course> courses, final LinkedList<Student> students, final LinkedList<Faculty> faculty, 
+            final LinkedList<Admin> admin, final LinkedList<PastCourse> past){
         
         setCourses(courses);
         setStudents(students);
         setFaculty(faculty);
         setAdmin(admin);
+        pastList = past;
 
        /*         ActionListener listener = new
              ActionListener()
@@ -219,7 +222,7 @@ public class Backup {
             return 0;
 
     }
-
+    
     public int backupCourses(final LinkedList<Course> courses){
 
             setCourses(courses);
@@ -258,14 +261,53 @@ public class Backup {
        
             return 0;
     }
+    
+    public int backupPast(final LinkedList<PastCourse> past){
+
+         /******** BACKUP PASTCOURSES.CSV *********/
+
+            setPast(past);
+
+            File file = new File("pastCourses.csv");
+            file.delete();
+
+            ListIterator<PastCourse> iteratorPast = pastList.listIterator();
+
+            try{
+
+            /* Make a buffered file writer with a tmp file facultyList.csv.tmp */
+            BufferedWriter out2 = new BufferedWriter(new FileWriter("pastCourses.csv"));
+
+                
+                while(iteratorPast.hasNext())
+                {
+                    /* Temporarily store them in a variable */
+                    PastCourse element = iteratorPast.next();
+
+                    /* And write the backup out to the file */
+                    out2.write(element.backup());
+                    out2.flush();
+
+                }
+
+            }catch (IOException e){
+
+            }
+
+        /****** Rename the current pastCourses.csv file *****/
+
+            return 0;
+    }
 
 
-    public int backupAll(final LinkedList<Course> courses, final LinkedList<Student> students, final LinkedList<Faculty> faculty, final LinkedList<Admin> admin){
+    public int backupAll(final LinkedList<Course> courses, final LinkedList<Student> students, 
+            final LinkedList<Faculty> faculty, final LinkedList<Admin> admin, final LinkedList<PastCourse> past){
 
         setCourses(courses);
         setStudents(students);
         setFaculty(faculty);
         setAdmin(admin);
+        setPast(past);
 
 
         /* Some temp variables and initialize them to something outside the return scope */
@@ -273,6 +315,7 @@ public class Backup {
         int y = -999;
         int z = -999;
         int w = -999;
+        int v = -999;
 
 
         /* Call each method of this class to backup each list and store
@@ -282,11 +325,12 @@ public class Backup {
         y = this.backupFaculty(faculty);
         z = this.backupStudents(students);
         w = this.backupAdmin(admin);
+        v = this.backupPast(past);
 
         /* If any variable isn't equal to zero than we know the backup script
          * failed to execute sucessfully
          */
-        if ((x != 0) || (y != 0) || z != 0 || w != 0){
+        if ((x != 0) || (y != 0) || z != 0 || w != 0 || v != 0){
 
             /* So return a -1 */
             return -1;
@@ -303,6 +347,10 @@ public class Backup {
     private void setCourses(LinkedList<Course> list){
 
         courseList = list;
+    }
+    private void setPast(LinkedList<PastCourse> past){
+    
+        pastList = past;
     }
 
     private void setStudents(LinkedList<Student> list){
@@ -326,7 +374,7 @@ private LinkedList<Course> courseList;
 private LinkedList<Student> studentList;
 private LinkedList<Faculty> facultyList;
 private LinkedList<Admin> adminList;
-
+private LinkedList<PastCourse> pastList;
 
 
 

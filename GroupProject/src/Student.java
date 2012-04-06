@@ -17,6 +17,8 @@ public class Student extends User {
         tempCurrentSchudule = yourCurrentSchudule;
         holds = yourHolds;
         currentSchudule = new LinkedList<Course>();
+        pastCourses = new LinkedList<PastCourse>();
+        gpa = 0;
         setPermission(0);
     }
    
@@ -137,7 +139,27 @@ public class Student extends User {
     public boolean getHolds()
     {
         return holds;
-    }        
+    }
+    
+    public void setPastCourses(LinkedList<PastCourse> course)
+    {
+        pastCourses = course;
+    }
+    
+    public LinkedList<PastCourse> getPastCourses()
+    {
+        return pastCourses;
+    }
+    
+    public void setGPA( double yourGPA)
+    {
+        gpa = yourGPA;
+    }
+    
+    public double getGPA()
+    {
+        return gpa;
+    }
             
     private String idNumber;
     private String major;
@@ -145,6 +167,8 @@ public class Student extends User {
     private int approvedCredits;
     private int creditHoursEnrolled;
     private LinkedList<Course> currentSchudule;
+    private LinkedList<PastCourse> pastCourses;
+    private double gpa;
     private String tempCurrentSchudule;
     private boolean holds;
     

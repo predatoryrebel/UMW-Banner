@@ -141,6 +141,49 @@ public class ReadFile{
             return courseList;
     }
     
+    public LinkedList<PastCourse> readPastCourseList() throws FileNotFoundException{
+        FileInputStream fstream = new FileInputStream("pastCourses.csv");
+        LinkedList<PastCourse> courseList = new LinkedList<PastCourse>();
+        Scanner input = new Scanner(fstream);
+
+        input.useDelimiter(",");
+        try
+        {
+            while (input.hasNextLine())
+            {
+
+                String crn;
+                crn = input.next();
+                String course = input.next();
+                int section = input.nextInt();
+                String title = input.next();
+                int credits = input.nextInt();
+                String professor = input.next();
+                String grade = input.next();
+                String user = input.nextLine();
+                user = user.substring(1, user.length());
+                
+                PastCourse pastCourse = new PastCourse(crn, course, section, title, credits, professor, grade, user);
+                     
+                courseList.add(pastCourse);
+                     
+                fstream.close(); 
+                }
+            }
+            catch (Exception e)
+            {
+                courseList = null;
+            }
+        
+            
+            
+            Collections.sort(courseList);
+
+               
+       
+            return courseList;
+    }
+    
     /**
      * The read admin list reads in admin objects from a readfile
      * @return

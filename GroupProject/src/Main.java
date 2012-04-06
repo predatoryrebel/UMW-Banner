@@ -13,10 +13,13 @@ public class Main {
         LinkedList<Faculty> facultyList = new LinkedList<Faculty>();
         LinkedList<User> userList = new LinkedList<User>();
         LinkedList<Admin> adminList = new LinkedList<Admin>();
+        LinkedList<PastCourse> pastCourseList = new LinkedList<PastCourse>();
         courseList = start.readCourseList();
         studentList = start.readStudentList();
         facultyList = start.readFacultyList();
         adminList = start.readAdminList();
+        pastCourseList = start.readPastCourseList();
+        
         
         ListIterator<Student> siterator = studentList.listIterator();
         
@@ -66,21 +69,37 @@ public class Main {
             element.buildCourseList(courseList);
         }
         
+        //add past course to students
+        siterator = studentList.listIterator(0);
+        while (siterator.hasNext())
+        {
+            Student student = siterator.next();
+            ListIterator<PastCourse> pastIterator = pastCourseList.listIterator();
+            while (pastIterator.hasNext())
+            {
+                PastCourse past = pastIterator.next();
+                if (past.getUser().equalsIgnoreCase(student.getUserName()))
+                {
+                    student.getPastCourses().add(past);
+                }
+            }
+           
+        }
        
 
         /* Create a new backup object that wil automaticaly backup an interval
          * which is the fourth parameter
          */
 
-        Backup backup = new Backup(courseList, studentList, facultyList, adminList);
+        Backup backup = new Backup(courseList, studentList, facultyList, adminList, pastCourseList);
 
         
 
         // Create MainGUI here and pass Login parameters to it
-        MainGUI mainWindow = new MainGUI(studentList, courseList, facultyList, userList, adminList);
+        MainGUI mainWindow = new MainGUI(studentList, courseList, facultyList, userList, adminList, pastCourseList);
         mainWindow.setVisible(true);
 
-        backup.backupAll(courseList, studentList, facultyList, adminList);
+        backup.backupAll(courseList, studentList, facultyList, adminList, pastCourseList);
         System.out.println("BACKED UP");
        
 

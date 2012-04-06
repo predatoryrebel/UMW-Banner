@@ -23,7 +23,6 @@ public class Course implements  Comparable<Course>{
         prerequisites = new LinkedList<Course>();
         enrolledStudents = new LinkedList<Student>();
         waitingList = new LinkedList<Student>();
-        next = null;
     }
     
     Course()
@@ -31,7 +30,16 @@ public class Course implements  Comparable<Course>{
        prerequisites = new LinkedList<Course>();
        enrolledStudents = new LinkedList<Student>(); 
        waitingList = new LinkedList<Student>();
-       next = null;
+    }
+    
+    Course(String aCRN, String aCourse,int aSection, String theTitle, int numCredits, String theProfessor)
+    {
+        crn = aCRN;
+        course = aCourse; 
+        section = aSection;
+        title = theTitle;
+        credits = numCredits;
+        professor = theProfessor;
     }
 
     /**
@@ -394,7 +402,6 @@ public class Course implements  Comparable<Course>{
     private String building;
     private String room;
     private String professor;
-    private Course next;
     private int totalSeats;
     private int filledSeats;
 

@@ -2,6 +2,8 @@
 import java.util.LinkedList;
 import java.util.ListIterator;
 import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 
 /*
@@ -174,6 +176,9 @@ public class DropACourse extends javax.swing.JFrame {
             }
             //drop course from course list
             courseList.remove(course);
+            
+            JFrame frame = new JFrame();
+            JOptionPane.showMessageDialog(frame, course.getName() +  " has been removed." );
         }
     }//GEN-LAST:event_dropActionPerformed
 

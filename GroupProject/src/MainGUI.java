@@ -38,9 +38,10 @@ public class MainGUI extends JFrame implements ActionListener
         private LinkedList<Faculty> facultyList;
         private LinkedList<Admin> adminList;
         private LinkedList<User> userList;
+        private LinkedList<PastCourse> pastList;
 	
 	public MainGUI(LinkedList<Student> student, LinkedList<Course> course, LinkedList<Faculty> faculty, LinkedList<User> user,
-                LinkedList<Admin> admin)
+                LinkedList<Admin> admin, LinkedList<PastCourse> past)
 	{
 		setSize(680,300);
 		contentPane = getContentPane();
@@ -122,6 +123,7 @@ public class MainGUI extends JFrame implements ActionListener
                 facultyList = faculty;
                 adminList = admin;
                 userList = user;
+                pastList = past;
 	}
         
         // Change the GUI to logged in state
@@ -270,7 +272,7 @@ public class MainGUI extends JFrame implements ActionListener
             if(action.equals("Exit"))
             {
                 Backup backup = new Backup();
-                backup.backupAll(courseList, studentList, facultyList, adminList);
+                backup.backupAll(courseList, studentList, facultyList, adminList, pastList);
                 System.exit(0);
             }
         }
