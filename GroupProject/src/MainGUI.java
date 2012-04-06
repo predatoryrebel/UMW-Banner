@@ -28,6 +28,7 @@ public class MainGUI extends JFrame implements ActionListener
         public JMenuItem editMajor;
         public JMenuItem editMinor;
         public JMenuItem dropACourse;
+        public JMenuItem addGrade;
 	public Container contentPane;
         public JPanel profile;
         public JTextArea profileText;
@@ -51,6 +52,8 @@ public class MainGUI extends JFrame implements ActionListener
 		// Create File Menu buttons
 		fileMenu = new JMenu("File");
                 searchMenu = new JMenu("Search");
+                addGrade = new JMenuItem("Add a Grade");
+                addGrade.addActionListener(this);
                 dropACourse = new JMenuItem("Drop a Course from the Course List");
                 dropACourse.addActionListener(this);
                 dropAStudentFromTheUniversity = new JMenuItem("Drop a Student from The University");
@@ -152,6 +155,7 @@ public class MainGUI extends JFrame implements ActionListener
             if (activeUser.getPermission() == 1)
             {
                 searchMenu.add(dropAStudent);
+                searchMenu.add(addGrade);
             }
             
             refreshWindow();
@@ -193,6 +197,8 @@ public class MainGUI extends JFrame implements ActionListener
                 mainMenu.remove(editMenu);
                 this.setTitle("");
                 profileText.setText("");
+                Backup backup = new Backup();
+                backup.backupAll(courseList, studentList, facultyList, adminList, pastList);
                 this.activeUser = null;
             }
             
@@ -252,6 +258,17 @@ public class MainGUI extends JFrame implements ActionListener
                 {
                     DropACourse d = new DropACourse(courseList);
                     d.setVisible(true);
+                }
+            }
+            
+            if (action.equals("Add a Grade"))
+            {
+                if (activeUser.getPermission() == 1)
+                {
+                    FindUser find = new FindUser(activeUser, adminList, studentList, facultyList);
+                    Faculty professor = find.findFaculty();
+                    GradeAStudent g = new GradeAStudent(professor, pastList);
+                    g.setVisible(true);
                 }
             }
             

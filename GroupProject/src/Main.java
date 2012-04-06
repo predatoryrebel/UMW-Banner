@@ -85,6 +85,14 @@ public class Main {
             }
            
         }
+        
+        siterator = studentList.listIterator(0);
+        while (siterator.hasNext())
+        {
+            Student student = siterator.next();
+            CalculateGPA findGPA = new CalculateGPA(student.getPastCourses());
+            student.setGPA(findGPA.calculate());
+        }
        
 
         /* Create a new backup object that wil automaticaly backup an interval
