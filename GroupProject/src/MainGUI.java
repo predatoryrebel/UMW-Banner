@@ -27,6 +27,7 @@ public class MainGUI extends JFrame implements ActionListener
         public JMenuItem editAddress;
         public JMenuItem editMajor;
         public JMenuItem editMinor;
+        public JMenuItem dropACourse;
 	public Container contentPane;
         public JPanel profile;
         public JTextArea profileText;
@@ -49,6 +50,8 @@ public class MainGUI extends JFrame implements ActionListener
 		// Create File Menu buttons
 		fileMenu = new JMenu("File");
                 searchMenu = new JMenu("Search");
+                dropACourse = new JMenuItem("Drop a Course from the Course List");
+                dropACourse.addActionListener(this);
                 dropAStudentFromTheUniversity = new JMenuItem("Drop a Student from The University");
                 dropAStudentFromTheUniversity.addActionListener(this);
                 dropAStudent = new JMenuItem("Drop a Student from a Course");
@@ -137,6 +140,7 @@ public class MainGUI extends JFrame implements ActionListener
                 fileMenu.add(createAccount, 0);
                 searchMenu.add(dropAStudent);
                 searchMenu.add(dropAStudentFromTheUniversity);
+                searchMenu.add(dropACourse);
             }
             if (activeUser.getPermission() == 0)
             {
@@ -236,6 +240,15 @@ public class MainGUI extends JFrame implements ActionListener
                 if (activeUser.getPermission() == 2)
                 {
                     DropAStudentFromTheUniversityAdmin d = new DropAStudentFromTheUniversityAdmin(studentList);
+                    d.setVisible(true);
+                }
+            }
+            
+            if (action.equals("Drop a Course from the Course List"))       
+            {
+                if (activeUser.getPermission() == 2)
+                {
+                    DropACourse d = new DropACourse(courseList);
                     d.setVisible(true);
                 }
             }
