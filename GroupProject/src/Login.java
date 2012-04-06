@@ -113,7 +113,7 @@ public class Login extends javax.swing.JFrame {
             User element = iterator.next();
             if(element.getUserName().equalsIgnoreCase(userNameTextBox.getText()))
             {
-                if (element.getPassword().equalsIgnoreCase(passwordTextBox.getText()));
+                if (element.getPassword().equals(passwordTextBox.getText()));
                 {
                     mainWindow.setActiveUser(element);    // Set the active account to the user who just logged in.
                     //SearchClass search = new SearchClass(courseList, studentList, facultyList, element);

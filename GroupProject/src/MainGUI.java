@@ -13,6 +13,7 @@ public class MainGUI extends JFrame implements ActionListener
 	public JMenu fileMenu;
         public JMenu editMenu;
         public JMenu searchMenu;
+        public JMenuItem dropAStudentFromTheUniversity;
         public JMenuItem dropAStudent;
         public JMenuItem dropItem;
         public JMenuItem searchForClassesItem;
@@ -48,6 +49,8 @@ public class MainGUI extends JFrame implements ActionListener
 		// Create File Menu buttons
 		fileMenu = new JMenu("File");
                 searchMenu = new JMenu("Search");
+                dropAStudentFromTheUniversity = new JMenuItem("Drop a Student from The University");
+                dropAStudentFromTheUniversity.addActionListener(this);
                 dropAStudent = new JMenuItem("Drop a Student from a Course");
                 dropAStudent.addActionListener(this);
                 dropItem = new JMenuItem("Drop");
@@ -133,6 +136,7 @@ public class MainGUI extends JFrame implements ActionListener
             {
                 fileMenu.add(createAccount, 0);
                 searchMenu.add(dropAStudent);
+                searchMenu.add(dropAStudentFromTheUniversity);
             }
             if (activeUser.getPermission() == 0)
             {
@@ -193,8 +197,11 @@ public class MainGUI extends JFrame implements ActionListener
             
             if(action.equals("Search For Classes"))
             {
-                SearchClass s = new SearchClass(courseList, studentList, activeUser);
-                s.setVisible(true);
+                if (activeUser.getPermission() == 0)
+                {
+                    SearchClass s = new SearchClass(courseList, studentList, activeUser);
+                    s.setVisible(true);
+                }
             }
             
             if(action.equals("Drop"))
@@ -220,6 +227,15 @@ public class MainGUI extends JFrame implements ActionListener
                     FindUser find = new FindUser(activeUser, adminList, studentList, facultyList);
                     Faculty professor = find.findFaculty();
                     DropAStudentFaculty d = new DropAStudentFaculty(professor);
+                    d.setVisible(true);
+                }
+            }
+            
+            if (action.equals("Drop a Student from The University"))
+            {
+                if (activeUser.getPermission() == 2)
+                {
+                    DropAStudentFromTheUniversityAdmin d = new DropAStudentFromTheUniversityAdmin(studentList);
                     d.setVisible(true);
                 }
             }
