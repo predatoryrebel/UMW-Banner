@@ -2,6 +2,8 @@
 import java.util.LinkedList;
 import java.util.ListIterator;
 import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 
 /*
@@ -42,7 +44,7 @@ public class GradeAStudent extends javax.swing.JFrame {
         listModel = new DefaultListModel();
         listModel.clear();
         studentList.setModel(listModel);
-        name.setText("");
+        nameField.setText("");
         gradeBox.setSelectedIndex(-1);
     }
 
@@ -252,8 +254,11 @@ public class GradeAStudent extends javax.swing.JFrame {
         
         course.getEnrolledStudents().remove(student);
         course.dropStudent();
-        System.out.println(student.getPastCourses() + " " + student.getGPA());
-        System.out.println(course.getEnrolledStudents());
+        JFrame frame = new JFrame();
+        JOptionPane.showMessageDialog(frame, student.getFirstName() + " " + student.getLastName() + " has received a " + 
+                grade);
+        Backup backup = new Backup();
+        backup.backupPast(pastList);
     }//GEN-LAST:event_gradeActionPerformed
 
     private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
