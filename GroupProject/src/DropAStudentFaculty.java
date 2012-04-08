@@ -5,13 +5,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- *
+ * Allows a faculty member to drop a student from one of the course they teach
  * @author cjoyner
  */
 public class DropAStudentFaculty extends javax.swing.JFrame {
@@ -24,7 +19,9 @@ public class DropAStudentFaculty extends javax.swing.JFrame {
         faculty = professor;
         reset();
     }
-    
+    /**
+     * Adds faculty member course list to course list box
+     */
     private void reset()
     {
         ListIterator<Course> iterator = faculty.getCourses().listIterator();
@@ -158,6 +155,10 @@ public class DropAStudentFaculty extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Mouse is released adds students in selected course to student list box
+     * @param evt 
+     */
     private void courseListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_courseListMouseReleased
         //get selected course
         int index = courseList.getSelectedIndex();
@@ -176,6 +177,10 @@ public class DropAStudentFaculty extends javax.swing.JFrame {
         studentList.setModel(listModel);
     }//GEN-LAST:event_courseListMouseReleased
 
+    /**
+     * Mouse is released add student to drop list box
+     * @param evt 
+     */
     private void studentListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_studentListMouseReleased
         //get index of click object
         int index = studentList.getSelectedIndex();
@@ -193,6 +198,10 @@ public class DropAStudentFaculty extends javax.swing.JFrame {
         dropList.setModel(dropListModel);
     }//GEN-LAST:event_studentListMouseReleased
 
+    /**
+     * Uses a button to drop students in drop list box
+     * @param evt 
+     */
     private void dropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropActionPerformed
         //get students to drop
         ListModel<Student> listModel = dropList.getModel();
@@ -213,10 +222,18 @@ public class DropAStudentFaculty extends javax.swing.JFrame {
         reset();
     }//GEN-LAST:event_dropActionPerformed
 
+    /**
+     * Exits Drop a student faculty
+     * @param evt 
+     */
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_exitActionPerformed
 
+    /**
+     * Clears all list boxes, calls reset
+     * @param evt 
+     */
     private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
         DefaultListModel listModel = new DefaultListModel();
         //clear all list boxes

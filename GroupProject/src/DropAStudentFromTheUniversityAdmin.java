@@ -8,10 +8,6 @@ import javax.swing.ListModel;
 
 /*
  * Drop student from the university
- */
-
-/**
- *
  * @author cjoyner
  */
 public class DropAStudentFromTheUniversityAdmin extends javax.swing.JFrame {
@@ -24,7 +20,9 @@ public class DropAStudentFromTheUniversityAdmin extends javax.swing.JFrame {
         studentList = student;
         reset();
     }
-    
+    /**
+     * add students from student list to select list box
+     */
     private void reset()
     {
         DefaultListModel<Student> listModel = new DefaultListModel();
@@ -147,6 +145,10 @@ public class DropAStudentFromTheUniversityAdmin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Mouse is released selected student is add to drop list box
+     * @param evt 
+     */
     private void selectListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_selectListMouseReleased
         //get index of click object
         int index = selectList.getSelectedIndex();
@@ -164,6 +166,10 @@ public class DropAStudentFromTheUniversityAdmin extends javax.swing.JFrame {
         dropList.setModel(dropListModel);
     }//GEN-LAST:event_selectListMouseReleased
 
+    /**
+     * Uses a button to drop students from student list
+     * @param evt 
+     */
     private void dropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropActionPerformed
         ListModel<Student> listModel = dropList.getModel();
         //drops students in dropList box
@@ -187,6 +193,10 @@ public class DropAStudentFromTheUniversityAdmin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_dropActionPerformed
 
+    /**
+     * Clears all list boxes, calls reset
+     * @param evt 
+     */
     private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
         DefaultListModel listModel = new DefaultListModel();
         listModel.clear();
@@ -195,6 +205,10 @@ public class DropAStudentFromTheUniversityAdmin extends javax.swing.JFrame {
         reset();
     }//GEN-LAST:event_clearActionPerformed
 
+    /**
+     * Exits drop a student from the university
+     * @param evt 
+     */
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_exitActionPerformed

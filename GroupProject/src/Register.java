@@ -1,10 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
- *
+ *Lets a person register as a user
  * @author cjoyner
  */
 import java.util.*;
@@ -172,14 +168,19 @@ public class Register extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Creates a user if username is unique and passwords match
+     * @param evt 
+     */
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
         ListIterator<User> iterator = userList.listIterator();
         boolean validUserName = true;
         
         while (iterator.hasNext())
         {
+            //gets users
             User element = iterator.next();
-      
+            //check for same usernae and incorrect password
             if (element.getUserName().equalsIgnoreCase(userNameTextBox.getText())|| 
                 !passwordTextBox.getText().equalsIgnoreCase(password2TextBox.getText()) || 
                 passwordTextBox.getText().isEmpty())
@@ -191,11 +192,13 @@ public class Register extends javax.swing.JFrame {
         
         if (!validUserName)
         {
+            //displays error message about username or password
             JFrame frame = new JFrame();
             JOptionPane.showMessageDialog(frame, "User name or password are invalid");
         }
         else
         {
+            //creates a user based on enter information
             person = new User(userNameTextBox.getText(), passwordTextBox.getText(), emailTextBox.getText(), firstNameTextBox.getText(),
                         lastNameTextBox.getText());
             userList.add(person);
@@ -206,22 +209,21 @@ public class Register extends javax.swing.JFrame {
                 person.setPermission(2);
             if (faculty.isSelected() == true)
                 person.setPermission(1);
-            
+            //displays mesage confirming user
             JFrame frame = new JFrame();
             JOptionPane.showMessageDialog(frame, userNameTextBox.getText() + " has been created. Please login.");
             this.setVisible(false);
         }
             
     }//GEN-LAST:event_registerButtonActionPerformed
-
+/**
+ * Exits Register
+ * @param evt 
+ */
     private void canelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_canelButtonActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_canelButtonActionPerformed
 
-    public User getUser()
-    {
-        return person;
-    }
     
     private LinkedList<User> userList;
     private User person;

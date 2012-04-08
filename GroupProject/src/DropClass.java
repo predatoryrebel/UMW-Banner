@@ -4,13 +4,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- *
+ *Allows an Admin to drop a course from the course list
  * @author cjoyner
  */
 public class DropClass extends javax.swing.JFrame {
@@ -24,11 +19,14 @@ public class DropClass extends javax.swing.JFrame {
         resetCurrentSchedule();
     }
     
+    /**
+     * Adds course from course list to current list 1 box
+     */
     private void resetCurrentSchedule()
     {
         DefaultListModel listModel = new DefaultListModel();
         ListIterator<Course> iterator = student.getCurrentSchudule().listIterator();
-        
+        ///adds courses
         while (iterator.hasNext())
         {
             Course course =  iterator.next();
@@ -147,13 +145,18 @@ public class DropClass extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Uses a button to drop a course from the course list
+     * @param evt 
+     */
     private void dropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropActionPerformed
         ListModel<Course> listModel = dropList.getModel();
-        
+        //gets all course in drop list box
         for (int a = 0; a < listModel.getSize(); a++)
         {
             Course course = listModel.getElementAt(a);
             
+            //remove course from student's who are currently enrolled
             boolean remove = student.getCurrentSchudule().remove(course);
             if (remove)
             {
@@ -173,6 +176,10 @@ public class DropClass extends javax.swing.JFrame {
        
     }//GEN-LAST:event_dropActionPerformed
 
+    /**
+     * Mouse is release adds selected course to drop list box
+     * @param evt 
+     */
     private void currentList1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_currentList1MouseReleased
         //get index of click object
         int index = currentList1.getSelectedIndex();
@@ -190,10 +197,18 @@ public class DropClass extends javax.swing.JFrame {
         dropList.setModel(dropListModel);
     }//GEN-LAST:event_currentList1MouseReleased
 
+    /**
+     * Exits drop class
+     * @param evt 
+     */
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_exitActionPerformed
 
+    /**
+     * Clears all list boxes, calls reset
+     * @param evt 
+     */
     private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
         DefaultListModel listModel = new DefaultListModel();
         listModel.clear();

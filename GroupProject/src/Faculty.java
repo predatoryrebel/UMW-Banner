@@ -24,7 +24,10 @@ public class Faculty extends User {
         setPermission(1);
     }
     
-          
+     /**
+      * Builds faculty course list by matching course criteria professor to faculty members Last name and first initial
+      * @param courseList 
+      */     
     public void buildCourseList(LinkedList<Course> courseList)
     {
         ListIterator<Course> iterator = courseList.listIterator();

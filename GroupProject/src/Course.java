@@ -1,5 +1,7 @@
 import java.util.*;
-
+/*
+ * Holds course and related course details
+ */
 public class Course implements  Comparable<Course>{
 
     /* Parameter constructor */
@@ -25,6 +27,9 @@ public class Course implements  Comparable<Course>{
         waitingList = new LinkedList<Student>();
     }
     
+    /**
+     * Default constructor no parameters
+     */
     Course()
     {
        prerequisites = new LinkedList<Course>();
@@ -32,8 +37,18 @@ public class Course implements  Comparable<Course>{
        waitingList = new LinkedList<Student>();
     }
     
+    /**
+     * Constructor used to set a past course
+     * @param aCRN
+     * @param aCourse
+     * @param aSection
+     * @param theTitle
+     * @param numCredits
+     * @param theProfessor 
+     */    
     Course(String aCRN, String aCourse,int aSection, String theTitle, int numCredits, String theProfessor)
     {
+        /* Set the values to their respective parameters */
         crn = aCRN;
         course = aCourse; 
         section = aSection;
@@ -43,7 +58,7 @@ public class Course implements  Comparable<Course>{
     }
 
     /**
-     * buildEnrolledStudents: MEthod that bulds a linked list of currently
+     * buildEnrolledStudents: Method that builds a linked list of currently
      * enrolled students in Course
      *
      * @param studentList
@@ -51,12 +66,13 @@ public class Course implements  Comparable<Course>{
     public void buildEnrolledStudents(LinkedList<Student> studentList)
     {
         ListIterator<Student> iterator = studentList.listIterator();
-        
+        //iterates though student list
         while (iterator.hasNext())
         {
             Student person = iterator.next();
             LinkedList<Course> checkForStudent = person.getCurrentSchudule();
             ListIterator<Course> iteratorCourse = checkForStudent.listIterator();
+            //adds student to a course if they are enrolled
             while (iteratorCourse.hasNext())
             {
                 Course studentCourse = iteratorCourse.next();

@@ -6,13 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- *
+ *Allows a student to drop s course
  * @author cjoyner
  */
 public class DropACourse extends javax.swing.JFrame {
@@ -26,7 +21,10 @@ public class DropACourse extends javax.swing.JFrame {
         reset();
     }
     
-      private void reset()
+    /**
+     * Display student's current schedule 
+     */
+    private void reset()
     {
         DefaultListModel<Course> listModel = new DefaultListModel();
         ListIterator<Course> iterator = courseList.listIterator();
@@ -141,7 +139,10 @@ public class DropACourse extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Once mouse is released add course to drop list
+     * @param evt 
+     */
     private void selectListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_selectListMouseReleased
          //get index of click object
         int index = selectList.getSelectedIndex();
@@ -158,7 +159,11 @@ public class DropACourse extends javax.swing.JFrame {
         dropListModel.addElement(course);
         dropList.setModel(dropListModel);
     }//GEN-LAST:event_selectListMouseReleased
-
+    
+    /**
+     * Use a drop button to drop classes in the drop box
+     * @param evt 
+     */
     private void dropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropActionPerformed
         ListModel<Course> listModel = dropList.getModel();
         //drop courses in dropList box
@@ -176,12 +181,15 @@ public class DropACourse extends javax.swing.JFrame {
             }
             //drop course from course list
             courseList.remove(course);
-            
+            //display a successful drop
             JFrame frame = new JFrame();
             JOptionPane.showMessageDialog(frame, course.getName() +  " has been removed." );
         }
     }//GEN-LAST:event_dropActionPerformed
-
+    /**
+     * Clears select list and drop list.  calls reset
+     * @param evt 
+     */
     private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
         DefaultListModel listModel = new DefaultListModel();
         listModel.clear();
@@ -189,7 +197,10 @@ public class DropACourse extends javax.swing.JFrame {
         selectList.setModel(listModel);
         reset();
     }//GEN-LAST:event_clearActionPerformed
-
+    /**
+     * Exits drop a course
+     * @param evt 
+     */
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_exitActionPerformed

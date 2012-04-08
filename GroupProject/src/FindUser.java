@@ -3,14 +3,16 @@ import java.util.*;
 
 /*
  * Takes a user and finds the user as a student, faculty or admin
- */
-
-/**
- *
- * @author cjoyner
+  * @author cjoyner
  */
 public class FindUser {
-    
+    /**
+     *  Constructs an FindUser object with the given parameters
+     * @param person
+     * @param admin
+     * @param student
+     * @param faculty 
+     */
     FindUser(User person, LinkedList<Admin> admin, LinkedList<Student> student, LinkedList<Faculty> faculty)
     {
         user = person;
@@ -81,7 +83,7 @@ public class FindUser {
         return person;
     }
             
-    
+    /********** DATA MEMBERS **********/
     private User user;
     private LinkedList<Admin> adminList;
     private LinkedList<Student> studentList;

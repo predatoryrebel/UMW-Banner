@@ -6,10 +6,6 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
  *
@@ -26,7 +22,9 @@ public class DropAStudentAdmin extends javax.swing.JFrame {
         reset();
     }
     
-    
+    /**
+     * Set adds students from student list to select list
+     */
     private void reset()
     {
         ListIterator<Student> iterator = studentList.listIterator();
@@ -162,6 +160,10 @@ public class DropAStudentAdmin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Use a drop button to drop student from a course
+     * @param evt 
+     */
     private void dropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropActionPerformed
          ListModel<Course> listModel = dropList.getModel();
          ListModel<Student> listModel2 = selectList.getModel();
@@ -191,6 +193,10 @@ public class DropAStudentAdmin extends javax.swing.JFrame {
         
     }//GEN-LAST:event_dropActionPerformed
 
+    /**
+     * Mouse is released adds student's course list to course list
+     * @param evt 
+     */
     private void selectListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_selectListMouseReleased
         //get index of click object
         int index = selectList.getSelectedIndex();
@@ -210,7 +216,10 @@ public class DropAStudentAdmin extends javax.swing.JFrame {
         //set the list
         courseList.setModel(listModel);
     }//GEN-LAST:event_selectListMouseReleased
-
+    /**
+     * Mouse is released adds a course to drop list
+     * @param evt 
+     */
     private void courseListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_courseListMouseReleased
         //get index of click object
         int index = courseList.getSelectedIndex();
@@ -227,17 +236,25 @@ public class DropAStudentAdmin extends javax.swing.JFrame {
         dropListModel.addElement(course);
         dropList.setModel(dropListModel);
     }//GEN-LAST:event_courseListMouseReleased
-
+    /**
+     * Exits drop a Student Admin
+     * @param evt 
+     */
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_exitActionPerformed
 
+    /**
+     * Clears all list boxes and calls reset
+     * @param evt 
+     */
     private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
         DefaultListModel listModel = new DefaultListModel();
         listModel.clear();
         courseList.setModel(listModel);
         dropList.setModel(listModel);
         selectList.setModel(listModel);
+        reset();
     }//GEN-LAST:event_clearActionPerformed
 
     private LinkedList<Student> studentList;

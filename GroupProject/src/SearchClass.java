@@ -1,10 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
- *
+ * Search for a class based on different criteria
  * @author cjoyner
  */
 import java.util.*;
@@ -18,12 +14,8 @@ public class SearchClass extends javax.swing.JFrame {
     public SearchClass(LinkedList<Course> course, LinkedList<Student> student, User person) {
         initComponents();
         user = person;
-        
-        if (user.getPermission() == 0)
-        {
-            courseList = course;
-            studentList = student;
-        }
+        courseList = course;
+        studentList = student;
         setDefaultCloseOperation(HIDE_ON_CLOSE);
       
     }
@@ -189,48 +181,51 @@ public class SearchClass extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Uses button to search for a course
+     * @param evt 
+     */
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         
         SearchCourse search = new SearchCourse(courseList);
         LinkedList<Course> searchList = null;
          DefaultListModel listModel; 
-        
+        //search title
         if (titleCheckBox.isSelected()){
             searchList = search.searchCourseByTitle(jTextField1.getText());
             search = new SearchCourse(searchList);
         }
-            
+        //Search course name
         if (courseNameCheckBox.isSelected()){
             searchList = search.searchCourseByCourseName(jTextField1.getText());
             search = new SearchCourse(searchList);
         }
-        
+        //Search day monday
         if (timeBox.getSelectedItem() == "M"){
             searchList = search.searchCourseByDay("M");
             search = new SearchCourse(searchList);
         }
-        
+        //Search day tuesday
         if (timeBox.getSelectedItem() == "T"){
             searchList = search.searchCourseByDay("T");
             search = new SearchCourse(searchList);
         }
-        
+        //search day wednesday
         if (timeBox.getSelectedItem() == "W"){
             searchList = search.searchCourseByDay("W");
             search = new SearchCourse(searchList);
         }
-        
+        //search day thursday
         if (timeBox.getSelectedItem() == "R"){
             searchList = search.searchCourseByDay("R");
             search = new SearchCourse(searchList);
         }
-        
+        //search day friday
         if (timeBox.getSelectedItem() == "F"){
             searchList = search.searchCourseByDay("F");
             search = new SearchCourse(searchList);
         }
-        
+        //search by time
         if (timeText.getText() != "")
         {
             searchList = search.searchCourseByTime(timeText.getText());
@@ -241,7 +236,7 @@ public class SearchClass extends javax.swing.JFrame {
         if (!searchList.isEmpty()){
             ListIterator<Course> iterator = searchList.listIterator();
             listModel = new DefaultListModel();
-
+            //adds found items to list
             while (iterator.hasNext())
             {
                 Course element = iterator.next();
@@ -250,6 +245,7 @@ public class SearchClass extends javax.swing.JFrame {
         }
         else
         {
+            //search matches
             listModel = new DefaultListModel();
             String noneFound = "Search item not found";
             listModel.addElement(noneFound);
@@ -258,6 +254,10 @@ public class SearchClass extends javax.swing.JFrame {
          searchCourseList.setModel(listModel);
     }//GEN-LAST:event_searchButtonActionPerformed
 
+    /**
+     * Mouse is released adds selected course to add list box
+     * @param evt 
+     */
     private void searchCourseListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchCourseListMouseReleased
         //get index of click object
         int index = searchCourseList.getSelectedIndex();
@@ -275,6 +275,10 @@ public class SearchClass extends javax.swing.JFrame {
         addCourseList.setModel(addListModel);
     }//GEN-LAST:event_searchCourseListMouseReleased
 
+    /**
+     * Adds a course to student's current enrolled lsit and adds a student to course current enrolled list
+     * @param evt 
+     */
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         ListModel<Course> listModel = addCourseList.getModel();
         
@@ -335,7 +339,7 @@ public class SearchClass extends javax.swing.JFrame {
 
             }
         }
-        
+        //back up student list
         Backup backup = new Backup();
         backup.backupStudents(studentList);
         
@@ -345,6 +349,10 @@ public class SearchClass extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_timeBoxActionPerformed
 
+    /**
+     * Clears list boxes 
+     * @param evt 
+     */
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
         DefaultListModel listModel = new DefaultListModel();
         
@@ -354,6 +362,10 @@ public class SearchClass extends javax.swing.JFrame {
         searchCourseList.setModel(listModel);
     }//GEN-LAST:event_clearButtonActionPerformed
 
+    /**
+     * Exits SearchClass
+     * @param evt 
+     */
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_exitButtonActionPerformed

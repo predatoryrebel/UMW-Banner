@@ -1,10 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
- *
+ *Logins in Users
  * @author cjoyner
  */
 import java.awt.Component;
@@ -105,9 +101,14 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Use a button to login users
+     * @param evt 
+     */
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
         ListIterator<User> iterator = userList.listIterator();
-       
+        
+        //check username and password
         while (iterator.hasNext())
         {
             User element = iterator.next();
@@ -116,14 +117,16 @@ public class Login extends javax.swing.JFrame {
                 if (element.getPassword().equals(passwordTextBox.getText()));
                 {
                     mainWindow.setActiveUser(element);    // Set the active account to the user who just logged in.
-                    //SearchClass search = new SearchClass(courseList, studentList, facultyList, element);
-                    //search.setVisible(true);
                     this.setVisible(false);
                 }
             }
         }
     }//GEN-LAST:event_LoginButtonActionPerformed
 
+    /**
+     * Use a button to call object Register
+     * @param evt 
+     */
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
         Register registerPanel = new Register(userList);
         registerPanel.setVisible(true);

@@ -6,13 +6,9 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
- *
+ * Allows a faculty member give a student a grade
  * @author cjoyner
  */
 public class GradeAStudent extends javax.swing.JFrame {
@@ -27,6 +23,9 @@ public class GradeAStudent extends javax.swing.JFrame {
         reset();
     }
     
+    /**
+     * Adds faculty member course to select list box, clears text box and student list box, set combo box index to -1
+     */
     private void reset()
     {
         DefaultListModel<Course> listModel = new DefaultListModel();
@@ -44,7 +43,9 @@ public class GradeAStudent extends javax.swing.JFrame {
         listModel = new DefaultListModel();
         listModel.clear();
         studentList.setModel(listModel);
+        //clear text box
         nameField.setText("");
+        //set combo box index to -1
         gradeBox.setSelectedIndex(-1);
     }
 
@@ -189,6 +190,10 @@ public class GradeAStudent extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Mouse is released adds selected course students to student list box
+     * @param evt 
+     */
     private void selectListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_selectListMouseReleased
         //get selected course
         int index = selectList.getSelectedIndex();
@@ -203,10 +208,14 @@ public class GradeAStudent extends javax.swing.JFrame {
             Student student = iterator.next();
             listModel.addElement(student);
         }
-        
+        //set student list box
         studentList.setModel(listModel);
     }//GEN-LAST:event_selectListMouseReleased
 
+    /**
+     * Mouse is released adds selected student to text box
+     * @param evt 
+     */
     private void studentListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_studentListMouseReleased
         //get student
         int index = studentList.getSelectedIndex();
@@ -217,6 +226,10 @@ public class GradeAStudent extends javax.swing.JFrame {
         nameField.setText(studentName);
     }//GEN-LAST:event_studentListMouseReleased
 
+    /**
+     * Gives a student a grade on a course, calculates a students GPA
+     * @param evt 
+     */
     private void gradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gradeActionPerformed
         //get student
         int indexStudent = studentList.getSelectedIndex();
@@ -248,23 +261,34 @@ public class GradeAStudent extends javax.swing.JFrame {
                 //remove course from current enrolled list
                 student.getCurrentSchudule().remove(course);
                 student.setCreditHoursEnrolled(student.getCreditHoursEnrolled() - course.getCredits());
+                //add past corse to past list
                 pastList.add(past);
+                 //removes student from course
+                course.getEnrolledStudents().remove(student);
+                course.dropStudent();
+                //displays message 
+                JFrame frame = new JFrame();
+                JOptionPane.showMessageDialog(frame, student.getFirstName() + " " + student.getLastName() + " has received a " + 
+                grade);
             }
         }
-        
-        course.getEnrolledStudents().remove(student);
-        course.dropStudent();
-        JFrame frame = new JFrame();
-        JOptionPane.showMessageDialog(frame, student.getFirstName() + " " + student.getLastName() + " has received a " + 
-                grade);
+        //backs up pastCourse.csv
         Backup backup = new Backup();
         backup.backupPast(pastList);
     }//GEN-LAST:event_gradeActionPerformed
 
+    /**
+     * calls reset
+     * @param evt 
+     */
     private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
         reset();
     }//GEN-LAST:event_clearActionPerformed
 
+    /**
+     * Exits GradeAStudent
+     * @param evt 
+     */
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_exitActionPerformed
