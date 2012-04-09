@@ -72,7 +72,7 @@ public class CurrentCourse extends Course {
     * @return boolean true if student is added
     */
     public boolean addStudent(){
-        if (totalSeats >= filledSeats)
+        if (totalSeats > filledSeats)
         {
             filledSeats++;
             return true;
