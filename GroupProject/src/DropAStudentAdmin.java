@@ -165,7 +165,7 @@ public class DropAStudentAdmin extends javax.swing.JFrame {
      * @param evt 
      */
     private void dropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropActionPerformed
-         ListModel<Course> listModel = dropList.getModel();
+         ListModel<CurrentCourse> listModel = dropList.getModel();
          ListModel<Student> listModel2 = selectList.getModel();
          //get student
          int index = selectList.getSelectedIndex();
@@ -173,7 +173,7 @@ public class DropAStudentAdmin extends javax.swing.JFrame {
         //remove select course in dropList
         for (int a = 0; a < listModel.getSize(); a++)
         {
-            Course course = listModel.getElementAt(a);
+            CurrentCourse course = listModel.getElementAt(a);
             boolean remove = student.getCurrentSchudule().remove(course);
             //removes course credits from approved credits
             if (remove)
@@ -205,12 +205,12 @@ public class DropAStudentAdmin extends javax.swing.JFrame {
         Student student = list.getElementAt(index);
         DefaultListModel listModel = new DefaultListModel();
         //get course list for student
-        ListIterator<Course> iterator = student.getCurrentSchudule().listIterator();
+        ListIterator<CurrentCourse> iterator = student.getCurrentSchudule().listIterator();
         
         //adds student's course to list model
         while (iterator.hasNext())
         {
-            Course element = iterator.next();
+            CurrentCourse element = iterator.next();
             listModel.addElement(element);
         }
         //set the list
@@ -223,9 +223,9 @@ public class DropAStudentAdmin extends javax.swing.JFrame {
     private void courseListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_courseListMouseReleased
         //get index of click object
         int index = courseList.getSelectedIndex();
-        ListModel<Course> listModel = courseList.getModel();
+        ListModel<CurrentCourse> listModel = courseList.getModel();
         //get course
-        Course course = listModel.getElementAt(index);
+        CurrentCourse course = listModel.getElementAt(index);
         DefaultListModel dropListModel = new DefaultListModel();
         listModel = dropList.getModel();
         //adds items already in addCourseList to addListModel

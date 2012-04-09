@@ -15,7 +15,7 @@ public class PastCourse extends Course {
      * toString method : used to create a string of the data members of a past course
      * @return contents : a string of the data members
      */
-    @Override
+    
     public String toString()
     {
         String contents = "";
@@ -33,7 +33,6 @@ public class PastCourse extends Course {
      * 
      * @return backup : a string of the data members
      */
-    @Override
     public String backup()
     {
         String backup;

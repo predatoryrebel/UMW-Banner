@@ -34,13 +34,13 @@ public class MainGUI extends JFrame implements ActionListener
         public Login login;
         private User activeUser;
         private LinkedList<Student> studentList;
-        private LinkedList<Course> courseList;
+        private LinkedList<CurrentCourse> courseList;
         private LinkedList<Faculty> facultyList;
         private LinkedList<Admin> adminList;
         private LinkedList<User> userList;
         private LinkedList<PastCourse> pastList;
 	
-	public MainGUI(LinkedList<Student> student, LinkedList<Course> course, LinkedList<Faculty> faculty, LinkedList<User> user,
+	public MainGUI(LinkedList<Student> student, LinkedList<CurrentCourse> course, LinkedList<Faculty> faculty, LinkedList<User> user,
                 LinkedList<Admin> admin, LinkedList<PastCourse> past)
 	{
 		setSize(680,300);

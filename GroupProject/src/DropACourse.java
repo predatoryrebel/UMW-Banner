@@ -15,7 +15,7 @@ public class DropACourse extends javax.swing.JFrame {
     /**
      * Creates new form DropACourse
      */
-    public DropACourse(LinkedList<Course> course) {
+    public DropACourse(LinkedList<CurrentCourse> course) {
         initComponents();
         courseList = course;
         reset();
@@ -26,12 +26,12 @@ public class DropACourse extends javax.swing.JFrame {
      */
     private void reset()
     {
-        DefaultListModel<Course> listModel = new DefaultListModel();
-        ListIterator<Course> iterator = courseList.listIterator();
+        DefaultListModel<CurrentCourse> listModel = new DefaultListModel();
+        ListIterator<CurrentCourse> iterator = courseList.listIterator();
         //set student into list model
         while (iterator.hasNext())
         {
-            Course course = iterator.next();
+            CurrentCourse course = iterator.next();
             listModel.addElement(course);
         }
         
@@ -146,10 +146,10 @@ public class DropACourse extends javax.swing.JFrame {
     private void selectListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_selectListMouseReleased
          //get index of click object
         int index = selectList.getSelectedIndex();
-        ListModel<Course> listModel = selectList.getModel();
+        ListModel<CurrentCourse> listModel = selectList.getModel();
         //get course
-        Course course = listModel.getElementAt(index);
-        DefaultListModel<Course> dropListModel = new DefaultListModel();
+        CurrentCourse course = listModel.getElementAt(index);
+        DefaultListModel<CurrentCourse> dropListModel = new DefaultListModel();
         listModel = dropList.getModel();
         //adds items already in dropList to dropListModel
         for (int a = 0; a < listModel.getSize(); a++){
@@ -165,12 +165,12 @@ public class DropACourse extends javax.swing.JFrame {
      * @param evt 
      */
     private void dropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropActionPerformed
-        ListModel<Course> listModel = dropList.getModel();
+        ListModel<CurrentCourse> listModel = dropList.getModel();
         //drop courses in dropList box
         for (int a  = 0; a < listModel.getSize(); a++)
         {
             //get course
-            Course course = listModel.getElementAt(a);
+            CurrentCourse course = listModel.getElementAt(a);
             ListIterator<Student> iterator = course.getEnrolledStudents().listIterator();
             //drop course from enrolled students
             while (iterator.hasNext())
@@ -205,7 +205,7 @@ public class DropACourse extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_exitActionPerformed
 
-   private LinkedList<Course> courseList;
+   private LinkedList<CurrentCourse> courseList;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton clear;
     private javax.swing.JButton drop;

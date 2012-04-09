@@ -8,7 +8,7 @@ public class SearchCourse {
      * Constructor
      * @param yourCourseList 
      */
-    SearchCourse(LinkedList<Course> yourCourseList)
+    SearchCourse(LinkedList<CurrentCourse> yourCourseList)
     {
         courseList = yourCourseList;
     }
@@ -18,16 +18,16 @@ public class SearchCourse {
      * @param courseName
      * @return 
      */
-    public LinkedList<Course> searchCourseByCourseName(String courseName )
+    public LinkedList<CurrentCourse> searchCourseByCourseName(String courseName )
     {
-        ListIterator<Course> iterator = courseList.listIterator();
-        LinkedList<Course> courseNameList = new LinkedList<Course>();
+        ListIterator<CurrentCourse> iterator = courseList.listIterator();
+        LinkedList<CurrentCourse> courseNameList = new LinkedList<CurrentCourse>();
         courseName = courseName.toUpperCase();
         //goes though course list to find match
         while (iterator.hasNext())
         {
             //adds course with matching name to course name list
-            Course element = iterator.next();
+            CurrentCourse element = iterator.next();
             if (element.getName().toUpperCase().contains(courseName))
             {
                 courseNameList.add(element);
@@ -43,15 +43,15 @@ public class SearchCourse {
      * @param title
      * @return 
      */
-     public LinkedList<Course> searchCourseByTitle(String title )
+     public LinkedList<CurrentCourse> searchCourseByTitle(String title )
     {
-        ListIterator<Course> iterator = courseList.listIterator();
-        LinkedList<Course> courseTitleList = new LinkedList<Course>();
+        ListIterator<CurrentCourse> iterator = courseList.listIterator();
+        LinkedList<CurrentCourse> courseTitleList = new LinkedList<CurrentCourse>();
         title = title.toUpperCase();
         //goes though course list to find match
         while (iterator.hasNext())
         {
-            Course element = iterator.next();
+            CurrentCourse element = iterator.next();
             //adds course with matching title to course title list
             if (element.getTitle().toUpperCase().contains(title))
             {
@@ -70,16 +70,16 @@ public class SearchCourse {
       * @param time
       * @return 
       */
-     public LinkedList<Course> searchCourseByTime(String time )
+     public LinkedList<CurrentCourse> searchCourseByTime(String time )
     {
-        ListIterator<Course> iterator = courseList.listIterator();
-        LinkedList<Course> courseTimeList = new LinkedList<Course>();
+        ListIterator<CurrentCourse> iterator = courseList.listIterator();
+        LinkedList<CurrentCourse> courseTimeList = new LinkedList<CurrentCourse>();
         time = time.toUpperCase();
         //goes though course list to find match
         while (iterator.hasNext())
         {
             //adds matches to course time list
-            Course element = iterator.next();
+            CurrentCourse element = iterator.next();
             if (element.getTime().toUpperCase().contains(time))
             {
                 courseTimeList.add(element);
@@ -95,14 +95,14 @@ public class SearchCourse {
       * @param days
       * @return 
       */
-     public LinkedList<Course> searchCourseByDay(String days )
+     public LinkedList<CurrentCourse> searchCourseByDay(String days )
     {
-        ListIterator<Course> iterator = courseList.listIterator();
-        LinkedList<Course> courseDaysList = new LinkedList<Course>();
+        ListIterator<CurrentCourse> iterator = courseList.listIterator();
+        LinkedList<CurrentCourse> courseDaysList = new LinkedList<CurrentCourse>();
         //goes though course list to find match
         while (iterator.hasNext())
         {
-            Course element = iterator.next();
+            CurrentCourse element = iterator.next();
             //adds matches to course days list
             if (element.getDays().contains(days))
             {
@@ -118,5 +118,5 @@ public class SearchCourse {
      
      
     /********DATA MEMBER*********/
-    private LinkedList<Course> courseList;
+    private LinkedList<CurrentCourse> courseList;
 }

@@ -25,11 +25,11 @@ public class DropClass extends javax.swing.JFrame {
     private void resetCurrentSchedule()
     {
         DefaultListModel listModel = new DefaultListModel();
-        ListIterator<Course> iterator = student.getCurrentSchudule().listIterator();
+        ListIterator<CurrentCourse> iterator = student.getCurrentSchudule().listIterator();
         ///adds courses
         while (iterator.hasNext())
         {
-            Course course =  iterator.next();
+            CurrentCourse course =  iterator.next();
             listModel.addElement(course);
         }
         
@@ -150,11 +150,11 @@ public class DropClass extends javax.swing.JFrame {
      * @param evt 
      */
     private void dropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropActionPerformed
-        ListModel<Course> listModel = dropList.getModel();
+        ListModel<CurrentCourse> listModel = dropList.getModel();
         //gets all course in drop list box
         for (int a = 0; a < listModel.getSize(); a++)
         {
-            Course course = listModel.getElementAt(a);
+            CurrentCourse course = listModel.getElementAt(a);
             
             //remove course from student's who are currently enrolled
             boolean remove = student.getCurrentSchudule().remove(course);
@@ -183,9 +183,9 @@ public class DropClass extends javax.swing.JFrame {
     private void currentList1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_currentList1MouseReleased
         //get index of click object
         int index = currentList1.getSelectedIndex();
-        ListModel<Course> listModel = currentList1.getModel();
+        ListModel<CurrentCourse> listModel = currentList1.getModel();
         //get course
-        Course course = listModel.getElementAt(index);
+        CurrentCourse course = listModel.getElementAt(index);
         DefaultListModel dropListModel = new DefaultListModel();
         listModel = dropList.getModel();
         //adds items already in addCourseList to addListModel
