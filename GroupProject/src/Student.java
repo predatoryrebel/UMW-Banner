@@ -16,13 +16,13 @@ public class Student extends User {
         creditHoursEnrolled =  yourCreditHoursEnrolled;
         tempCurrentSchudule = yourCurrentSchudule;
         holds = yourHolds;
-        currentSchudule = new LinkedList<Course>();
+        currentSchudule = new LinkedList<CurrentCourse>();
         pastCourses = new LinkedList<PastCourse>();
         gpa = 0;
         setPermission(0);
     }
    
-    public void buildCurrentScudule(LinkedList<Course> courseList)
+    public void buildCurrentScudule(LinkedList<CurrentCourse> courseList)
     {
         String temp = tempCurrentSchudule;
         Scanner input = new Scanner(temp);
@@ -31,12 +31,12 @@ public class Student extends User {
         while (input.hasNext()){
         
             String crn = input.next();
-            Course tempCourse = new Course();
+            CurrentCourse tempCourse = new CurrentCourse();
             tempCourse.setCRN(crn);        
             Collections.sort(courseList, Course.comparatorByCRN());
             int index = Collections.binarySearch(courseList, tempCourse , Course.comparatorByCRN());
             currentSchudule.add(courseList.get(index));
-            Course course = courseList.get(index);
+            CurrentCourse course = courseList.get(index);
            creditHoursEnrolled =  creditHoursEnrolled + course.getCredits();
         }
         
@@ -44,11 +44,11 @@ public class Student extends User {
     
     private void buildTempCurrentSchudule()
     {
-       ListIterator<Course> iterator = currentSchudule.listIterator();
+       ListIterator<CurrentCourse> iterator = currentSchudule.listIterator();
        tempCurrentSchudule = "";
        while (iterator.hasNext())
        {
-           Course element = iterator.next();
+           CurrentCourse element = iterator.next();
            tempCurrentSchudule = tempCurrentSchudule + " " + element.getCRN();
        }
        
@@ -126,7 +126,7 @@ public class Student extends User {
         return creditHoursEnrolled;
     }
     
-    public LinkedList<Course> getCurrentSchudule()
+    public LinkedList<CurrentCourse> getCurrentSchudule()
     {
         return currentSchudule;
     }
@@ -166,7 +166,7 @@ public class Student extends User {
     private String minor;
     private int approvedCredits;
     private int creditHoursEnrolled;
-    private LinkedList<Course> currentSchudule;
+    private LinkedList<CurrentCourse> currentSchudule;
     private LinkedList<PastCourse> pastCourses;
     private double gpa;
     private String tempCurrentSchudule;

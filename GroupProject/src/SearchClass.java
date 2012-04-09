@@ -11,7 +11,7 @@ public class SearchClass extends javax.swing.JFrame {
      * Creates new form SearchClass
      */
    
-    public SearchClass(LinkedList<Course> course, LinkedList<Student> student, User person) {
+    public SearchClass(LinkedList<CurrentCourse> course, LinkedList<Student> student, User person) {
         initComponents();
         user = person;
         courseList = course;
@@ -188,7 +188,7 @@ public class SearchClass extends javax.swing.JFrame {
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         
         SearchCourse search = new SearchCourse(courseList);
-        LinkedList<Course> searchList = null;
+        LinkedList<CurrentCourse> searchList = null;
          DefaultListModel listModel; 
         //search title
         if (titleCheckBox.isSelected()){
@@ -234,12 +234,12 @@ public class SearchClass extends javax.swing.JFrame {
         
         
         if (!searchList.isEmpty()){
-            ListIterator<Course> iterator = searchList.listIterator();
+            ListIterator<CurrentCourse> iterator = searchList.listIterator();
             listModel = new DefaultListModel();
             //adds found items to list
             while (iterator.hasNext())
             {
-                Course element = iterator.next();
+                CurrentCourse element = iterator.next();
                 listModel.addElement(element);
             }   
         }
@@ -261,9 +261,9 @@ public class SearchClass extends javax.swing.JFrame {
     private void searchCourseListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchCourseListMouseReleased
         //get index of click object
         int index = searchCourseList.getSelectedIndex();
-        ListModel<Course> listModel = searchCourseList.getModel();
+        ListModel<CurrentCourse> listModel = searchCourseList.getModel();
         //get course
-        Course course = listModel.getElementAt(index);
+        CurrentCourse course = listModel.getElementAt(index);
         DefaultListModel addListModel = new DefaultListModel();
         listModel = addCourseList.getModel();
         //adds items already in addCourseList to addListModel
@@ -280,10 +280,10 @@ public class SearchClass extends javax.swing.JFrame {
      * @param evt 
      */
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        ListModel<Course> listModel = addCourseList.getModel();
+        ListModel<CurrentCourse> listModel = addCourseList.getModel();
         
         for (int a = 0; a < listModel.getSize(); a++){
-            Course course = listModel.getElementAt(a);
+            CurrentCourse course = listModel.getElementAt(a);
             ListIterator<Student> iterator = studentList.listIterator();
             //seach student list for student
             while (iterator.hasNext())
@@ -292,12 +292,12 @@ public class SearchClass extends javax.swing.JFrame {
                 //check username of user to student user name
                 if (user.getUserName().equalsIgnoreCase(element.getUserName()))
                 {
-                    ListIterator<Course> courseIterator = element.getCurrentSchudule().listIterator();
+                    ListIterator<CurrentCourse> courseIterator = element.getCurrentSchudule().listIterator();
                     boolean courseAlreadyAdded = false;
                     //checks to make sure the student isn't already enrolled in the class
                     while (courseIterator.hasNext())
                     {    
-                        Course courseElement = courseIterator.next();
+                        CurrentCourse courseElement = courseIterator.next();
                         if (courseElement.getName().equalsIgnoreCase(course.getName()))
                             courseAlreadyAdded = true;
                     }
@@ -372,7 +372,7 @@ public class SearchClass extends javax.swing.JFrame {
 
     private LinkedList<Student> studentList;
     private User user;
-    private LinkedList<Course> courseList;
+    private LinkedList<CurrentCourse> courseList;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
     private javax.swing.JList addCourseList;

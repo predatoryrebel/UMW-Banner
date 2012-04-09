@@ -20,7 +20,7 @@ public class Faculty extends User {
         
         office = yourOffice;
         phoneNumber = yourPhoneNumber;
-        courses = new LinkedList<Course>();
+        courses = new LinkedList<CurrentCourse>();
         setPermission(1);
     }
     
@@ -28,12 +28,12 @@ public class Faculty extends User {
       * Builds faculty course list by matching course criteria professor to faculty members Last name and first initial
       * @param courseList 
       */     
-    public void buildCourseList(LinkedList<Course> courseList)
+    public void buildCourseList(LinkedList<CurrentCourse> courseList)
     {
-        ListIterator<Course> iterator = courseList.listIterator();
+        ListIterator<CurrentCourse> iterator = courseList.listIterator();
         while (iterator.hasNext())
         {
-            Course tempCourse = iterator.next();
+            CurrentCourse tempCourse = iterator.next();
             String professor = getLastName() + getFirstName().substring(0, 1);
             if (tempCourse.getProfessor().equalsIgnoreCase(professor))
             {
@@ -130,7 +130,7 @@ public class Faculty extends User {
      * teaches
      * @return
      */
-    public LinkedList<Course> getCourses()
+    public LinkedList<CurrentCourse> getCourses()
     {
         return courses;
     }
@@ -138,6 +138,6 @@ public class Faculty extends User {
 /******** DATA MEMBERS ********/
     private String office;
     private String phoneNumber;
-    private LinkedList<Course> courses;
+    private LinkedList<CurrentCourse> courses;
 
 }

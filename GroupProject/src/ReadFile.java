@@ -92,9 +92,9 @@ public class ReadFile{
         return studentList;
     }
             
-    public LinkedList<Course> readCourseList() throws FileNotFoundException{
+    public LinkedList<CurrentCourse> readCourseList() throws FileNotFoundException{
         FileInputStream fstream = new FileInputStream("courseList.csv");
-        LinkedList<Course> courseList = new LinkedList<Course>();
+        LinkedList<CurrentCourse> courseList = new LinkedList<CurrentCourse>();
         Scanner input = new Scanner(fstream);
 
         input.useDelimiter(",");
@@ -119,7 +119,7 @@ public class ReadFile{
                 String professor = input.nextLine();
                 professor = professor.substring(1, professor.length());
                 
-                Course newCourse = new Course(crn, course, section, title, prer, credits, time, days, building, room, professor,
+                CurrentCourse newCourse = new CurrentCourse(crn, course, section, title, prer,credits, time, days, building, room, professor,
                     totalSeats, filledSeats);
                      
                 courseList.add(newCourse);

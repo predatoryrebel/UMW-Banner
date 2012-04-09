@@ -24,12 +24,12 @@ public class DropAStudentFaculty extends javax.swing.JFrame {
      */
     private void reset()
     {
-        ListIterator<Course> iterator = faculty.getCourses().listIterator();
+        ListIterator<CurrentCourse> iterator = faculty.getCourses().listIterator();
         DefaultListModel listModel = new DefaultListModel();
         //add courses to the list model
         while (iterator.hasNext())
         {
-            Course element = iterator.next();
+            CurrentCourse element = iterator.next();
             listModel.addElement(element);
         }
         //set list of course
@@ -162,7 +162,7 @@ public class DropAStudentFaculty extends javax.swing.JFrame {
     private void courseListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_courseListMouseReleased
         //get selected course
         int index = courseList.getSelectedIndex();
-        ListModel<Course> list = courseList.getModel();
+        ListModel<CurrentCourse> list = courseList.getModel();
         course = list.getElementAt(index);
         
         //add students from selected course
@@ -246,7 +246,7 @@ public class DropAStudentFaculty extends javax.swing.JFrame {
 
     
     private Faculty faculty;
-    private Course course;
+    private CurrentCourse course;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton clear;
     private javax.swing.JList courseList;

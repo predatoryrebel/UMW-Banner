@@ -28,13 +28,13 @@ public class GradeAStudent extends javax.swing.JFrame {
      */
     private void reset()
     {
-        DefaultListModel<Course> listModel = new DefaultListModel();
-        ListIterator<Course> iterator = faculty.getCourses().listIterator();
+        DefaultListModel<CurrentCourse> listModel = new DefaultListModel();
+        ListIterator<CurrentCourse> iterator = faculty.getCourses().listIterator();
         
         //add courses to select list
         while (iterator.hasNext())
         {
-            Course course = iterator.next();
+            CurrentCourse course = iterator.next();
             listModel.addElement(course);
         }
         
@@ -197,8 +197,8 @@ public class GradeAStudent extends javax.swing.JFrame {
     private void selectListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_selectListMouseReleased
         //get selected course
         int index = selectList.getSelectedIndex();
-        ListModel<Course> list = selectList.getModel();
-        Course course = list.getElementAt(index);
+        ListModel<CurrentCourse> list = selectList.getModel();
+        CurrentCourse course = list.getElementAt(index);
         
         //add students from selected course
         ListIterator<Student> iterator = course.getEnrolledStudents().listIterator();
@@ -237,18 +237,18 @@ public class GradeAStudent extends javax.swing.JFrame {
         Student student = listModel.getElementAt(indexStudent);
          //get selected course
         int indexCourse = selectList.getSelectedIndex();
-        ListModel<Course> list = selectList.getModel();
-        Course course = list.getElementAt(indexCourse);
+        ListModel<CurrentCourse> list = selectList.getModel();
+        CurrentCourse course = list.getElementAt(indexCourse);
         //get grade 
         int index = gradeBox.getSelectedIndex();
         ListModel<String> model = gradeBox.getModel();
         String grade = model.getElementAt(index);
         
-        ListIterator<Course> iterator = student.getCurrentSchudule().listIterator();
+        ListIterator<CurrentCourse> iterator = student.getCurrentSchudule().listIterator();
         //delete course from current enrolled list
         while (iterator.hasNext())
         {
-            Course studentCourse = iterator.next();
+            CurrentCourse studentCourse = iterator.next();
             if (course == studentCourse)
             {
                 //set past grade

@@ -3,40 +3,7 @@ import java.util.*;
  * Holds course and related course details
  */
 public class Course implements  Comparable<Course>{
-
-    /* Parameter constructor */
-    Course(String aCRN, String aCourse, int aSection, String theTitle, String thePrer, int numCredits, String theTime,
-           String theDays, String theBuilding, String theRoom, String theProfessor, int totalSeatNumber, int theFilledSeats ) 
-    {
-        /* Set the values to their respective parameters */
-        crn = aCRN;
-        course = aCourse;
-        section = aSection;
-        title = theTitle;
-        prer = thePrer;
-        credits = numCredits;
-        time = theTime;
-        days = theDays;
-        building = theBuilding;
-        room = theRoom;
-        professor = theProfessor;
-        totalSeats = totalSeatNumber;
-        filledSeats = theFilledSeats;
-        prerequisites = new LinkedList<Course>();
-        enrolledStudents = new LinkedList<Student>();
-        waitingList = new LinkedList<Student>();
-    }
-    
-    /**
-     * Default constructor no parameters
-     */
-    Course()
-    {
-       prerequisites = new LinkedList<Course>();
-       enrolledStudents = new LinkedList<Student>(); 
-       waitingList = new LinkedList<Student>();
-    }
-    
+ 
     /**
      * Constructor used to set a past course
      * @param aCRN
@@ -55,33 +22,6 @@ public class Course implements  Comparable<Course>{
         title = theTitle;
         credits = numCredits;
         professor = theProfessor;
-    }
-
-    /**
-     * buildEnrolledStudents: Method that builds a linked list of currently
-     * enrolled students in Course
-     *
-     * @param studentList
-     */
-    public void buildEnrolledStudents(LinkedList<Student> studentList)
-    {
-        ListIterator<Student> iterator = studentList.listIterator();
-        //iterates though student list
-        while (iterator.hasNext())
-        {
-            Student person = iterator.next();
-            LinkedList<Course> checkForStudent = person.getCurrentSchudule();
-            ListIterator<Course> iteratorCourse = checkForStudent.listIterator();
-            //adds student to a course if they are enrolled
-            while (iteratorCourse.hasNext())
-            {
-                Course studentCourse = iteratorCourse.next();
-                if (studentCourse == this)
-                {
-                    enrolledStudents.add(person);
-                }
-            }
-        }
     }
 
     /**
@@ -111,62 +51,6 @@ public class Course implements  Comparable<Course>{
                 };
     }
     
-    
-    
-   /**
-    * addStudent method adds a student to this course
-    * @return booleen true if student is added
-    */
-    public boolean addStudent(){
-        if (totalSeats >= filledSeats)
-        {
-            filledSeats++;
-            return true;
-        }    
-        else
-            return false;
-    }
-
-    /**
-     * dropStudent method drops a student from this course
-     */
-    public void dropStudent(){
-        if (filledSeats != 0)
-            filledSeats--;
-        
-    }
-
-    /**
-     * toString method : used to create a string of the data members of a course
-     * @return contents : a string of the data members
-     */
-    public String toString(){
-    
-        String contents;
-        
-        contents = crn + " " + course + " " + section + " " + title + " " + prer + " "  + credits + " " + time + " "
-                + days + " " + building + " " + room + " " + professor + " " + totalSeats + " " + filledSeats;
-        
-        return contents;
-    }
-
-    /**
-     * backup method : used to backup all the data members
-     * from this course to a comma delimited string, which
-     * will be written to a file
-     * 
-     * @return
-     */
-    public String backup(){
-
-        String backup;
-
-        /* create the string that we will return */
-        backup = crn + "," + course + "," + section + "," + title + "," + prer + ","  + credits + "," + time + ","
-                + days + "," + building + "," + room  + "," + totalSeats + "," + filledSeats + "," + professor +"\n";
-
-        return backup;
-    }
 
     /**
      * sets the CRN data member
@@ -232,15 +116,7 @@ public class Course implements  Comparable<Course>{
         return title;
     }
 
-    /**
-     * Method that gets the list of currently enrolled students
-     * @return
-     */
-    public LinkedList<Student> getEnrolledStudents()
-    {
-        return enrolledStudents;
-    }
-
+    
     /**
      * set the amount of credit hours this course will have
      * @param yourCredits
@@ -259,76 +135,7 @@ public class Course implements  Comparable<Course>{
         return credits;
     }
 
-    /**
-     * Sets the time this course will be
-     * @param yourTime
-     */
-    public void setTime(String yourTime)
-    {
-        time = yourTime;
-    }
-
-    /**
-     * returns the time of this course
-     * @return
-     */
-    public String getTime()
-    {
-        return time;
-    }
-
-    /**
-     * Sets the days this course will be on
-     * @param yourDays
-     */
-    public void setDays(String yourDays)
-    {
-        days = yourDays;
-    }
-
-    /**
-     * method that returns the days data member
-     * @return
-     */
-    public String getDays()
-    {
-        return days;
-    }
-
-    /**
-     * Method that sets the building where this class will be help
-     * @param yourBuilding
-     */
-    public void setBuilding(String yourBuilding)
-    {
-        building = yourBuilding;
-    }
-
-    /**
-     * Return the building this class is held in
-     * @return
-     */
-    public String getBuilding()
-    {
-        return building;
-    }
-
-    /**
-     * Sets the room that this class will use
-     * @param yourRoom
-     */
-    public void setRoom(String yourRoom)
-    {
-        room = yourRoom;
-    }
-    /**
-     * Gets the room that this class is in
-     * @return
-     */
-    public String getRoom()
-    {
-        return room;
-    }
+   
 
     /**
      * Sets the name of the professor that teaches this course
@@ -348,78 +155,18 @@ public class Course implements  Comparable<Course>{
         return professor;
     }
 
-    /**
-     * Method that sets the total amount of seats that will
-     * be available in this course
-     *
-     * @param yourTotalSeats
-     */
-    public void setTotalSeats(int yourTotalSeats)
-    {
-        if (yourTotalSeats > -1)
-        {
-            totalSeats = yourTotalSeats;
-        }
-    }
-
-    /**
-     * Method that returns the total amount of seats in
-     * this course
-     * @return
-     */
-    public int getTotalSeats()
-    {
-        return totalSeats;
-    }
-
-    /**
-     * Gets the amount of seats that are filled in this course
-     * @param yourFilledSeats
-     */
-    public void setFilledSeats(int yourFilledSeats)
-    {
-        if (yourFilledSeats > 0 && yourFilledSeats >= getTotalSeats())
-        {
-            filledSeats = yourFilledSeats;
-        }
-    }
-
-    /**
-     * Returns the amount of filled seats in this course
-     * @return
-     */
-    public int getFilledSeats()
-    {
-        return filledSeats;
-    }
     
-    /**
-     * Get waiting list for the course
-     * @return list of students waiting on the course
-     */
-    public LinkedList<Student> getWaitingList()
-    {
-        return waitingList;
-    }
 
 
 /****** DATA MEMBERS *****************/
-    private LinkedList<Student> waitingList;
+    
     private String crn;
     private String course;
     private int section;
     private String title;
-    private String prer;
-    private LinkedList<Course> prerequisites;
-    private LinkedList<Student> enrolledStudents;
-    private int credits;
-    private String time;
-    private String days;
-    private String building;
-    private String room;
     private String professor;
-    private int totalSeats;
-    private int filledSeats;
+    private int credits;
+    
 
     
 }

@@ -177,11 +177,11 @@ public class DropAStudentFromTheUniversityAdmin extends javax.swing.JFrame {
         {
             //get student
             Student student = listModel.getElementAt(a);
-            ListIterator<Course> iterator = student.getCurrentSchudule().listIterator();
+            ListIterator<CurrentCourse> iterator = student.getCurrentSchudule().listIterator();
             //drop student from enrolled courses
             while (iterator.hasNext())
             {
-                Course course = iterator.next();
+                CurrentCourse course = iterator.next();
                 course.getEnrolledStudents().remove(student);
                 course.dropStudent();
             }

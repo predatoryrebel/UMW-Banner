@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
         
         ReadFile start = new ReadFile();
-        LinkedList<Course> courseList = new LinkedList<Course>();
+        LinkedList<CurrentCourse> courseList = new LinkedList<CurrentCourse>();
         LinkedList<Student> studentList = new LinkedList<Student>();
         LinkedList<Faculty> facultyList = new LinkedList<Faculty>();
         LinkedList<User> userList = new LinkedList<User>();
@@ -53,11 +53,11 @@ public class Main {
             element.buildCurrentScudule(courseList);
         }
 
-        ListIterator<Course> citerator = courseList.listIterator();
+        ListIterator<CurrentCourse> citerator = courseList.listIterator();
         //adds students to a course
         while (citerator.hasNext())
         {
-            Course element = citerator.next();
+            CurrentCourse element = citerator.next();
             element.buildEnrolledStudents(studentList);
         }
         

@@ -18,7 +18,7 @@ import javax.swing.Timer;
  */
 public class Backup {
 
-    Backup(final LinkedList<Course> courses, final LinkedList<Student> students, final LinkedList<Faculty> faculty, 
+    Backup(final LinkedList<CurrentCourse> courses, final LinkedList<Student> students, final LinkedList<Faculty> faculty, 
             final LinkedList<Admin> admin, final int backupTime){
         
         setCourses(courses);
@@ -46,7 +46,7 @@ public class Backup {
 
     }
 
-    Backup (final LinkedList<Course> courses, final LinkedList<Student> students, final LinkedList<Faculty> faculty, 
+    Backup (final LinkedList<CurrentCourse> courses, final LinkedList<Student> students, final LinkedList<Faculty> faculty, 
             final LinkedList<Admin> admin, final LinkedList<PastCourse> past){
         
         setCourses(courses);
@@ -223,7 +223,7 @@ public class Backup {
 
     }
     
-    public int backupCourses(final LinkedList<Course> courses){
+    public int backupCourses(final LinkedList<CurrentCourse> courses){
 
             setCourses(courses);
 
@@ -231,7 +231,7 @@ public class Backup {
             file.delete();
 
            /******** BACKUP courselist.CSV ***********/
-            ListIterator<Course> iterator = courseList.listIterator();
+            ListIterator<CurrentCourse> iterator = courseList.listIterator();
 
             /* Try to write out to file, if can't ctch IOException*/
             try {
@@ -243,7 +243,7 @@ public class Backup {
                 while (iterator.hasNext()) {
 
                     /* Temporarily store the element */
-                    Course element = iterator.next();
+                    CurrentCourse element = iterator.next();
 
                     /* Write the comma delimited backup method result to file */
                     out.write(element.backup());
@@ -300,7 +300,7 @@ public class Backup {
     }
 
 
-    public int backupAll(final LinkedList<Course> courses, final LinkedList<Student> students, 
+    public int backupAll(final LinkedList<CurrentCourse> courses, final LinkedList<Student> students, 
             final LinkedList<Faculty> faculty, final LinkedList<Admin> admin, final LinkedList<PastCourse> past){
 
         setCourses(courses);
@@ -344,7 +344,7 @@ public class Backup {
 
     }
 
-    private void setCourses(LinkedList<Course> list){
+    private void setCourses(LinkedList<CurrentCourse> list){
 
         courseList = list;
     }
@@ -370,7 +370,7 @@ public class Backup {
 
 private int time = 0;
 
-private LinkedList<Course> courseList;
+private LinkedList<CurrentCourse> courseList;
 private LinkedList<Student> studentList;
 private LinkedList<Faculty> facultyList;
 private LinkedList<Admin> adminList;
