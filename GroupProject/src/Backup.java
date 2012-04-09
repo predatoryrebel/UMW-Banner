@@ -26,24 +26,6 @@ public class Backup {
         setFaculty(faculty);
         setAdmin(admin);
 
-        /* time = backupTime;
-
-                ActionListener listener = new
-             ActionListener()
-             {
-                public void actionPerformed(ActionEvent event)
-                {
-                    backupAll();
-                 
-                }
-             };
-
-          int DELAY = (time * (60 * 1000));
-             // Milliseconds between timer ticks
-          Timer t = new Timer(DELAY, listener);
-          t.start();
-        */
-
     }
 
     Backup (final LinkedList<CurrentCourse> courses, final LinkedList<Student> students, final LinkedList<Faculty> faculty, 
@@ -54,23 +36,6 @@ public class Backup {
         setFaculty(faculty);
         setAdmin(admin);
         pastList = past;
-
-       /*         ActionListener listener = new
-             ActionListener()
-             {
-                public void actionPerformed(ActionEvent event)
-                {
-                    backupAll();
-                    
-                }
-             };
-
-          int DELAY = (2 * (60 * 1000));
-             // Milliseconds between timer ticks
-          Timer t = new Timer(DELAY, listener);
-          t.start();
-
-*/
 
     }
 
@@ -109,36 +74,6 @@ public class Backup {
             }catch (IOException e){
 
             }
-
-        /****** Rename the current facultyList.csv file *****/
-
-            // File (or directory) with old name
-            
-            // File (or directory) with new name
-            //File file2 = new File("facultyList.csv.bak");
-
-            // Rename file (or directory)
-            ///boolean success = file.renameTo(file2);
-            //if (!success) {
-                 // File was not successfully renamed
-            //}
-            //file.delete();
-
-            /* Rename the temp file we made to courselist.csv */
-            /*
-            // File (or directory) with old name
-            file = new File("facultyList.csv.tmp");
-
-            // File (or directory) with new name
-            file2 = new File("facultyList.csv");
-
-            // Rename file (or directory)
-            success = file.renameTo(file2);
-            if (!success) {
-                // File was not successfully renamed
-            }*/
-
-        /******** END RENAME FACULTYLIST.CSV *********/
 
             return 0;
     }
