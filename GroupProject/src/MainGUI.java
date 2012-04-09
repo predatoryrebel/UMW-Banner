@@ -24,7 +24,6 @@ public class MainGUI extends JFrame implements ActionListener
         public JMenuItem editFirstName;
         public JMenuItem editLastName;
         public JMenuItem editEmail;
-        public JMenuItem editAddress;
         public JMenuItem editMajor;
         public JMenuItem editMinor;
         public JMenuItem dropACourse;
@@ -80,8 +79,6 @@ public class MainGUI extends JFrame implements ActionListener
                 editFirstName.addActionListener(this);
                 editEmail = new JMenuItem("Edit Email");
                 editEmail.addActionListener(this);
-                editAddress = new JMenuItem("Edit Address");
-                editAddress.addActionListener(this);
                 editMajor = new JMenuItem("Edit Major");
                 editMajor.addActionListener(this);
                 editMinor = new JMenuItem("Edit Minor");
@@ -89,6 +86,7 @@ public class MainGUI extends JFrame implements ActionListener
 		
 		// Add items to the file menu
 		fileMenu.add(loginItem);
+                fileMenu.add(createAccount);
 		fileMenu.add(exitItem);
                 
                 // Add Items to the search menu
@@ -98,9 +96,6 @@ public class MainGUI extends JFrame implements ActionListener
                 editMenu.add(editFirstName);
                 editMenu.add(editLastName);
                 editMenu.add(editEmail);
-                editMenu.add(editAddress);
-                editMenu.add(editMajor);
-                editMenu.add(editMinor);
 		
 		// Add menus to the menubar
 		mainMenu.add(fileMenu);
@@ -150,6 +145,8 @@ public class MainGUI extends JFrame implements ActionListener
             if (activeUser.getPermission() == 0)
             {
                 searchMenu.add(dropItem);
+                editMenu.add(editMajor);
+                editMenu.add(editMinor);
             }
             
             if (activeUser.getPermission() == 1)
@@ -204,7 +201,8 @@ public class MainGUI extends JFrame implements ActionListener
             
             if(action.equals("Create Account"))
             {
-                
+                CreateAccount createAccountWindow = new CreateAccount();
+                createAccountWindow.setVisible(true);
             }
             
             if(action.equals("Search For Classes"))
@@ -282,6 +280,60 @@ public class MainGUI extends JFrame implements ActionListener
                 if(newFirstName != null)
                 {
                     activeUser.setFirstName(newFirstName);
+                    refreshWindow();
+                }
+            }
+            
+            if(action.equals("Edit Last Name"))
+            {
+                // Get the new name from the JOptionPane
+                String newLastName = JOptionPane.showInputDialog("Edit Last Name", activeUser.getLastName());
+                
+                // If the user presses OK, change the name and refresh the window.
+                // Otherwise, do nothing.
+                if(newLastName != null)
+                {
+                    activeUser.setLastName(newLastName);
+                    refreshWindow();
+                }
+            }
+            
+            if(action.equals("Edit Email"))
+            {
+                // Get the new name from the JOptionPane
+                String newEmail = JOptionPane.showInputDialog("Edit Email", activeUser.getEmail());
+                
+                // If the user presses OK, change the name and refresh the window.
+                // Otherwise, do nothing.
+                if(newEmail != null)
+                {
+                    activeUser.setEmail(newEmail);
+                    refreshWindow();
+                }
+            }
+            
+            if(action.equals("Edit Major"))
+            {
+                // User must be a student to perform this action
+                Student student = (Student)activeUser;
+                String major = JOptionPane.showInputDialog("Edit Major", student.getMajor());
+                
+                if(major != null)
+                {
+                    student.setMajor(major);
+                    refreshWindow();
+                }
+            }
+            
+            if(action.equals("Edit Minor"))
+            {
+                // User must be a student to perform this action
+                Student student = (Student)activeUser;
+                String minor = JOptionPane.showInputDialog("Edit Minor", student.getMinor());
+                
+                if(minor != null)
+                {
+                    student.setMinor(minor);
                     refreshWindow();
                 }
             }
