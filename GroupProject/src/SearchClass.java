@@ -294,6 +294,7 @@ public class SearchClass extends javax.swing.JFrame {
                 {
                     ListIterator<CurrentCourse> courseIterator = element.getCurrentSchudule().listIterator();
                     boolean courseAlreadyAdded = false;
+                    boolean courseAlreadyTaken = false;
                     //checks to make sure the student isn't already enrolled in the class
                     while (courseIterator.hasNext())
                     {    
@@ -301,13 +302,23 @@ public class SearchClass extends javax.swing.JFrame {
                         if (courseElement.getName().equalsIgnoreCase(course.getName()))
                             courseAlreadyAdded = true;
                     }
+                    //check to make sure student has not take the course
+                    ListIterator<PastCourse> pastIterator = element.getPastCourses().listIterator();
+                    while (pastIterator.hasNext())
+                    {
+                        PastCourse pastElement = pastIterator.next();
+                        if (pastElement.getName().equalsIgnoreCase(course.getName())  && !pastElement.getGrade().equalsIgnoreCase("F"))
+                            courseAlreadyTaken = true;
+                    }    
+                   
                     //makes sure class is not full and student will not go over approved credits
                     int totalCredits = element.getCreditHoursEnrolled();
                     totalCredits = totalCredits + course.getCredits();
                     
                     //checks number of seats for course, student will not go over approved credits, student is not already enrolled
                     //in the class and holds
-                    if (totalCredits <= element.getApprovedCredits()  && !courseAlreadyAdded  && element.getHolds() == false )
+                    if (totalCredits <= element.getApprovedCredits()  && !courseAlreadyAdded  && element.getHolds() == false 
+                            && !courseAlreadyTaken)
                     {
                         boolean availableSeat = course.addStudent();
                         if (availableSeat)
@@ -320,11 +331,30 @@ public class SearchClass extends javax.swing.JFrame {
                         }
                         else
                         {
-                            //add student to waiting list
-                            course.getWaitingList().add(element);
-                            JFrame frame = new JFrame();
-                            JOptionPane.showMessageDialog(frame, course.getName() + " is full.  You have been put on the "
-                                    + "waiting list.");
+                            ListIterator<Student> waitingIterator = course.getWaitingList().listIterator();
+                            //check to see if student is already on the waitng list
+                            boolean alreadyOnWaitingList = false;
+                            while (waitingIterator.hasNext())
+                            {
+                                Student student = waitingIterator.next();
+                                if (student.equals(element))
+                                {
+                                    alreadyOnWaitingList = true;
+                                }
+                            }
+                            if (!alreadyOnWaitingList)
+                            {
+                                //add student to waiting list
+                                course.getWaitingList().addLast(element);
+                                JFrame frame = new JFrame();
+                                JOptionPane.showMessageDialog(frame, course.getName() + " is full.  You have been put on the "
+                                        + "waiting list.");
+                            }
+                            else
+                            {
+                                JFrame frame = new JFrame();
+                                JOptionPane.showMessageDialog(frame, "You are already on the waitng list.");
+                            }
                         }
                     }
                     //message to tell use course was not added

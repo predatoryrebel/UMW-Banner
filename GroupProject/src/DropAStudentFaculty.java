@@ -216,7 +216,28 @@ public class DropAStudentFaculty extends javax.swing.JFrame {
             //display remove course
             JFrame frame = new JFrame();
             JOptionPane.showMessageDialog(frame, student.getFirstName() + "  has been removed from "  + course.getName() );
-           
+            
+            Student waitingStudent = course.getWaitingList().pollFirst();
+            if (waitingStudent != null)
+            {
+                //adds student from waiting list
+                course.getEnrolledStudents().add(waitingStudent);
+                course.addStudent();
+                
+                //makes sure class is not full and student will not go over approved credits
+                int totalCredits = waitingStudent.getCreditHoursEnrolled();
+                totalCredits = totalCredits + course.getCredits();
+                
+                if (totalCredits <= waitingStudent.getApprovedCredits()  && waitingStudent.getHolds() == false)
+                {
+                    //adds course to current enrolled list
+                    waitingStudent.setCreditHoursEnrolled(totalCredits);
+                    waitingStudent.getCurrentSchudule().add(course);
+                    frame = new JFrame();
+                    JOptionPane.showMessageDialog(frame, waitingStudent.getFirstName() + " " + waitingStudent.getLastName() +
+                            "has been added from the waiting list" );
+                }
+            }
         }
         
         reset();
