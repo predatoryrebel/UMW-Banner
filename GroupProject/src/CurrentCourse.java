@@ -1,6 +1,8 @@
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.ListIterator;
+import java.util.Scanner;
 
 
 
@@ -12,7 +14,8 @@ public class CurrentCourse extends Course {
     
      /* Parameter constructor */
     CurrentCourse(String aCRN, String aCourse, int aSection, String theTitle, String thePrer, int numCredits, String theTime,
-           String theDays, String theBuilding, String theRoom, String theProfessor, int totalSeatNumber, int theFilledSeats ) 
+           String theDays, String theBuilding, String theRoom, String theProfessor, int totalSeatNumber, int theFilledSeats,
+           String tempList) 
     {
         /* Set the values to their respective parameters */
        super (aCRN,aCourse,aSection,theTitle,numCredits,theProfessor);
@@ -27,6 +30,7 @@ public class CurrentCourse extends Course {
         prerequisites = new LinkedList<CurrentCourse>();
         enrolledStudents = new LinkedList<Student>();
         waitingList = new LinkedList<Student>();
+        tempWaitingList = tempList;
     }
     
     /**
@@ -38,6 +42,44 @@ public class CurrentCourse extends Course {
        prerequisites = new LinkedList<CurrentCourse>();
        enrolledStudents = new LinkedList<Student>(); 
        waitingList = new LinkedList<Student>();
+    }
+    
+    private void buildTempWaitngList()
+    {
+        ListIterator<Student> iterator = waitingList.listIterator();
+        String temp = "";
+        //build tempwaitingList
+        while (iterator.hasNext())
+        {
+            Student student = iterator.next();
+            temp = temp + " " + student.getIDNumber();
+        }
+        //set new waitng list
+        tempWaitingList = temp;
+    }
+    
+    /**
+     * builds a waiting list form information in the courseList.csv
+     * @param studentList 
+     */
+    public void buildWaitingList(LinkedList<Student> studentList)
+    {
+        
+        String temp = tempWaitingList;
+        Scanner input = new Scanner(temp);
+        input.useDelimiter(" ");
+        //build waiting list
+        while (input.hasNext()){
+        
+            //get id number
+            String id = input.next();
+            Student student = new Student(id);  
+            //search for a student based on their id number
+            Collections.sort(studentList, Student.comparatorByID());
+            int index = Collections.binarySearch(studentList, student, Student.comparatorByID());
+            //add student to the waiting list
+            waitingList.add(studentList.get(index));
+        }
     }
     
      /**
@@ -99,7 +141,8 @@ public class CurrentCourse extends Course {
         String contents;
         
          contents = getCRN() + " " + getName() + " " + getSection() + " " + getTitle() + " " + prer + " "  + getCredits() + " " + time + " "
-                + days + " " + building + " " + room  + " " + totalSeats + " " + filledSeats + " " + getProfessor();
+                + days + " " + building + " " + room  + " " + totalSeats + " " + filledSeats + " " + tempWaitingList +
+                 " " + getProfessor();
         
         return contents;
     }
@@ -114,10 +157,11 @@ public class CurrentCourse extends Course {
     public String backup(){
 
         String backup;
-
+        this.buildTempWaitngList();
         /* create the string that we will return */
         backup = getCRN() + "," + getName() + "," + getSection() + "," + getTitle() + "," + prer + ","  + getCredits() + "," + time + ","
-                + days + "," + building + "," + room  + "," + totalSeats + "," + filledSeats + "," + getProfessor() +"\n";
+                + days + "," + building + "," + room  + "," + totalSeats + "," + filledSeats + "," + tempWaitingList + "," 
+                + getProfessor() +"\n";
 
         return backup;
     }
@@ -256,6 +300,7 @@ public class CurrentCourse extends Course {
         return waitingList;
     }
     
+       
     private LinkedList<Student> waitingList;
     private LinkedList<CurrentCourse> prerequisites;
     private LinkedList<Student> enrolledStudents;
@@ -266,6 +311,6 @@ public class CurrentCourse extends Course {
     private int totalSeats;
     private int filledSeats;
     private String prer;
-    
+    private String tempWaitingList;
     
 }

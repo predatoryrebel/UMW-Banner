@@ -91,9 +91,6 @@ public class MainGUI extends JFrame implements ActionListener
                 
                 // Add Items to the search menu
                 searchMenu.add(searchForClassesItem);
-
-                // Create backup object
-                Backup backup = new Backup();
                 
                 // Add items to the edit menu
                 editMenu.add(editFirstName);
@@ -160,10 +157,6 @@ public class MainGUI extends JFrame implements ActionListener
             
             refreshWindow();
         }
-        public int getActivePermission(){
-            
-            return this.activeUser.getPermission();
-        }
         
         // Set the current user's profile to the active account
         private void refreshWindow()
@@ -208,9 +201,7 @@ public class MainGUI extends JFrame implements ActionListener
             
             if(action.equals("Create Account"))
             {
-                // Create backup object
-                Backup backup = new Backup();
-                CreateAccount createAccountWindow = new CreateAccount(userList,studentList, facultyList, adminList, backup, this);
+                CreateAccount createAccountWindow = new CreateAccount();
                 createAccountWindow.setVisible(true);
             }
             
@@ -349,7 +340,6 @@ public class MainGUI extends JFrame implements ActionListener
             
             if(action.equals("Exit"))
             {
-                // Create backup object
                 Backup backup = new Backup();
                 backup.backupAll(courseList, studentList, facultyList, adminList, pastList);
                 System.exit(0);

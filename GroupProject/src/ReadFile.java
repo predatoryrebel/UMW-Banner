@@ -116,11 +116,12 @@ public class ReadFile{
                 String room = input.next();
                 int totalSeats = input.nextInt();
                 int filledSeats = input.nextInt();
+                String tempWaiting = input.next();
                 String professor = input.nextLine();
                 professor = professor.substring(1, professor.length());
                 
                 CurrentCourse newCourse = new CurrentCourse(crn, course, section, title, prer,credits, time, days, building, room, professor,
-                    totalSeats, filledSeats);
+                    totalSeats, filledSeats, tempWaiting);
                      
                 courseList.add(newCourse);
                      

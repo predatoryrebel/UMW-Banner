@@ -59,6 +59,7 @@ public class Main {
         {
             CurrentCourse element = citerator.next();
             element.buildEnrolledStudents(studentList);
+            element.buildWaitingList(studentList);
         }
         
         fiterator = facultyList.listIterator(0);

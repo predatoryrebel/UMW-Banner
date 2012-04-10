@@ -21,6 +21,12 @@ public class Student extends User {
         gpa = 0;
         setPermission(0);
     }
+    
+    Student(String id)
+    {
+            idNumber = id;
+    }        
+            
    
     public void buildCurrentScudule(LinkedList<CurrentCourse> courseList)
     {
@@ -74,6 +80,22 @@ public class Student extends User {
                 creditHoursEnrolled + "," + tempCurrentSchudule + "," + holds + "\n";
 
         return backup;
+    }
+    
+    /**
+     * Method used to compare a student by id number
+     * @return result of comparison
+     */
+    public static Comparator<Student> comparatorByID()
+    {
+        return new
+                Comparator<Student>()
+                {
+                    public int compare(Student a, Student b)
+                    {
+                        return a.getIDNumber().compareTo(b.getIDNumber());
+                    }
+                };
     }
     
     public void setIDNumber(String id)
