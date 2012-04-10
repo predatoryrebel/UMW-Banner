@@ -1,3 +1,8 @@
+
+import java.util.*;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -9,13 +14,24 @@
  */
 public class CreateAccount extends javax.swing.JFrame {
 
+    // Can be used as a link to the main window
+    // If you need to change the main window, write a new method in MainGUI and call it from your class
+    private MainGUI mainWindow;
+
     /**
      * Creates new form CreateAccount
      */
-    public CreateAccount() {
+    public CreateAccount(LinkedList<User> users, LinkedList<Student> students, LinkedList<Faculty> faculty, LinkedList<Admin> admins, Backup back, MainGUI mw) {
         initComponents();
-    }
+        backup = back;
+        userList = users;
+        studentList = students;
+        facultyList = faculty;
+        adminList = admins;       
+        mainWindow = mw;    // The Main GUI. mainWindow can be used to call methods in the MainGUI object.
+        setDefaultCloseOperation(HIDE_ON_CLOSE);
 
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -30,8 +46,6 @@ public class CreateAccount extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         jRadioButton3 = new javax.swing.JRadioButton();
@@ -39,12 +53,11 @@ public class CreateAccount extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jPasswordField1 = new javax.swing.JPasswordField();
+        confirmButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,10 +67,6 @@ public class CreateAccount extends javax.swing.JFrame {
 
         jLabel3.setText("Email");
 
-        jLabel4.setText("Major");
-
-        jLabel5.setText("Minor");
-
         jRadioButton1.setText("Student");
 
         jRadioButton2.setText("Faculty");
@@ -66,29 +75,29 @@ public class CreateAccount extends javax.swing.JFrame {
 
         jLabel6.setText("Account Type");
 
-        jTextField1.setText("jTextField1");
-
-        jTextField2.setText("jTextField2");
-
-        jTextField3.setText("jTextField3");
-
-        jTextField4.setText("jTextField4");
-
-        jTextField5.setText("jTextField5");
-
-        jTextField6.setText("jTextField6");
-
         jLabel7.setText("Username");
 
         jLabel8.setText("Password");
 
-        jPasswordField1.setText("jPasswordField1");
+        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPasswordField1ActionPerformed(evt);
+            }
+        });
+
+        confirmButton.setText("Create Account");
+        confirmButton.setToolTipText("Click to create an account with this information");
+        confirmButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -109,15 +118,9 @@ public class CreateAccount extends javax.swing.JFrame {
                                 .addComponent(jTextField2)
                                 .addComponent(jTextField3))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
+                        .addComponent(jLabel8)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE))))
+                        .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)))
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
@@ -125,6 +128,10 @@ public class CreateAccount extends javax.swing.JFrame {
                     .addComponent(jRadioButton2)
                     .addComponent(jRadioButton3))
                 .addGap(65, 65, 65))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(154, 154, 154)
+                .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(159, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,27 +160,144 @@ public class CreateAccount extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(153, Short.MAX_VALUE))
+                .addGap(79, 79, 79)
+                .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPasswordField1ActionPerformed
+
+    private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
+        // TODO add your handling code here:
+
+      
+        int buttonsChecked = 0;
+        Random random = new Random();
+
+        ListIterator<User> iterator = userList.listIterator();
+        
+
+        /* Check if User Name field is empty, and if so warn the user */
+        if(jTextField6.getText().equals("")){
+
+            /* Warn the user via pop-up */
+            JFrame frame = new JFrame();
+            JOptionPane.showMessageDialog(frame, "Cannot have an empty username.." );
+            return;
+        }
+
+        /* Check if the password is empty and don't let the user proceed otherwise */
+        if(jPasswordField1.getText().equals("")){
+
+            /* Warn the user via pop-up */
+            JFrame frame = new JFrame();
+            JOptionPane.showMessageDialog(frame, "Cannot have an empty password.." );
+            return;
+        }
+
+        /*
+         * Check for duplicate usernames by stepping through the entire list
+         */
+        while(iterator.hasNext()){
+
+            /* Create a new user and set it equal to the next person */
+            User element = iterator.next();
+
+                /* Check if the user in the userlist has a duplicate name to the one we are given */
+               if(element.getUserName().equalsIgnoreCase(jTextField6.getText())){
+
+                   /* If it is, warn the user via pop-up notice */
+                   JFrame frame = new JFrame();
+                   JOptionPane.showMessageDialog(frame, "This username is taken.." );
+                   break;
+               }
+        }
+
+        /*
+         * String yourIDNumber, String firstName, String lastName, String userName, String password, String email, String yourMajor,
+            String yourMinor, int yourApprovedCredits, int yourCreditHoursEnrolled, String yourCurrentSchudule,
+            boolean yourHolds
+         */
+
+        /* Check for which radio buttons are pressed */
+        if(jRadioButton1.isSelected() == true){
+            buttonsChecked++;
+        }
+        if(jRadioButton2.isSelected() == true){
+            buttonsChecked++;
+        }
+        if(jRadioButton3.isSelected() == true){
+            buttonsChecked++;
+        }
+
+        /* Sanity check the selected radio buttons */
+        if (buttonsChecked > 1){
+
+            JFrame frame = new JFrame();
+            JOptionPane.showMessageDialog(frame, "Can't select more than one radio button" );
+            return;
+        }
+        if (buttonsChecked < 1){
+
+            JFrame frame = new JFrame();
+            JOptionPane.showMessageDialog(frame, "Must select at least one radio button" );
+            return;
+        }
+        
+        if(jRadioButton1.isSelected() == true){
+            buttonsChecked++;
+            String ID = showRandomInteger((studentList.size()+ 10), (studentList.size()+ 50), random);
+            Student addThis = new Student(ID, jTextField1.getText(), jTextField2.getText(),jTextField6.getText(), jPasswordField1.getText(), jTextField3.getText(), "Not Declared", "Not Declared", 0, 0, "", false);
+            studentList.add(addThis);
+            backup.backupStudents(studentList);
+            this.setVisible(false);
+
+        }
+        if((jRadioButton2.isSelected() == true) && (mainWindow.getActivePermission() == 2) ){
+            buttonsChecked++;
+            Faculty addThis = new Faculty(jTextField6.getText(), jPasswordField1.getText(), jTextField3.getText(), jTextField1.getText(), jTextField2.getText(), "No Office Specified", "No Phone Number Found" );
+            facultyList.add(addThis);
+            backup.backupFaculty(facultyList);
+            this.setVisible(false);
+        }
+        if((jRadioButton3.isSelected() == true) && (mainWindow.getActivePermission() == 2)){
+            buttonsChecked++;
+            Admin addThis = new Admin(jTextField6.getText(), jPasswordField1.getText(), jTextField3.getText(), jTextField1.getText(), jTextField2.getText(), "No Office Specified", "No Phone Number Found" );
+            adminList.add(addThis);
+            backup.backupAdmin(adminList);
+            this.setVisible(false);
+        }
+
+        return;
+    }//GEN-LAST:event_confirmButtonActionPerformed
+
+    private static String showRandomInteger(int aStart, int aEnd, Random aRandom){
+    if ( aStart > aEnd ) {
+      throw new IllegalArgumentException("Start cannot exceed End.");
+    }
+    //get the range, casting to long to avoid overflow problems
+    long range = (long)aEnd - (long)aStart + 1;
+    // compute a fraction of the range, 0 <= frac < range
+    long fraction = (long)(range * aRandom.nextDouble());
+    int randomNumber =  (int)(fraction + aStart);
+    return "" + randomNumber;
+  }
+    private LinkedList<User> userList;
+    private LinkedList<Student> studentList;
+    private LinkedList<Faculty> facultyList;
+    private LinkedList<Admin> adminList;
+    private Backup backup;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton confirmButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -184,8 +308,6 @@ public class CreateAccount extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     // End of variables declaration//GEN-END:variables
 }
