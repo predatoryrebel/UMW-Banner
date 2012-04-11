@@ -206,8 +206,11 @@ public class MainGUI extends JFrame implements ActionListener
             
             if(action.equals("Create Account"))
             {
-                CreateAccount createAccountWindow = new CreateAccount();
-                createAccountWindow.setVisible(true);
+                if (activeUser.getPermission() == 0)
+                {
+                    CreateAccount createAccountWindow = new CreateAccount(activeUser, studentList);
+                    createAccountWindow.setVisible(true);
+                }
             }
             
             if(action.equals("Search For Classes"))
