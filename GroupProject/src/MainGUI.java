@@ -26,6 +26,7 @@ public class MainGUI extends JFrame implements ActionListener
         public JMenuItem editEmail;
         public JMenuItem editMajor;
         public JMenuItem editMinor;
+        public JMenuItem createCourse;
         public JMenuItem dropACourse;
         public JMenuItem addGrade;
 	public Container contentPane;
@@ -83,6 +84,8 @@ public class MainGUI extends JFrame implements ActionListener
                 editMajor.addActionListener(this);
                 editMinor = new JMenuItem("Edit Minor");
                 editMinor.addActionListener(this);
+                createCourse = new JMenuItem("Create Course");
+                createCourse.addActionListener(this);
 		
 		// Add items to the file menu
 		fileMenu.add(loginItem);
@@ -141,6 +144,7 @@ public class MainGUI extends JFrame implements ActionListener
                 searchMenu.add(dropAStudent);
                 searchMenu.add(dropAStudentFromTheUniversity);
                 searchMenu.add(dropACourse);
+                editMenu.add(createCourse);
             }
             if (activeUser.getPermission() == 0)
             {
@@ -153,6 +157,7 @@ public class MainGUI extends JFrame implements ActionListener
             {
                 searchMenu.add(dropAStudent);
                 searchMenu.add(addGrade);
+                editMenu.add(createCourse);
             }
             
             refreshWindow();
@@ -246,6 +251,15 @@ public class MainGUI extends JFrame implements ActionListener
                 if (activeUser.getPermission() == 2)
                 {
                     DropAStudentFromTheUniversityAdmin d = new DropAStudentFromTheUniversityAdmin(studentList);
+                    d.setVisible(true);
+                }
+            }
+
+            if (action.equals("Create Course"))
+            {
+                if ((activeUser.getPermission() == 2) || (activeUser.getPermission() == 1))
+                {
+                    CreateCourse d = new CreateCourse(courseList);
                     d.setVisible(true);
                 }
             }
