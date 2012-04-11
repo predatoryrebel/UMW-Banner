@@ -140,7 +140,7 @@ public class MainGUI extends JFrame implements ActionListener
             // If the user is an admin
             if(activeUser.getPermission() == 2)
             {
-                fileMenu.add(createAccount, 0);
+                fileMenu.add(createAccount);
                 searchMenu.add(dropAStudent);
                 searchMenu.add(dropAStudentFromTheUniversity);
                 searchMenu.add(dropACourse);
@@ -148,6 +148,7 @@ public class MainGUI extends JFrame implements ActionListener
             }
             if (activeUser.getPermission() == 0)
             {
+                fileMenu.add(createAccount);
                 searchMenu.add(dropItem);
                 editMenu.add(editMajor);
                 editMenu.add(editMinor);
@@ -155,6 +156,7 @@ public class MainGUI extends JFrame implements ActionListener
             
             if (activeUser.getPermission() == 1)
             {
+                fileMenu.add(createAccount);
                 searchMenu.add(dropAStudent);
                 searchMenu.add(addGrade);
                 editMenu.add(createCourse);
@@ -210,6 +212,12 @@ public class MainGUI extends JFrame implements ActionListener
                 {
                     CreateAccount createAccountWindow = new CreateAccount(activeUser, studentList);
                     createAccountWindow.setVisible(true);
+                }
+                
+                if (activeUser.getPermission() == 1 || activeUser.getPermission() == 2)
+                {
+                    CreateAccountAdminAndFaculty createAccount = new CreateAccountAdminAndFaculty(activeUser, facultyList, adminList);
+                    createAccount.setVisible(true);
                 }
             }
             
