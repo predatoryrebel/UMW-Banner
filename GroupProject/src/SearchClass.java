@@ -43,9 +43,9 @@ public class SearchClass extends javax.swing.JFrame {
         timeBox = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        timeText = new javax.swing.JTextField();
         clearButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
+        timeText = new javax.swing.JTextField();
 
         jLabel1.setText("Search");
 
@@ -80,6 +80,7 @@ public class SearchClass extends javax.swing.JFrame {
 
         timeBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "M", "T", "W", "R", "F" }));
         timeBox.setSelectedIndex(-1);
+        timeBox.setSelectedItem(-1);
         timeBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 timeBoxActionPerformed(evt);
@@ -140,7 +141,7 @@ public class SearchClass extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(timeBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(timeText, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(timeText, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(44, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -226,14 +227,14 @@ public class SearchClass extends javax.swing.JFrame {
             search = new SearchCourse(searchList);
         }
         //search by time
-        if (timeText.getText() != "")
+        if (!timeText.getText().isEmpty())
         {
             searchList = search.searchCourseByTime(timeText.getText());
            
         }
         
         
-        if (!searchList.isEmpty()){
+        if (searchList != null){
             ListIterator<CurrentCourse> iterator = searchList.listIterator();
             listModel = new DefaultListModel();
             //adds found items to list
@@ -300,7 +301,11 @@ public class SearchClass extends javax.swing.JFrame {
                     {    
                         CurrentCourse courseElement = courseIterator.next();
                         if (courseElement.getName().equalsIgnoreCase(course.getName()))
+                        {
                             courseAlreadyAdded = true;
+                            JFrame frame = new JFrame();
+                            JOptionPane.showMessageDialog(frame, "You are already enrolled in " + course.getName() );
+                        }
                     }
                     //check to make sure student has not take the course
                     ListIterator<PastCourse> pastIterator = element.getPastCourses().listIterator();
@@ -308,7 +313,11 @@ public class SearchClass extends javax.swing.JFrame {
                     {
                         PastCourse pastElement = pastIterator.next();
                         if (pastElement.getName().equalsIgnoreCase(course.getName())  && !pastElement.getGrade().equalsIgnoreCase("F"))
-                            courseAlreadyTaken = true;
+                        {
+                           courseAlreadyTaken = true;
+                            JFrame frame = new JFrame();
+                            JOptionPane.showMessageDialog(frame, "You are already taken " + course.getName() );
+                        }
                     }    
                    
                     //makes sure class is not full and student will not go over approved credits
@@ -353,16 +362,21 @@ public class SearchClass extends javax.swing.JFrame {
                             else
                             {
                                 JFrame frame = new JFrame();
-                                JOptionPane.showMessageDialog(frame, "You are already on the waitng list.");
+                                JOptionPane.showMessageDialog(frame, "You are already on " + course.getName()+ " waitng list.");
                             }
                         }
                     }
                     //message to tell use course was not added
-                    else
+                    else if (element.getHolds() == true)
                     {
                         JFrame frame = new JFrame();
-                        JOptionPane.showMessageDialog(frame, "Course was not added check credits, holds and make sure you are not "
-                                + "alreay enrolled in the course.");
+                        JOptionPane.showMessageDialog(frame, course.getName() + " was not added check holds.");
+                    }
+                    else if (totalCredits > element.getApprovedCredits())
+                    {
+                        JFrame frame = new JFrame();
+                        JOptionPane.showMessageDialog(frame, course.getName() + " was not added because ir would put you over"
+                                + "the approved credits.");
                     }
                    
                 }
@@ -372,24 +386,35 @@ public class SearchClass extends javax.swing.JFrame {
         //back up student list
         Backup backup = new Backup();
         backup.backupStudents(studentList);
+        backup.backupCourses(courseList);
         
+        clear();
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void timeBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timeBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_timeBoxActionPerformed
-
+    
+    /**
+     * Clears form 
+     */
+    private void clear()
+    {
+        DefaultListModel listModel = new DefaultListModel();
+        
+        timeBox.setSelectedIndex(-1);
+        timeText.setText("");
+        listModel.clear();
+        addCourseList.setModel(listModel);
+        searchCourseList.setModel(listModel);
+    }
+    
     /**
      * Clears list boxes 
      * @param evt 
      */
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
-        DefaultListModel listModel = new DefaultListModel();
-        
-        
-        listModel.clear();
-        addCourseList.setModel(listModel);
-        searchCourseList.setModel(listModel);
+       clear();
     }//GEN-LAST:event_clearButtonActionPerformed
 
     /**

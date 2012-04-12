@@ -1,3 +1,4 @@
+import java.util.LinkedList;
 import java.util.ListIterator;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
@@ -5,7 +6,7 @@ import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 
 /**
- *Allows an Admin to drop a course from the course list
+ *Allows a student to drop course that they are enrolled in
  * @author cjoyner
  */
 public class DropClass extends javax.swing.JFrame {
@@ -13,14 +14,17 @@ public class DropClass extends javax.swing.JFrame {
     /**
      * Creates new form DropClass
      */
-    public DropClass(Student user) {
+    public DropClass(Student user, LinkedList<Student> listStudent, LinkedList<CurrentCourse> course) {
         initComponents();
         student = user;
+        studentList = listStudent;
+        courseList = course;
+        setDefaultCloseOperation(HIDE_ON_CLOSE);
         resetCurrentSchedule();
     }
     
     /**
-     * Adds course from course list to current list 1 box
+     * Adds student's course to list box
      */
     private void resetCurrentSchedule()
     {
@@ -146,7 +150,7 @@ public class DropClass extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * Uses a button to drop a course from the course list
+     * Uses a button to drop a course
      * @param evt 
      */
     private void dropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropActionPerformed
@@ -164,6 +168,8 @@ public class DropClass extends javax.swing.JFrame {
                 //drop student from course
                 course.getEnrolledStudents().remove(student);            
                 course.dropStudent();
+                JFrame frame = new JFrame();
+                JOptionPane.showMessageDialog(frame, "Course " + course.getName() + " has been removed." );
             }
             
             Student waitingStudent = course.getWaitingList().pollFirst();
@@ -187,13 +193,12 @@ public class DropClass extends javax.swing.JFrame {
                             "has been added from the waiting list" );
                 }
             }
-       
-            JFrame frame = new JFrame();
-            JOptionPane.showMessageDialog(frame, "Course " + course.getName() + " has been removed." );
-            
-           
         }
-       
+        
+        Backup backup = new Backup();
+        backup.backupCourses(courseList);
+        backup.backupStudents(studentList);
+        clear();
         resetCurrentSchedule();
        
     }//GEN-LAST:event_dropActionPerformed
@@ -232,14 +237,19 @@ public class DropClass extends javax.swing.JFrame {
      * @param evt 
      */
     private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
+        clear();
+        resetCurrentSchedule();
+    }//GEN-LAST:event_clearActionPerformed
+
+    private void clear()
+    {
         DefaultListModel listModel = new DefaultListModel();
         listModel.clear();
         currentList1.setModel(listModel);
         dropList.setModel(listModel);
-        resetCurrentSchedule();
-    }//GEN-LAST:event_clearActionPerformed
-
-    
+    }
+    private LinkedList<Student> studentList;
+    private LinkedList<CurrentCourse> courseList;
     private Student student;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton clear;

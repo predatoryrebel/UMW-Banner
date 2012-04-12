@@ -236,7 +236,7 @@ public class MainGUI extends JFrame implements ActionListener
                 {    
                     FindUser find = new FindUser(activeUser, adminList, studentList, facultyList);
                     Student user = find.findStudent();
-                    DropClass d = new DropClass(user);
+                    DropClass d = new DropClass(user, studentList, courseList);
                     d.setVisible(true);
                 }
             }

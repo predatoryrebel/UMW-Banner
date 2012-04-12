@@ -59,7 +59,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="timeBox" min="-2" max="-2" attributes="0"/>
-                          <Component id="timeText" min="-2" pref="82" max="-2" attributes="0"/>
+                          <Component id="timeText" min="-2" pref="97" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -199,6 +199,9 @@
         <Property name="selectedIndex" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="-1" type="code"/>
         </Property>
+        <Property name="selectedItem" type="java.lang.Object" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="-1" type="code"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="timeBoxActionPerformed"/>
@@ -213,8 +216,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Time"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="timeText">
     </Component>
     <Component class="javax.swing.JButton" name="clearButton">
       <Properties>
@@ -231,6 +232,8 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exitButtonActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="timeText">
     </Component>
   </SubComponents>
 </Form>

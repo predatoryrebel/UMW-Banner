@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 
 /**
- *Allows a student to drop s course
+ *Allows an Admin to drop a course from the course list
  * @author cjoyner
  */
 public class DropACourse extends javax.swing.JFrame {
@@ -22,13 +22,13 @@ public class DropACourse extends javax.swing.JFrame {
     }
     
     /**
-     * Display student's current schedule 
+     * Display course list
      */
     private void reset()
     {
         DefaultListModel<CurrentCourse> listModel = new DefaultListModel();
         ListIterator<CurrentCourse> iterator = courseList.listIterator();
-        //set student into list model
+        //set course list into list model
         while (iterator.hasNext())
         {
             CurrentCourse course = iterator.next();
