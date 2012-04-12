@@ -16,10 +16,13 @@ public class GradeAStudent extends javax.swing.JFrame {
     /**
      * Creates new form GradeAStudent
      */
-    public GradeAStudent(Faculty professor, LinkedList<PastCourse> past) {
+    public GradeAStudent(Faculty professor, LinkedList<PastCourse> past, LinkedList<CurrentCourse> course, LinkedList<Student> student) {
         initComponents();
         faculty = professor;
         pastList = past;
+        listStudent = student;
+        courseList = course;
+        setDefaultCloseOperation(HIDE_ON_CLOSE);
         reset();
     }
     
@@ -234,47 +237,52 @@ public class GradeAStudent extends javax.swing.JFrame {
         //get student
         int indexStudent = studentList.getSelectedIndex();
         ListModel<Student> listModel = studentList.getModel();
-        Student student = listModel.getElementAt(indexStudent);
-         //get selected course
-        int indexCourse = selectList.getSelectedIndex();
-        ListModel<CurrentCourse> list = selectList.getModel();
-        CurrentCourse course = list.getElementAt(indexCourse);
-        //get grade 
-        int index = gradeBox.getSelectedIndex();
-        ListModel<String> model = gradeBox.getModel();
-        String grade = model.getElementAt(index);
-        
-        ListIterator<CurrentCourse> iterator = student.getCurrentSchudule().listIterator();
-        //delete course from current enrolled list
-        while (iterator.hasNext())
+        if (indexStudent != -1)
         {
-            CurrentCourse studentCourse = iterator.next();
-            if (course == studentCourse)
+            Student student = listModel.getElementAt(indexStudent);
+            //get selected course
+            int indexCourse = selectList.getSelectedIndex();
+            ListModel<CurrentCourse> list = selectList.getModel();
+            CurrentCourse course = list.getElementAt(indexCourse);
+            //get grade 
+            int index = gradeBox.getSelectedIndex();
+            ListModel<String> model = gradeBox.getModel();
+            String grade = model.getElementAt(index);
+
+            ListIterator<CurrentCourse> iterator = student.getCurrentSchudule().listIterator();
+            //delete course from current enrolled list
+            while (iterator.hasNext())
             {
-                //set past grade
-                PastCourse past = new PastCourse(studentCourse.getCRN(), studentCourse.getName(), studentCourse.getSection(),
-                    studentCourse.getTitle(), studentCourse.getCredits(), studentCourse.getProfessor(),grade, student.getUserName());
-                student.getPastCourses().add(past);
-                //calcualte gpa
-                CalculateGPA gpaCal = new CalculateGPA(student.getPastCourses());
-                student.setGPA(gpaCal.calculate());
-                //remove course from current enrolled list
-                student.getCurrentSchudule().remove(course);
-                student.setCreditHoursEnrolled(student.getCreditHoursEnrolled() - course.getCredits());
-                //add past corse to past list
-                pastList.add(past);
-                 //removes student from course
-                course.getEnrolledStudents().remove(student);
-                course.dropStudent();
-                //displays message 
-                JFrame frame = new JFrame();
-                JOptionPane.showMessageDialog(frame, student.getFirstName() + " " + student.getLastName() + " has received a " + 
-                grade);
+                CurrentCourse studentCourse = iterator.next();
+                if (course == studentCourse)
+                {
+                    //set past grade
+                    PastCourse past = new PastCourse(studentCourse.getCRN(), studentCourse.getName(), studentCourse.getSection(),
+                        studentCourse.getTitle(), studentCourse.getCredits(), studentCourse.getProfessor(),grade, student.getUserName());
+                    student.getPastCourses().add(past);
+                    //calcualte gpa
+                    CalculateGPA gpaCal = new CalculateGPA(student.getPastCourses());
+                    student.setGPA(gpaCal.calculate());
+                    //remove course from current enrolled list
+                    student.getCurrentSchudule().remove(course);
+                    student.setCreditHoursEnrolled(student.getCreditHoursEnrolled() - course.getCredits());
+                    //add past corse to past list
+                    pastList.add(past);
+                    //removes student from course
+                    course.getEnrolledStudents().remove(student);
+                    course.dropStudent();
+                    //displays message 
+                    JFrame frame = new JFrame();
+                    JOptionPane.showMessageDialog(frame, student.getFirstName() + " " + student.getLastName() + " has received a " + 
+                    grade);
+                }
             }
+            //backs up pastCourse.csv
+            Backup backup = new Backup();
+            backup.backupPast(pastList);
+            backup.backupCourses(courseList);
+            backup.backupStudents(listStudent);
         }
-        //backs up pastCourse.csv
-        Backup backup = new Backup();
-        backup.backupPast(pastList);
     }//GEN-LAST:event_gradeActionPerformed
 
     /**
@@ -295,6 +303,8 @@ public class GradeAStudent extends javax.swing.JFrame {
 
     private Faculty faculty; 
     private LinkedList<PastCourse> pastList;
+    private LinkedList<CurrentCourse> courseList;
+    private LinkedList<Student> listStudent;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton clear;
     private javax.swing.JButton exit;

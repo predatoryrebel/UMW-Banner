@@ -290,7 +290,7 @@ public class MainGUI extends JFrame implements ActionListener
                 {
                     FindUser find = new FindUser(activeUser, adminList, studentList, facultyList);
                     Faculty professor = find.findFaculty();
-                    GradeAStudent g = new GradeAStudent(professor, pastList);
+                    GradeAStudent g = new GradeAStudent(professor, pastList, courseList, studentList);
                     g.setVisible(true);
                 }
             }
