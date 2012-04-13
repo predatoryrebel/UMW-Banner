@@ -216,6 +216,7 @@ public class DropAStudentAdmin extends javax.swing.JFrame {
                 }
             }
 
+            clear();
             reset();
             Backup backup = new Backup();
             backup.backupCourses(listCourse);
@@ -287,14 +288,18 @@ public class DropAStudentAdmin extends javax.swing.JFrame {
      * @param evt 
      */
     private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
+        clear();
+        reset();
+    }//GEN-LAST:event_clearActionPerformed
+
+    private void clear()
+    {
         DefaultListModel listModel = new DefaultListModel();
         listModel.clear();
         courseList.setModel(listModel);
         dropList.setModel(listModel);
         selectList.setModel(listModel);
-        reset();
-    }//GEN-LAST:event_clearActionPerformed
-
+    }
     private LinkedList<CurrentCourse> listCourse;
     private LinkedList<Student> studentList;
     // Variables declaration - do not modify//GEN-BEGIN:variables
