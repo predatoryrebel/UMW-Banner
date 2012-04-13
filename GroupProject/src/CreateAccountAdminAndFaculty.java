@@ -18,6 +18,7 @@ public class CreateAccountAdminAndFaculty extends javax.swing.JFrame {
         user = person;
         facultyList = faculty;
         adminList = admin;
+        setDefaultCloseOperation(HIDE_ON_CLOSE);
         reset();
     }
     

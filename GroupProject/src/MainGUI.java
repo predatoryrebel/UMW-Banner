@@ -245,14 +245,14 @@ public class MainGUI extends JFrame implements ActionListener
             {
                 if (activeUser.getPermission() == 2)
                 {
-                   DropAStudentAdmin d = new DropAStudentAdmin(studentList);
+                   DropAStudentAdmin d = new DropAStudentAdmin(studentList, courseList);
                    d.setVisible(true);
                 }
                 if (activeUser.getPermission() == 1)
                 {
                     FindUser find = new FindUser(activeUser, adminList, studentList, facultyList);
                     Faculty professor = find.findFaculty();
-                    DropAStudentFaculty d = new DropAStudentFaculty(professor);
+                    DropAStudentFaculty d = new DropAStudentFaculty(professor, studentList, courseList);
                     d.setVisible(true);
                 }
             }

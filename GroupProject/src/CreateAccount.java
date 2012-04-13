@@ -18,6 +18,7 @@ public class CreateAccount extends javax.swing.JFrame {
         initComponents();
         user = person;
         studentList = student;
+        setDefaultCloseOperation(HIDE_ON_CLOSE);
         reset();
     }
 

@@ -15,6 +15,7 @@ public class Register extends javax.swing.JFrame {
         initComponents();
         userList = user;
         person = null;
+        setDefaultCloseOperation(HIDE_ON_CLOSE);
     }
 
    

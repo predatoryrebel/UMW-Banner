@@ -17,6 +17,7 @@ public class DropAStudentFromTheUniversityAdmin extends javax.swing.JFrame {
      */
     public DropAStudentFromTheUniversityAdmin(LinkedList<Student> student) {
         initComponents();
+        setDefaultCloseOperation(HIDE_ON_CLOSE);
         studentList = student;
         reset();
     }
@@ -152,18 +153,22 @@ public class DropAStudentFromTheUniversityAdmin extends javax.swing.JFrame {
     private void selectListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_selectListMouseReleased
         //get index of click object
         int index = selectList.getSelectedIndex();
-        ListModel<Student> listModel = selectList.getModel();
-        //get student
-        Student student = listModel.getElementAt(index);
-        DefaultListModel<Student> dropListModel = new DefaultListModel();
-        listModel = dropList.getModel();
-        //adds items already in dropList to dropListModel
-        for (int a = 0; a < listModel.getSize(); a++){
-            dropListModel.addElement(listModel.getElementAt(a));
+         //check index
+        if (index != -1)
+        {
+            ListModel<Student> listModel = selectList.getModel();
+            //get student
+            Student student = listModel.getElementAt(index);
+            DefaultListModel<Student> dropListModel = new DefaultListModel();
+            listModel = dropList.getModel();
+            //adds items already in dropList to dropListModel
+            for (int a = 0; a < listModel.getSize(); a++){
+                dropListModel.addElement(listModel.getElementAt(a));
+            }
+            //add student to dropList
+            dropListModel.addElement(student);
+            dropList.setModel(dropListModel);
         }
-        //add student to dropList
-        dropListModel.addElement(student);
-        dropList.setModel(dropListModel);
     }//GEN-LAST:event_selectListMouseReleased
 
     /**
