@@ -12,12 +12,14 @@ import javax.swing.ListModel;
  */
 public class DropACourse extends javax.swing.JFrame {
 
-    /**
+     /**
      * Creates new form DropACourse
      */
-    public DropACourse(LinkedList<CurrentCourse> course) {
+    public DropACourse(LinkedList<CurrentCourse> course, LinkedList<Student> student) {
         initComponents();
         courseList = course;
+        listStudent = student;
+        setDefaultCloseOperation(HIDE_ON_CLOSE);
         reset();
     }
     
@@ -146,18 +148,22 @@ public class DropACourse extends javax.swing.JFrame {
     private void selectListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_selectListMouseReleased
          //get index of click object
         int index = selectList.getSelectedIndex();
-        ListModel<CurrentCourse> listModel = selectList.getModel();
-        //get course
-        CurrentCourse course = listModel.getElementAt(index);
-        DefaultListModel<CurrentCourse> dropListModel = new DefaultListModel();
-        listModel = dropList.getModel();
-        //adds items already in dropList to dropListModel
-        for (int a = 0; a < listModel.getSize(); a++){
-            dropListModel.addElement(listModel.getElementAt(a));
+        //check index
+        if (index != -1)
+        {
+            ListModel<CurrentCourse> listModel = selectList.getModel();
+            //get course
+            CurrentCourse course = listModel.getElementAt(index);
+            DefaultListModel<CurrentCourse> dropListModel = new DefaultListModel();
+            listModel = dropList.getModel();
+            //adds items already in dropList to dropListModel
+            for (int a = 0; a < listModel.getSize(); a++){
+                dropListModel.addElement(listModel.getElementAt(a));
+            }
+            //add course to dropList
+            dropListModel.addElement(course);
+            dropList.setModel(dropListModel);
         }
-        //add course to dropList
-        dropListModel.addElement(course);
-        dropList.setModel(dropListModel);
     }//GEN-LAST:event_selectListMouseReleased
     
     /**
@@ -184,19 +190,33 @@ public class DropACourse extends javax.swing.JFrame {
             //display a successful drop
             JFrame frame = new JFrame();
             JOptionPane.showMessageDialog(frame, course.getName() +  " has been removed." );
+            Backup backup = new Backup();
+            backup.backupCourses(courseList);
+            backup.backupStudents(listStudent);
         }
+        clear();
+        reset();
     }//GEN-LAST:event_dropActionPerformed
     /**
      * Clears select list and drop list.  calls reset
      * @param evt 
      */
     private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
+        clear();
+        reset();
+    }//GEN-LAST:event_clearActionPerformed
+    
+    /**
+     * Clear list boxes
+     */
+    private void clear()
+    {
         DefaultListModel listModel = new DefaultListModel();
         listModel.clear();
         dropList.setModel(listModel);
         selectList.setModel(listModel);
-        reset();
-    }//GEN-LAST:event_clearActionPerformed
+    }
+    
     /**
      * Exits drop a course
      * @param evt 
@@ -205,6 +225,7 @@ public class DropACourse extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_exitActionPerformed
 
+   private LinkedList<Student> listStudent;
    private LinkedList<CurrentCourse> courseList;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton clear;

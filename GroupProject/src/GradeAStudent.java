@@ -200,19 +200,23 @@ public class GradeAStudent extends javax.swing.JFrame {
     private void selectListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_selectListMouseReleased
         //get selected course
         int index = selectList.getSelectedIndex();
-        ListModel<CurrentCourse> list = selectList.getModel();
-        CurrentCourse course = list.getElementAt(index);
-        
-        //add students from selected course
-        ListIterator<Student> iterator = course.getEnrolledStudents().listIterator();
-        DefaultListModel listModel = new DefaultListModel();
-        while (iterator.hasNext())
+         //check index
+        if (index != -1)
         {
-            Student student = iterator.next();
-            listModel.addElement(student);
+            ListModel<CurrentCourse> list = selectList.getModel();
+            CurrentCourse course = list.getElementAt(index);
+
+            //add students from selected course
+            ListIterator<Student> iterator = course.getEnrolledStudents().listIterator();
+            DefaultListModel listModel = new DefaultListModel();
+            while (iterator.hasNext())
+            {
+                Student student = iterator.next();
+                listModel.addElement(student);
+            }
+            //set student list box
+            studentList.setModel(listModel);
         }
-        //set student list box
-        studentList.setModel(listModel);
     }//GEN-LAST:event_selectListMouseReleased
 
     /**
@@ -222,11 +226,15 @@ public class GradeAStudent extends javax.swing.JFrame {
     private void studentListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_studentListMouseReleased
         //get student
         int index = studentList.getSelectedIndex();
-        ListModel<Student> listModel = studentList.getModel();
-        Student student = listModel.getElementAt(index);
-        
-        String studentName = student.getFirstName() + " " + student.getLastName();
-        nameField.setText(studentName);
+         //check index
+        if (index != -1)
+        {
+            ListModel<Student> listModel = studentList.getModel();
+            Student student = listModel.getElementAt(index);
+
+            String studentName = student.getFirstName() + " " + student.getLastName();
+            nameField.setText(studentName);
+        }
     }//GEN-LAST:event_studentListMouseReleased
 
     /**

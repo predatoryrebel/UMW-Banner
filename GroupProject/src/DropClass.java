@@ -210,18 +210,22 @@ public class DropClass extends javax.swing.JFrame {
     private void currentList1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_currentList1MouseReleased
         //get index of click object
         int index = currentList1.getSelectedIndex();
-        ListModel<CurrentCourse> listModel = currentList1.getModel();
-        //get course
-        CurrentCourse course = listModel.getElementAt(index);
-        DefaultListModel dropListModel = new DefaultListModel();
-        listModel = dropList.getModel();
-        //adds items already in addCourseList to addListModel
-        for (int a = 0; a < listModel.getSize(); a++){
-            dropListModel.addElement(listModel.getElementAt(a));
+         //check index
+        if (index != -1)
+        {
+            ListModel<CurrentCourse> listModel = currentList1.getModel();
+            //get course
+            CurrentCourse course = listModel.getElementAt(index);
+            DefaultListModel dropListModel = new DefaultListModel();
+            listModel = dropList.getModel();
+            //adds items already in addCourseList to addListModel
+            for (int a = 0; a < listModel.getSize(); a++){
+                dropListModel.addElement(listModel.getElementAt(a));
+            }
+            //add course to addCourseList
+            dropListModel.addElement(course);
+            dropList.setModel(dropListModel);
         }
-        //add course to addCourseList
-        dropListModel.addElement(course);
-        dropList.setModel(dropListModel);
     }//GEN-LAST:event_currentList1MouseReleased
 
     /**
@@ -248,6 +252,7 @@ public class DropClass extends javax.swing.JFrame {
         currentList1.setModel(listModel);
         dropList.setModel(listModel);
     }
+    
     private LinkedList<Student> studentList;
     private LinkedList<CurrentCourse> courseList;
     private Student student;

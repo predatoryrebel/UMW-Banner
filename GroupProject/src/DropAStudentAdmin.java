@@ -16,9 +16,11 @@ public class DropAStudentAdmin extends javax.swing.JFrame {
     /**
      * Creates new form DropAStudentAdmin
      */
-    public DropAStudentAdmin(LinkedList<Student> student) {
+    public DropAStudentAdmin(LinkedList<Student> student, LinkedList<CurrentCourse> course) {
         initComponents();
         studentList = student;
+        listCourse = course;
+        setDefaultCloseOperation(HIDE_ON_CLOSE);
         reset();
     }
     
@@ -169,50 +171,56 @@ public class DropAStudentAdmin extends javax.swing.JFrame {
          ListModel<Student> listModel2 = selectList.getModel();
          //get student
          int index = selectList.getSelectedIndex();
-         Student student = listModel2.getElementAt(index);
-        //remove select course in dropList
-        for (int a = 0; a < listModel.getSize(); a++)
-        {
-            CurrentCourse course = listModel.getElementAt(a);
-            boolean remove = student.getCurrentSchudule().remove(course);
-            //removes course credits from approved credits
-            if (remove)
+         //check index number
+         if (index != -1)
+         {
+            Student student = listModel2.getElementAt(index);
+            //remove select course in dropList
+            for (int a = 0; a < listModel.getSize(); a++)
             {
-                student.setCreditHoursEnrolled(student.getCreditHoursEnrolled() - course.getCredits());
-                //drop student from course
-                course.getEnrolledStudents().remove(student);            
-                course.dropStudent();
-            }
-            
-            //display remove course
-            JFrame frame = new JFrame();
-            JOptionPane.showMessageDialog(frame, "Course " + course.getName() + " has been removed." );
-            
-            Student waitingStudent = course.getWaitingList().pollFirst();
-            if (waitingStudent != null)
-            {
-                //adds student from waiting list
-                course.getEnrolledStudents().add(waitingStudent);
-                course.addStudent();
-                
-                //makes sure class is not full and student will not go over approved credits
-                int totalCredits = waitingStudent.getCreditHoursEnrolled();
-                totalCredits = totalCredits + course.getCredits();
-                
-                if (totalCredits <= waitingStudent.getApprovedCredits()  && waitingStudent.getHolds() == false)
+                CurrentCourse course = listModel.getElementAt(a);
+                boolean remove = student.getCurrentSchudule().remove(course);
+                //removes course credits from approved credits
+                if (remove)
                 {
-                    //adds course to current enrolled list
-                    waitingStudent.setCreditHoursEnrolled(totalCredits);
-                    waitingStudent.getCurrentSchudule().add(course);
-                    frame = new JFrame();
-                    JOptionPane.showMessageDialog(frame, waitingStudent.getFirstName() + " " + waitingStudent.getLastName() +
-                            "has been added from the waiting list" );
+                    student.setCreditHoursEnrolled(student.getCreditHoursEnrolled() - course.getCredits());
+                    //drop student from course
+                    course.getEnrolledStudents().remove(student);            
+                    course.dropStudent();
+                }
+
+                //display remove course
+                JFrame frame = new JFrame();
+                JOptionPane.showMessageDialog(frame, "Course " + course.getName() + " has been removed." );
+
+                Student waitingStudent = course.getWaitingList().pollFirst();
+                if (waitingStudent != null)
+                {
+                    //adds student from waiting list
+                    course.getEnrolledStudents().add(waitingStudent);
+                    course.addStudent();
+
+                    //makes sure class is not full and student will not go over approved credits
+                    int totalCredits = waitingStudent.getCreditHoursEnrolled();
+                    totalCredits = totalCredits + course.getCredits();
+
+                    if (totalCredits <= waitingStudent.getApprovedCredits()  && waitingStudent.getHolds() == false)
+                    {
+                        //adds course to current enrolled list
+                        waitingStudent.setCreditHoursEnrolled(totalCredits);
+                        waitingStudent.getCurrentSchudule().add(course);
+                        frame = new JFrame();
+                        JOptionPane.showMessageDialog(frame, waitingStudent.getFirstName() + " " + waitingStudent.getLastName() +
+                                "has been added from the waiting list" );
+                    }
                 }
             }
+
+            reset();
+            Backup backup = new Backup();
+            backup.backupCourses(listCourse);
+            backup.backupStudents(studentList);
         }
-        
-        reset();
-        
     }//GEN-LAST:event_dropActionPerformed
 
     /**
@@ -222,21 +230,25 @@ public class DropAStudentAdmin extends javax.swing.JFrame {
     private void selectListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_selectListMouseReleased
         //get index of click object
         int index = selectList.getSelectedIndex();
-        ListModel<Student> list = selectList.getModel();
-        //get student
-        Student student = list.getElementAt(index);
-        DefaultListModel listModel = new DefaultListModel();
-        //get course list for student
-        ListIterator<CurrentCourse> iterator = student.getCurrentSchudule().listIterator();
-        
-        //adds student's course to list model
-        while (iterator.hasNext())
+        //check index number
+        if (index != -1)
         {
-            CurrentCourse element = iterator.next();
-            listModel.addElement(element);
+            ListModel<Student> list = selectList.getModel();
+            //get student
+            Student student = list.getElementAt(index);
+            DefaultListModel listModel = new DefaultListModel();
+            //get course list for student
+            ListIterator<CurrentCourse> iterator = student.getCurrentSchudule().listIterator();
+
+            //adds student's course to list model
+            while (iterator.hasNext())
+            {
+                CurrentCourse element = iterator.next();
+                listModel.addElement(element);
+            }
+            //set the list
+            courseList.setModel(listModel);
         }
-        //set the list
-        courseList.setModel(listModel);
     }//GEN-LAST:event_selectListMouseReleased
     /**
      * Mouse is released adds a course to drop list
@@ -245,18 +257,22 @@ public class DropAStudentAdmin extends javax.swing.JFrame {
     private void courseListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_courseListMouseReleased
         //get index of click object
         int index = courseList.getSelectedIndex();
-        ListModel<CurrentCourse> listModel = courseList.getModel();
-        //get course
-        CurrentCourse course = listModel.getElementAt(index);
-        DefaultListModel dropListModel = new DefaultListModel();
-        listModel = dropList.getModel();
-        //adds items already in addCourseList to addListModel
-        for (int a = 0; a < listModel.getSize(); a++){
-            dropListModel.addElement(listModel.getElementAt(a));
-        }
-        //add course to addCourseList
-        dropListModel.addElement(course);
-        dropList.setModel(dropListModel);
+        //check index number
+         if (index != -1)
+         {
+            ListModel<CurrentCourse> listModel = courseList.getModel();
+            //get course
+            CurrentCourse course = listModel.getElementAt(index);
+            DefaultListModel dropListModel = new DefaultListModel();
+            listModel = dropList.getModel();
+            //adds items already in addCourseList to addListModel
+            for (int a = 0; a < listModel.getSize(); a++){
+                dropListModel.addElement(listModel.getElementAt(a));
+            }
+            //add course to addCourseList
+            dropListModel.addElement(course);
+            dropList.setModel(dropListModel);
+         }
     }//GEN-LAST:event_courseListMouseReleased
     /**
      * Exits drop a Student Admin
@@ -279,6 +295,7 @@ public class DropAStudentAdmin extends javax.swing.JFrame {
         reset();
     }//GEN-LAST:event_clearActionPerformed
 
+    private LinkedList<CurrentCourse> listCourse;
     private LinkedList<Student> studentList;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton clear;

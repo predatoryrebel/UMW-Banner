@@ -24,6 +24,7 @@ public class CreateCourse extends javax.swing.JFrame {
     public CreateCourse(LinkedList<CurrentCourse> courses) {
         courselist = courses;
         initComponents();
+        setDefaultCloseOperation(HIDE_ON_CLOSE);
         resetCurrentSchedule();
 
     }

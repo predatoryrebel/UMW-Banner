@@ -262,18 +262,22 @@ public class SearchClass extends javax.swing.JFrame {
     private void searchCourseListMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchCourseListMouseReleased
         //get index of click object
         int index = searchCourseList.getSelectedIndex();
-        ListModel<CurrentCourse> listModel = searchCourseList.getModel();
-        //get course
-        CurrentCourse course = listModel.getElementAt(index);
-        DefaultListModel addListModel = new DefaultListModel();
-        listModel = addCourseList.getModel();
-        //adds items already in addCourseList to addListModel
-        for (int a = 0; a < listModel.getSize(); a++){
-            addListModel.addElement(listModel.getElementAt(a));
+         //check index
+        if (index != -1)
+        {
+            ListModel<CurrentCourse> listModel = searchCourseList.getModel();
+            //get course
+            CurrentCourse course = listModel.getElementAt(index);
+            DefaultListModel addListModel = new DefaultListModel();
+            listModel = addCourseList.getModel();
+            //adds items already in addCourseList to addListModel
+            for (int a = 0; a < listModel.getSize(); a++){
+                addListModel.addElement(listModel.getElementAt(a));
+            }
+            //add course to addCourseList
+            addListModel.addElement(course);
+            addCourseList.setModel(addListModel);
         }
-        //add course to addCourseList
-        addListModel.addElement(course);
-        addCourseList.setModel(addListModel);
     }//GEN-LAST:event_searchCourseListMouseReleased
 
     /**

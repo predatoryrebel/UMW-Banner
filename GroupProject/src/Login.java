@@ -16,6 +16,7 @@ public class Login extends javax.swing.JFrame {
      * Creates new form Login
      */
     
+   
     public Login(LinkedList<User> user, MainGUI mw) {
         initComponents();
         userList = user;
@@ -23,6 +24,13 @@ public class Login extends javax.swing.JFrame {
         setDefaultCloseOperation(HIDE_ON_CLOSE);
     }
    
+    // Clear the text boxes
+    public void clearText()
+    {
+        passwordTextBox.setText("");
+        userNameTextBox.setText("");
+    }
+    
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 

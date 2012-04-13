@@ -53,7 +53,7 @@ public class CalculateGPA {
      * @param grade letter grade
      * @return double number grade
      */
-    private double getNumberValue(String grade)
+    public static double getNumberValue(String grade)
     {
         //returns number grade that matches a letter grade
         if (grade.equalsIgnoreCase("A"))
