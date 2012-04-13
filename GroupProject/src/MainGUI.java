@@ -388,7 +388,7 @@ public class MainGUI extends JFrame implements ActionListener
                 if(newFirstName != null)
                 {
                     activeUser.setFirstName(newFirstName);
-                    nameLabel.setText("<html><b>Name:</b></html>" + activeUser.getFirstName() + " " + activeUser.getLastName());
+                    nameLabel.setText("<html><b>Name:</b>  " + activeUser.getFirstName() + " " + activeUser.getLastName() + "</html>");
                     refreshWindow();
                 }
             }
@@ -403,7 +403,7 @@ public class MainGUI extends JFrame implements ActionListener
                 if(newLastName != null)
                 {
                     activeUser.setLastName(newLastName);
-                    nameLabel.setText("<html><b>Name</html></b>:" + activeUser.getFirstName() + " " + activeUser.getLastName());
+                    nameLabel.setText("<html><b>Name</b>:  " + activeUser.getFirstName() + " " + activeUser.getLastName() + "</html>");
                     refreshWindow();
                 }
             }
@@ -418,7 +418,7 @@ public class MainGUI extends JFrame implements ActionListener
                 if(newEmail != null)
                 {
                     activeUser.setEmail(newEmail);
-                    emailLabel.setText("<html><b>Email:</html></b> " + activeUser.getEmail());    
+                    emailLabel.setText("<html><b>Email:</b>  " + activeUser.getEmail() + "</html>");    
                     refreshWindow();
                 }
             }
@@ -432,7 +432,7 @@ public class MainGUI extends JFrame implements ActionListener
                 if(major != null)
                 {
                     student.setMajor(major);
-                    majorLabel.setText("<html><b>Major: </html></b>" + student.getMajor());
+                    majorLabel.setText("<html><b>Major:</b>  " + student.getMajor() + "</html>");
                     refreshWindow();
                 }
             }
@@ -446,7 +446,6 @@ public class MainGUI extends JFrame implements ActionListener
                 if(minor != null)
                 {
                     student.setMinor(minor);
-                    refreshWindow();
                 }
             }
             
