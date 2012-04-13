@@ -82,7 +82,7 @@ public class MainGUI extends JFrame implements ActionListener
                 dropAStudentFromTheUniversity.addActionListener(this);
                 dropAStudent = new JMenuItem("Drop a Student from a Course");
                 dropAStudent.addActionListener(this);
-                dropItem = new JMenuItem("Drop");
+                dropItem = new JMenuItem("Drop a Course");
                 dropItem.addActionListener(this);
 		loginItem = new JMenuItem("Login");
 		loginItem.addActionListener(this);
@@ -111,7 +111,7 @@ public class MainGUI extends JFrame implements ActionListener
 		
 		// Add items to the file menu
 		fileMenu.add(loginItem);
-                fileMenu.add(createAccount);
+                //fileMenu.add(createAccount);
 		fileMenu.add(exitItem);
                 
                 // Add Items to the search menu
@@ -210,21 +210,33 @@ public class MainGUI extends JFrame implements ActionListener
             // If the user is an admin
             if(activeUser.getPermission() == 2)
             {
-                fileMenu.add(createAccount);
+                //fileMenu.add(createAccount);
                 searchMenu.add(dropAStudent);
                 searchMenu.add(dropAStudentFromTheUniversity);
                 searchMenu.add(dropACourse);
-                editMenu.add(createCourse);
+                searchMenu.remove(addGrade);
+                searchMenu.remove(dropItem);
+                searchMenu.remove(searchForClassesItem);
+                editMenu.add(createCourse, 0);
+                editMenu.remove(editMajor);
+                editMenu.remove(editMinor);
                 academicPanel.setVisible(false);
                 majorLabel.setVisible(false);
             }
             if (activeUser.getPermission() == 0)
             {
-                fileMenu.add(createAccount);
+                //fileMenu.add(createAccount);
                 searchMenu.add(dropItem);
+                searchMenu.add(searchForClassesItem, 0);
+                searchMenu.remove(dropAStudentFromTheUniversity);
+                searchMenu.remove(dropAStudent);
+                searchMenu.remove(dropACourse);
+                searchMenu.remove(addGrade);
+                editMenu.remove(createCourse);
                 editMenu.add(editMajor);
                 editMenu.add(editMinor);
-                academicPanel.setVisible(true);
+                
+                // Set up Profile Display                
                 Student s = (Student)activeUser;
                 majorLabel.setText("<html><b>Major:</b>  " + s.getMajor() + "</html>");
                 majorLabel.setVisible(true);
@@ -233,14 +245,21 @@ public class MainGUI extends JFrame implements ActionListener
                 totalCreditsLabel.setText("<html><b>Earned Credits:</b>  " + s.getEarnedCredits() + "</html>");
                 gpaLabel.setText("<html><b>GPA:</b>  " + s.getGPA() + "</html>");
                 gpaLabel.setVisible(true);
+                academicPanel.setVisible(true);
             }
             
             if (activeUser.getPermission() == 1)
             {
-                fileMenu.add(createAccount);
+                //fileMenu.add(createAccount);
                 searchMenu.add(dropAStudent);
                 searchMenu.add(addGrade);
-                editMenu.add(createCourse);
+                searchMenu.remove(dropItem);
+                searchMenu.remove(dropACourse);
+                searchMenu.remove(dropAStudentFromTheUniversity);
+                searchMenu.remove(searchForClassesItem);
+                editMenu.add(createCourse, 0);
+                editMenu.remove(editMajor);
+                editMenu.remove(editMinor);
                 academicPanel.setVisible(false);
                 majorLabel.setVisible(false);
             }
@@ -313,7 +332,7 @@ public class MainGUI extends JFrame implements ActionListener
                 }
             }
             
-            if(action.equals("Drop"))
+            if(action.equals("Drop a Course"))
             {
                 if (activeUser.getPermission() == 0)
                 {    
