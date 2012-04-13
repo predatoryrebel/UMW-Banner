@@ -12,12 +12,13 @@ import javax.swing.ListModel;
  */
 public class DropACourse extends javax.swing.JFrame {
 
-    /**
+     /**
      * Creates new form DropACourse
      */
-    public DropACourse(LinkedList<CurrentCourse> course) {
+    public DropACourse(LinkedList<CurrentCourse> course, LinkedList<Student> student) {
         initComponents();
         courseList = course;
+        listStudent = student;
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         reset();
     }
@@ -189,19 +190,33 @@ public class DropACourse extends javax.swing.JFrame {
             //display a successful drop
             JFrame frame = new JFrame();
             JOptionPane.showMessageDialog(frame, course.getName() +  " has been removed." );
+            Backup backup = new Backup();
+            backup.backupCourses(courseList);
+            backup.backupStudents(listStudent);
         }
+        clear();
+        reset();
     }//GEN-LAST:event_dropActionPerformed
     /**
      * Clears select list and drop list.  calls reset
      * @param evt 
      */
     private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
+        clear();
+        reset();
+    }//GEN-LAST:event_clearActionPerformed
+    
+    /**
+     * Clear list boxes
+     */
+    private void clear()
+    {
         DefaultListModel listModel = new DefaultListModel();
         listModel.clear();
         dropList.setModel(listModel);
         selectList.setModel(listModel);
-        reset();
-    }//GEN-LAST:event_clearActionPerformed
+    }
+    
     /**
      * Exits drop a course
      * @param evt 
@@ -210,6 +225,7 @@ public class DropACourse extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_exitActionPerformed
 
+   private LinkedList<Student> listStudent;
    private LinkedList<CurrentCourse> courseList;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton clear;
