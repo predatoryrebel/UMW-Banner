@@ -237,9 +237,7 @@ public class MainGUI extends JFrame implements ActionListener
         private void refreshWindow()
         {
             this.setVisible(false);
-            
-            // Add the current profile's text to the text box
-           
+    
             // Set the title bar
             this.setTitle(activeUser.getFirstName() + " " + activeUser.getLastName() + " - " + activeUser.getEmail());
             
@@ -256,6 +254,7 @@ public class MainGUI extends JFrame implements ActionListener
             if(action.equals("Login"))
             {
                 // Create Login window
+                login.clearText();
                 login.setVisible(true);
             }
             
@@ -268,6 +267,7 @@ public class MainGUI extends JFrame implements ActionListener
                 mainMenu.remove(searchMenu);
                 mainMenu.remove(editMenu);
                 this.setTitle("");
+                contentPane.setVisible(false);
                 
                 Backup backup = new Backup();
                 backup.backupAll(courseList, studentList, facultyList, adminList, pastList);
@@ -373,6 +373,7 @@ public class MainGUI extends JFrame implements ActionListener
                 if(newFirstName != null)
                 {
                     activeUser.setFirstName(newFirstName);
+                    nameLabel.setText("Name:" + activeUser.getFirstName() + " " + activeUser.getLastName());
                     refreshWindow();
                 }
             }
@@ -387,6 +388,7 @@ public class MainGUI extends JFrame implements ActionListener
                 if(newLastName != null)
                 {
                     activeUser.setLastName(newLastName);
+                    nameLabel.setText("Name:" + activeUser.getFirstName() + " " + activeUser.getLastName());
                     refreshWindow();
                 }
             }
@@ -401,6 +403,7 @@ public class MainGUI extends JFrame implements ActionListener
                 if(newEmail != null)
                 {
                     activeUser.setEmail(newEmail);
+                    emailLabel.setText("Email: " + activeUser.getEmail());    
                     refreshWindow();
                 }
             }
@@ -414,6 +417,7 @@ public class MainGUI extends JFrame implements ActionListener
                 if(major != null)
                 {
                     student.setMajor(major);
+                    majorLabel.setText("Major: " + student.getMajor());
                     refreshWindow();
                 }
             }
