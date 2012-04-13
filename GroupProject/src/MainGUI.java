@@ -51,6 +51,7 @@ public class MainGUI extends JFrame implements ActionListener
         
         // Schedule
         public JPanel schedulePanel;
+        public JLabel placeholder;
         // Organize scheduling info here
         
         public Login login;
@@ -170,7 +171,16 @@ public class MainGUI extends JFrame implements ActionListener
                 profile.add(personalPanel);
                 profile.add(academicPanel);
                 
+                // Configure the schedule panel
+                schedulePanel = new JPanel();
+                schedulePanel.setLayout(new FlowLayout());
+                schedulePanel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
+                placeholder = new JLabel("schedule");
+                schedulePanel.add(placeholder);
+                
+                // Add everything to the content pane
                 contentPane.add(profile,BorderLayout.WEST);
+                contentPane.add(schedulePanel, BorderLayout.CENTER);
                 contentPane.setVisible(false);
                 
                 
