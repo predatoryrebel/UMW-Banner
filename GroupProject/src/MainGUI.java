@@ -159,7 +159,7 @@ public class MainGUI extends JFrame implements ActionListener
                 academicPanel.setLayout(new GridLayout(3,1,0,0));
                 currentCreditsLabel = new JLabel("Current Credits:");
                 currentCreditsLabel.setFont(null);
-                totalCreditsLabel = new JLabel("Total Credits:");
+                totalCreditsLabel = new JLabel("Earned Credits:");
                 totalCreditsLabel.setFont(null);
                 gpaLabel = new JLabel("GPA:");
                 gpaLabel.setFont(null);
@@ -194,8 +194,8 @@ public class MainGUI extends JFrame implements ActionListener
             mainMenu.add(searchMenu);
             
             // Set basic information
-            nameLabel.setText("Name:" + activeUser.getFirstName() + " " + activeUser.getLastName());
-            emailLabel.setText("Email: " + activeUser.getEmail());    
+            nameLabel.setText("<html><b>Name:</b>  " + activeUser.getFirstName() + " " + activeUser.getLastName() + "</html>");
+            emailLabel.setText("<html><b>Email:  </b>" + activeUser.getEmail() + "</html>");    
             
             // If the user is an admin
             if(activeUser.getPermission() == 2)
@@ -216,8 +216,13 @@ public class MainGUI extends JFrame implements ActionListener
                 editMenu.add(editMinor);
                 academicPanel.setVisible(true);
                 Student s = (Student)activeUser;
-                majorLabel.setText("Major: " + s.getMajor());
+                majorLabel.setText("<html><b>Major:</b>  " + s.getMajor() + "</html>");
                 majorLabel.setVisible(true);
+                currentCreditsLabel.setText("<html><b>Current Credits:</b>  " + s.getCreditHoursEnrolled() + "</html>");
+                currentCreditsLabel.setVisible(true);
+                totalCreditsLabel.setText("<html><b>Earned Credits:</b>  " + s.getEarnedCredits() + "</html>");
+                gpaLabel.setText("<html><b>GPA:</b>  " + s.getGPA() + "</html>");
+                gpaLabel.setVisible(true);
             }
             
             if (activeUser.getPermission() == 1)
@@ -373,7 +378,7 @@ public class MainGUI extends JFrame implements ActionListener
                 if(newFirstName != null)
                 {
                     activeUser.setFirstName(newFirstName);
-                    nameLabel.setText("Name:" + activeUser.getFirstName() + " " + activeUser.getLastName());
+                    nameLabel.setText("<html><b>Name:</b></html>" + activeUser.getFirstName() + " " + activeUser.getLastName());
                     refreshWindow();
                 }
             }
@@ -388,7 +393,7 @@ public class MainGUI extends JFrame implements ActionListener
                 if(newLastName != null)
                 {
                     activeUser.setLastName(newLastName);
-                    nameLabel.setText("Name:" + activeUser.getFirstName() + " " + activeUser.getLastName());
+                    nameLabel.setText("<html><b>Name</html></b>:" + activeUser.getFirstName() + " " + activeUser.getLastName());
                     refreshWindow();
                 }
             }
@@ -403,7 +408,7 @@ public class MainGUI extends JFrame implements ActionListener
                 if(newEmail != null)
                 {
                     activeUser.setEmail(newEmail);
-                    emailLabel.setText("Email: " + activeUser.getEmail());    
+                    emailLabel.setText("<html><b>Email:</html></b> " + activeUser.getEmail());    
                     refreshWindow();
                 }
             }
@@ -417,7 +422,7 @@ public class MainGUI extends JFrame implements ActionListener
                 if(major != null)
                 {
                     student.setMajor(major);
-                    majorLabel.setText("Major: " + student.getMajor());
+                    majorLabel.setText("<html><b>Major: </html></b>" + student.getMajor());
                     refreshWindow();
                 }
             }

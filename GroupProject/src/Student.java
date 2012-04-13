@@ -182,6 +182,21 @@ public class Student extends User {
     {
         return gpa;
     }
+    
+    // Return total credits
+    public int getEarnedCredits()
+    {
+        int totalCredits = 0;
+        ListIterator<PastCourse> it = pastCourses.listIterator();
+        
+        while(it.hasNext())
+        {
+            PastCourse course = it.next();
+            totalCredits += CalculateGPA.getNumberValue(course.getGrade());
+        }
+        
+        return totalCredits;
+    }
             
     private String idNumber;
     private String major;
