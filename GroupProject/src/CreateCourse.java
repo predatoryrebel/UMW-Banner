@@ -1,5 +1,5 @@
 
-import java.util.LinkedList;
+import java.util.*;
 import java.util.ListIterator;
 import javax.swing.DefaultListModel;
 
@@ -104,6 +104,11 @@ public class CreateCourse extends javax.swing.JFrame {
         jScrollPane1.setViewportView(courseList);
 
         addButton.setText("Add This Course!");
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
 
         listlabel.setText("Current Course List");
 
@@ -192,6 +197,27 @@ public class CreateCourse extends javax.swing.JFrame {
     private void creditsFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creditsFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_creditsFieldActionPerformed
+
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        // TODO add your handling code here:
+
+        Course addCourse ;
+        Random CRN_Generator = new Random();
+
+        int randomCRN = CRN_Generator.nextInt(courselist.size() + 50);
+
+        Iterator<CurrentCourse> it = courselist.iterator();
+
+            while(it.hasNext()){
+                if (it.next().getCRN().equals(""+ randomCRN)){
+
+                }
+            }
+
+        addCourse = new Course(randomCRN);
+
+
+    }//GEN-LAST:event_addButtonActionPerformed
 
     
 
