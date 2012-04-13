@@ -36,7 +36,7 @@ public class CreateCourse extends javax.swing.JFrame {
         ///adds courses
         while (iterator.hasNext())
         {
-            CurrentCourse course =  iterator.next();
+            Course course =  iterator.next();
             listModel.addElement(course);
         }
 
@@ -69,6 +69,18 @@ public class CreateCourse extends javax.swing.JFrame {
         courseList = new javax.swing.JList();
         addButton = new javax.swing.JButton();
         listlabel = new javax.swing.JLabel();
+        requs = new javax.swing.JTextField();
+        days = new javax.swing.JTextField();
+        time = new javax.swing.JTextField();
+        building = new javax.swing.JTextField();
+        room = new javax.swing.JTextField();
+        Requirements = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        seats = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -113,39 +125,60 @@ public class CreateCourse extends javax.swing.JFrame {
 
         listlabel.setText("Current Course List");
 
+        Requirements.setText("Requirements");
+        Requirements.setFocusCycleRoot(true);
+
+        jLabel8.setText("Days");
+
+        jLabel9.setText("Time");
+
+        jLabel10.setText("Building");
+
+        jLabel11.setText("Room #");
+
+        jLabel7.setText("# of seats");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addGap(71, 71, 71)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(professorField, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
-                            .addComponent(creditsField, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
-                            .addComponent(courseTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
-                            .addComponent(sectionField, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
-                            .addComponent(coursefield, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
-                            .addComponent(jLabel2))
-                        .addGap(80, 80, 80))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(120, 120, 120)
-                        .addComponent(addButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(492, Short.MAX_VALUE)
-                .addComponent(listlabel)
-                .addGap(125, 125, 125))
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel8)
+                    .addComponent(Requirements)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel7))
+                .addGap(71, 71, 71)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(creditsField, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
+                    .addComponent(courseTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
+                    .addComponent(sectionField, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
+                    .addComponent(coursefield, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
+                    .addComponent(jLabel2)
+                    .addComponent(professorField, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
+                    .addComponent(building, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
+                    .addComponent(room, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
+                    .addComponent(requs, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
+                    .addComponent(days, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
+                    .addComponent(time, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
+                    .addComponent(seats, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(listlabel)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(163, 163, 163)
+                .addComponent(addButton)
+                .addContainerGap(608, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,7 +187,6 @@ public class CreateCourse extends javax.swing.JFrame {
                 .addComponent(listlabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -179,9 +211,34 @@ public class CreateCourse extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addComponent(professorField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(addButton)))
-                .addContainerGap(65, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(requs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Requirements))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(days, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(time, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9))
+                        .addGap(22, 22, 22)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(building, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(room, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(seats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1))
+                .addGap(52, 52, 52)
+                .addComponent(addButton)
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         pack();
@@ -202,43 +259,71 @@ public class CreateCourse extends javax.swing.JFrame {
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         // TODO add your handling code here:
 
-        Course addCourse ;
+        CurrentCourse addCourse ;
         Random CRN_Generator = new Random();
+        boolean proceed = false;
 
         int randomCRN = CRN_Generator.nextInt(courselist.size() + 50);
 
         Iterator<CurrentCourse> it = courselist.iterator();
 
+        while(proceed != true){
             while(it.hasNext()){
                 if (it.next().getCRN().equals(""+ randomCRN)){
 
+                    randomCRN = CRN_Generator.nextInt(courselist.size() + 50);
+                    proceed = false;
+                    break;
                 }
+
+                proceed = true;
             }
 
-        addCourse = new Course(randomCRN);
+            /*
+             * CurrentCourse(String aCRN, String aCourse, int aSection, String theTitle, String thePrer, int numCredits, String theTime,
+           String theDays, String theBuilding, String theRoom, String theProfessor, int totalSeatNumber, int theFilledSeats,
+           String tempList)
+             */
+        addCourse = new CurrentCourse(("" + randomCRN), coursefield.getText(), Integer.parseInt(sectionField.getText()), courseTitle.getText(), Requirements.getText(), Integer.parseInt(creditsField.getText()), time.getText(), days.getText(), building.getText(), room.getText(), professorField.getText(), Integer.parseInt(seats.getText()), 0, "" );
 
+        courselist.add(addCourse);
 
+        resetCurrentSchedule();
+        
+        }
     }//GEN-LAST:event_addButtonActionPerformed
 
     
 
     LinkedList<CurrentCourse> courselist;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Requirements;
     private javax.swing.JButton addButton;
+    private javax.swing.JTextField building;
     private javax.swing.JList courseList;
     private javax.swing.JTextField courseTitle;
     private javax.swing.JTextField coursefield;
     private javax.swing.JTextField creditsField;
+    private javax.swing.JTextField days;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel listlabel;
     private javax.swing.JTextField professorField;
+    private javax.swing.JTextField requs;
+    private javax.swing.JTextField room;
+    private javax.swing.JTextField seats;
     private javax.swing.JTextField sectionField;
+    private javax.swing.JTextField time;
     // End of variables declaration//GEN-END:variables
 
 }
