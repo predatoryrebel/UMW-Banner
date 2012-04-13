@@ -201,6 +201,8 @@ public class DropAStudentFromTheUniversityAdmin extends javax.swing.JFrame {
             backup.backupCourses(listCourse);
             backup.backupStudents(studentList);
         }
+        clear();
+        reset();
     }//GEN-LAST:event_dropActionPerformed
 
     /**
@@ -208,13 +210,17 @@ public class DropAStudentFromTheUniversityAdmin extends javax.swing.JFrame {
      * @param evt 
      */
     private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
+        clear();
+        reset();
+    }//GEN-LAST:event_clearActionPerformed
+
+    private void clear()
+    {
         DefaultListModel listModel = new DefaultListModel();
         listModel.clear();
         dropList.setModel(listModel);
         selectList.setModel(listModel);
-        reset();
-    }//GEN-LAST:event_clearActionPerformed
-
+    }
     /**
      * Exits drop a student from the university
      * @param evt 
