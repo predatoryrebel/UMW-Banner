@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.util.LinkedList;
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.border.*;
 
 /**
  * @author Stephen Schmith
@@ -30,8 +31,28 @@ public class MainGUI extends JFrame implements ActionListener
         public JMenuItem dropACourse;
         public JMenuItem addGrade;
 	public Container contentPane;
+        // Display components
+        // User Profile
         public JPanel profile;
-        public JTextArea profileText;
+        
+        // Personal Info
+        public JPanel personalPanel;
+        public JLabel nameLabel;
+        public JLabel emailLabel;
+        public JLabel majorLabel;
+        
+        public JLabel blankLabel;
+        
+        // Academic Info
+        public JPanel academicPanel;
+        public JLabel currentCreditsLabel;
+        public JLabel totalCreditsLabel;
+        public JLabel gpaLabel;
+        
+        // Schedule
+        public JPanel schedulePanel;
+        // Organize scheduling info here
+        
         public Login login;
         private User activeUser;
         private LinkedList<Student> studentList;
@@ -110,13 +131,48 @@ public class MainGUI extends JFrame implements ActionListener
                 
                 // Create the profile panel
                 profile = new JPanel();
-                profileText = new JTextArea();
-                profileText.setEditable(false);
+                contentPane.setLayout(new BorderLayout());
+                profile.setLayout(new GridLayout(2,1,0,0));
+                profile.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
+                profile.setFont(new Font("SansSerif", Font.PLAIN, 12));
                 
-                contentPane.setLayout(new FlowLayout());
-                profile.setLayout(new FlowLayout());
-                contentPane.add(profile);
-                profile.add(profileText);
+                // Create the personal info panel
+                // Initalize components
+                personalPanel = new JPanel();
+                personalPanel.setLayout(new GridLayout(3,1,0,0));
+                nameLabel = new JLabel("Name:");
+                nameLabel.setFont(null);
+                emailLabel = new JLabel("Email:");
+                emailLabel.setFont(null);
+                majorLabel = new JLabel("Major:");
+                majorLabel.setFont(null);
+                
+                
+                personalPanel.add(nameLabel);
+                personalPanel.add(emailLabel);
+                personalPanel.add(majorLabel);
+               
+                
+                // Create the academic info panel
+                // Initialize components
+                academicPanel = new JPanel();
+                academicPanel.setLayout(new GridLayout(3,1,0,0));
+                currentCreditsLabel = new JLabel("Current Credits:");
+                currentCreditsLabel.setFont(null);
+                totalCreditsLabel = new JLabel("Total Credits:");
+                totalCreditsLabel.setFont(null);
+                gpaLabel = new JLabel("GPA:");
+                gpaLabel.setFont(null);
+                academicPanel.add(currentCreditsLabel);
+                academicPanel.add(totalCreditsLabel);
+                academicPanel.add(gpaLabel);
+                
+                profile.add(personalPanel);
+                profile.add(academicPanel);
+                
+                contentPane.add(profile,BorderLayout.WEST);
+                contentPane.setVisible(false);
+                
                 
                 // Set data members
                 studentList = student;
@@ -137,6 +193,10 @@ public class MainGUI extends JFrame implements ActionListener
             mainMenu.add(editMenu);
             mainMenu.add(searchMenu);
             
+            // Set basic information
+            nameLabel.setText("Name:" + activeUser.getFirstName() + " " + activeUser.getLastName());
+            emailLabel.setText("Email: " + activeUser.getEmail());    
+            
             // If the user is an admin
             if(activeUser.getPermission() == 2)
             {
@@ -145,6 +205,8 @@ public class MainGUI extends JFrame implements ActionListener
                 searchMenu.add(dropAStudentFromTheUniversity);
                 searchMenu.add(dropACourse);
                 editMenu.add(createCourse);
+                academicPanel.setVisible(false);
+                majorLabel.setVisible(false);
             }
             if (activeUser.getPermission() == 0)
             {
@@ -152,6 +214,10 @@ public class MainGUI extends JFrame implements ActionListener
                 searchMenu.add(dropItem);
                 editMenu.add(editMajor);
                 editMenu.add(editMinor);
+                academicPanel.setVisible(true);
+                Student s = (Student)activeUser;
+                majorLabel.setText("Major: " + s.getMajor());
+                majorLabel.setVisible(true);
             }
             
             if (activeUser.getPermission() == 1)
@@ -160,8 +226,10 @@ public class MainGUI extends JFrame implements ActionListener
                 searchMenu.add(dropAStudent);
                 searchMenu.add(addGrade);
                 editMenu.add(createCourse);
+                academicPanel.setVisible(false);
+                majorLabel.setVisible(false);
             }
-            
+            contentPane.setVisible(true);
             refreshWindow();
         }
         
@@ -171,7 +239,7 @@ public class MainGUI extends JFrame implements ActionListener
             this.setVisible(false);
             
             // Add the current profile's text to the text box
-            profileText.setText(activeUser.toString());
+           
             // Set the title bar
             this.setTitle(activeUser.getFirstName() + " " + activeUser.getLastName() + " - " + activeUser.getEmail());
             
@@ -200,7 +268,7 @@ public class MainGUI extends JFrame implements ActionListener
                 mainMenu.remove(searchMenu);
                 mainMenu.remove(editMenu);
                 this.setTitle("");
-                profileText.setText("");
+                
                 Backup backup = new Backup();
                 backup.backupAll(courseList, studentList, facultyList, adminList, pastList);
                 this.activeUser = null;
