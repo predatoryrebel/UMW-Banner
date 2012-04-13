@@ -15,10 +15,11 @@ public class DropAStudentFromTheUniversityAdmin extends javax.swing.JFrame {
     /**
      * Creates new form DropAStudentFromTheUniversityAdmin
      */
-    public DropAStudentFromTheUniversityAdmin(LinkedList<Student> student) {
+    public DropAStudentFromTheUniversityAdmin(LinkedList<Student> student, LinkedList<CurrentCourse> course) {
         initComponents();
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         studentList = student;
+        listCourse = course;
         reset();
     }
     /**
@@ -195,6 +196,10 @@ public class DropAStudentFromTheUniversityAdmin extends javax.swing.JFrame {
             
             JFrame frame = new JFrame();
             JOptionPane.showMessageDialog(frame, student.getFirstName()+ " " + student.getLastName() + " has been removed." );
+            
+            Backup backup = new Backup();
+            backup.backupCourses(listCourse);
+            backup.backupStudents(studentList);
         }
     }//GEN-LAST:event_dropActionPerformed
 
@@ -218,6 +223,7 @@ public class DropAStudentFromTheUniversityAdmin extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_exitActionPerformed
 
+    private LinkedList<CurrentCourse> listCourse;
     private LinkedList<Student> studentList;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton clear;
