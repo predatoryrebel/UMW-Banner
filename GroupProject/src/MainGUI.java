@@ -51,6 +51,7 @@ public class MainGUI extends JFrame implements ActionListener
         
         // Schedule
         public JPanel schedulePanel;
+        public SchedulePanel schedule;
         public JLabel placeholder;
         // Organize scheduling info here
         
@@ -66,7 +67,7 @@ public class MainGUI extends JFrame implements ActionListener
 	public MainGUI(LinkedList<Student> student, LinkedList<CurrentCourse> course, LinkedList<Faculty> faculty, LinkedList<User> user,
                 LinkedList<Admin> admin, LinkedList<PastCourse> past)
 	{
-		setSize(680,300);
+		setSize(800,350);
 		contentPane = getContentPane();
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		mainMenu = new JMenuBar();
@@ -175,8 +176,11 @@ public class MainGUI extends JFrame implements ActionListener
                 schedulePanel = new JPanel();
                 schedulePanel.setLayout(new FlowLayout());
                 schedulePanel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
-                placeholder = new JLabel("schedule");
+                placeholder = new JLabel("Schedule");
+                schedule = new SchedulePanel();
+                
                 schedulePanel.add(placeholder);
+                schedulePanel.add(schedule);
                 
                 // Add everything to the content pane
                 contentPane.add(profile,BorderLayout.WEST);
@@ -246,6 +250,9 @@ public class MainGUI extends JFrame implements ActionListener
                 gpaLabel.setText("<html><b>GPA:</b>  " + s.getGPA() + "</html>");
                 gpaLabel.setVisible(true);
                 academicPanel.setVisible(true);
+                
+                // Set up the schedule
+                schedule.setSchedule(activeUser);
             }
             
             if (activeUser.getPermission() == 1)
