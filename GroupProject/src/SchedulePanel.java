@@ -3,6 +3,7 @@
  * and open the template in the editor.
  */
 import java.util.*;
+import java.awt.*;
 /**
  *
  * @author Steve
@@ -15,6 +16,7 @@ public class SchedulePanel extends javax.swing.JPanel {
     public SchedulePanel() {
         initComponents();
         int time = 8;
+        scheduleTable.setFont(new Font("SansSerif", Font.PLAIN, 9));
         
         for(int i = 0; i < scheduleTable.getRowCount(); i++)
         {
@@ -48,23 +50,105 @@ public class SchedulePanel extends javax.swing.JPanel {
             ListIterator<CurrentCourse> it = courses.listIterator();
             
             CurrentCourse current;
-            String timeString;
-            int time;
+            String timeString, dayString;
+            // If row is still -1 at the end of the method, do nothing
+            int row = -1;
+            int mIndex;
+            ArrayList<Integer> columns = new ArrayList<Integer>();
             
             while(it.hasNext())
             {
                 current = it.next();
-                timeString = current.getTime().substring(0,2);
-                if(timeString.charAt(1) == ':')
+                System.out.println("getTime: " + current.getTime());
+                mIndex = current.getTime().indexOf("m");
+                timeString = current.getTime().substring(0, mIndex + 1);
+                dayString = current.getDays();
+                
+                // Find the row value
+                switch(timeString)
                 {
-                    time = Integer.parseInt(timeString.substring(0, 1));
-                    System.out.println("Course Time: " + time);
+                    case "8:00 am":
+                        row = 0;
+                        break;
+                    case "9:00 am":
+                        row = 1;
+                        break;
+                    case "9:30 am":
+                        row = 1;
+                        break;
+                    case "10:00 am":
+                        row = 2;
+                        break;
+                    case "11:00 am":
+                        row = 3;
+                        break;
+                    case "12:00 pm":
+                        row = 4;
+                        break;
+                    case "12:30 pm":
+                        row = 4;
+                        break;
+                    case "1:00 pm":
+                        row = 5;
+                        break;
+                    case "2:00 pm":
+                        row = 6;
+                        break;
+                    case "3:00 pm":
+                        row = 7;
+                        break;
+                    case "4:00 pm":
+                        row = 8;
+                        break;
+                    case "4:30 pm":
+                        row = 4;
+                        break;
+                    case "5:00 pm":
+                        row = 9;
+                        break;
+                    case "6:00 pm":
+                        row = 10;
+                        break;
+                    case "7:00 pm":
+                        row = 11;
+                        break;
                 }
-                else
+                
+                // Find the column values
+                char c;
+                for(int i = 0; i < dayString.length(); i++)
                 {
-                    time = Integer.parseInt(timeString);
-                    System.out.println("Course Time: " + time);
+                    c = dayString.charAt(i);
+                    
+                    switch(c)
+                    {
+                        case 'M':
+                            columns.add(new Integer(1));
+                            break;
+                        case 'T':
+                            columns.add(new Integer(2));
+                            break;
+                        case 'W':
+                            columns.add(new Integer(3));
+                            break;
+                        case 'R':
+                            columns.add(new Integer(4));
+                            break;
+                        case 'F':
+                            columns.add(new Integer(5));
+                            break;
+                    }
                 }
+                
+                // Print the class to the table
+                if(row != -1)   // Don't print anything if a timeslot wasn't found
+                {
+                    for(int i = 0; i < columns.size(); i++)
+                    {
+                        scheduleTable.setValueAt(current.getTitle(), row, columns.get(i).intValue());
+                    }
+                }
+                columns.clear();
             }
         }
     }
@@ -115,6 +199,8 @@ public class SchedulePanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        scheduleTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        scheduleTable.setRowHeight(32);
         jScrollPane1.setViewportView(scheduleTable);
         scheduleTable.getColumnModel().getColumn(0).setResizable(false);
         scheduleTable.getColumnModel().getColumn(1).setResizable(false);
@@ -131,15 +217,15 @@ public class SchedulePanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 609, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 844, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
