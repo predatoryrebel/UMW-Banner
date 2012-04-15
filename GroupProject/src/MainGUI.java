@@ -31,6 +31,8 @@ public class MainGUI extends JFrame implements ActionListener
         public JMenuItem dropACourse;
         public JMenuItem addGrade;
 	public Container contentPane;
+        public HomePanel homePanel;
+                
         // Display components
         // User Profile
         public JPanel profile;
@@ -133,7 +135,7 @@ public class MainGUI extends JFrame implements ActionListener
                 
                 // Create the profile panel
                 profile = new JPanel();
-                contentPane.setLayout(new BorderLayout());
+                contentPane.setLayout(new FlowLayout());
                 profile.setLayout(new GridLayout(2,1,0,0));
                 profile.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
                 profile.setFont(new Font("SansSerif", Font.PLAIN, 12));
@@ -174,20 +176,14 @@ public class MainGUI extends JFrame implements ActionListener
                 
                 // Configure the schedule panel
                 schedulePanel = new JPanel();
-                schedulePanel.setLayout(new FlowLayout());
+                schedulePanel.setLayout(new BorderLayout());
                 schedulePanel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
                 placeholder = new JLabel("Schedule");
                 schedule = new SchedulePanel();
                 
                 schedulePanel.add(placeholder);
                 schedulePanel.add(schedule);
-                
-                // Add everything to the content pane
-                contentPane.add(profile,BorderLayout.WEST);
-                contentPane.add(schedulePanel, BorderLayout.CENTER);
-                contentPane.setVisible(false);
-                
-                
+                                
                 // Set data members
                 studentList = student;
                 courseList = course;
@@ -195,6 +191,11 @@ public class MainGUI extends JFrame implements ActionListener
                 adminList = admin;
                 userList = user;
                 pastList = past;
+                
+                // Add everything to the content pane
+                homePanel = new HomePanel(this, userList);
+                contentPane.add(homePanel, BorderLayout.CENTER);
+                contentPane.setVisible(true);
 	}
         
         // Change the GUI to logged in state
@@ -270,6 +271,9 @@ public class MainGUI extends JFrame implements ActionListener
                 academicPanel.setVisible(false);
                 majorLabel.setVisible(false);
             }
+            contentPane.remove(homePanel);
+            contentPane.add(profile, BorderLayout.WEST);
+            contentPane.add(schedulePanel, BorderLayout.CENTER);
             contentPane.setVisible(true);
             refreshWindow();
         }
@@ -309,6 +313,10 @@ public class MainGUI extends JFrame implements ActionListener
                 mainMenu.remove(editMenu);
                 this.setTitle("");
                 contentPane.setVisible(false);
+                contentPane.remove(profile);
+                contentPane.remove(schedulePanel);
+                contentPane.add(homePanel);
+                contentPane.setVisible(true);
                 
                 Backup backup = new Backup();
                 backup.backupAll(courseList, studentList, facultyList, adminList, pastList);

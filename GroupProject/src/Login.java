@@ -31,6 +31,25 @@ public class Login extends javax.swing.JFrame {
         userNameTextBox.setText("");
     }
     
+    public void doLogin(String username, String pword, LinkedList<User> users)
+    {
+        ListIterator<User> iterator = users.listIterator();
+        
+        //check username and password
+        while (iterator.hasNext())
+        {
+            User element = iterator.next();
+            if(element.getUserName().equalsIgnoreCase(username))
+            {
+                if (element.getPassword().equals(pword));
+                {
+                    mainWindow.setActiveUser(element);    // Set the active account to the user who just logged in.
+                    this.setVisible(false);
+                }
+            }
+        }
+    }
+    
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
