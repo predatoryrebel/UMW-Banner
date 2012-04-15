@@ -44,15 +44,13 @@
         <Component class="javax.swing.JTable" name="scheduleTable">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="8" rowCount="12">
+              <Table columnCount="6" rowCount="12">
                 <Column editable="false" title="Time" type="java.lang.String"/>
                 <Column editable="false" title="Monday" type="java.lang.String"/>
                 <Column editable="false" title="Tuesday" type="java.lang.String"/>
                 <Column editable="false" title="Wednesday" type="java.lang.String"/>
                 <Column editable="false" title="Thursday" type="java.lang.String"/>
                 <Column editable="false" title="Friday" type="java.lang.String"/>
-                <Column editable="false" title="Saturday" type="java.lang.String"/>
-                <Column editable="false" title="Sunday" type="java.lang.String"/>
               </Table>
             </Property>
             <Property name="autoResizeMode" type="int" value="4"/>
@@ -83,17 +81,7 @@
                   <Editor/>
                   <Renderer/>
                 </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>

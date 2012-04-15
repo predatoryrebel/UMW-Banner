@@ -271,6 +271,8 @@ public class MainGUI extends JFrame implements ActionListener
                 editMenu.remove(editMinor);
                 academicPanel.setVisible(false);
                 majorLabel.setVisible(false);
+                
+                schedule.setSchedule(activeUser);
             }
             contentPane.add(profile, BorderLayout.WEST);
             contentPane.add(schedulePanel, BorderLayout.CENTER);

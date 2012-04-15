@@ -42,11 +42,24 @@ public class SchedulePanel extends javax.swing.JPanel {
     // Print schedule information for faculty and students
     public void setSchedule(User user)
     {
-        if(user.getClass().getName().equals("Student"))
+        String className = user.getClass().getName();
+        System.out.println("Class Name:" + className);
+        if(className.equals("Student") || className.equals("Faculty"))
         {
-            Student s = (Student)user;
+            
             LinkedList<CurrentCourse> courses = new LinkedList<CurrentCourse>();
-            courses = s.getCurrentSchudule();
+            
+            if(className.equals("Student"))
+            {
+                Student s = (Student)user;
+                courses = s.getCurrentSchudule();
+            }
+            else
+            {
+                Faculty f = (Faculty)user;
+                courses = f.getCourses();
+            }
+            
             ListIterator<CurrentCourse> it = courses.listIterator();
             
             CurrentCourse current;
@@ -167,28 +180,28 @@ public class SchedulePanel extends javax.swing.JPanel {
 
         scheduleTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Time", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+                "Time", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -207,9 +220,6 @@ public class SchedulePanel extends javax.swing.JPanel {
         scheduleTable.getColumnModel().getColumn(2).setResizable(false);
         scheduleTable.getColumnModel().getColumn(3).setResizable(false);
         scheduleTable.getColumnModel().getColumn(4).setResizable(false);
-        scheduleTable.getColumnModel().getColumn(5).setResizable(false);
-        scheduleTable.getColumnModel().getColumn(6).setResizable(false);
-        scheduleTable.getColumnModel().getColumn(7).setResizable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
