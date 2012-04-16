@@ -19,7 +19,7 @@ public class Main {
         facultyList = start.readFacultyList();
         adminList = start.readAdminList();
         pastCourseList = start.readPastCourseList();
-        
+       
         
         ListIterator<Student> siterator = studentList.listIterator();
         

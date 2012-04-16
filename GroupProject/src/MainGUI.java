@@ -31,7 +31,7 @@ public class MainGUI extends JFrame implements ActionListener
         public JMenuItem dropACourse;
         public JMenuItem addGrade;
 	public Container contentPane;
-        public HomePanel homePanel;
+        //public HomePanel homePanel;
                 
         // Display components
         // User Profile
@@ -131,8 +131,16 @@ public class MainGUI extends JFrame implements ActionListener
            
 		setJMenuBar(mainMenu);
                 
+                // Set data members
+                studentList = student;
+                courseList = course;
+                facultyList = faculty;
+                adminList = admin;
+                userList = user;
+                pastList = past;
+                
                 // Create login window
-                login = new Login(user, this);
+                login = new Login(user, this, studentList, adminList, facultyList);
                 
                 // Create the profile panel
                 profile = new JPanel();
@@ -185,13 +193,7 @@ public class MainGUI extends JFrame implements ActionListener
                 schedulePanel.add(placeholder);
                 schedulePanel.add(schedule);
                                 
-                // Set data members
-                studentList = student;
-                courseList = course;
-                facultyList = faculty;
-                adminList = admin;
-                userList = user;
-                pastList = past;
+                
                 
                 // Add everything to the content pane
                 contentPane.add(profile, BorderLayout.WEST);
@@ -242,8 +244,9 @@ public class MainGUI extends JFrame implements ActionListener
                 editMenu.add(editMajor);
                 editMenu.add(editMinor);
                 
-                // Set up Profile Display                
-                Student s = (Student)activeUser;
+                // Set up Profile Display  
+                FindUser find = new FindUser(activeUser, adminList, studentList, facultyList);
+                Student s = find.findStudent();
                 majorLabel.setText("<html><b>Major:</b>  " + s.getMajor() + "</html>");
                 majorLabel.setVisible(true);
                 currentCreditsLabel.setText("<html><b>Current Credits:</b>  " + s.getCreditHoursEnrolled() + "</html>");
