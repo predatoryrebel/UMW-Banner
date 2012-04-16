@@ -356,7 +356,7 @@ public class MainGUI extends JFrame implements ActionListener
             {
                 if (activeUser.getPermission() == 0)
                 {
-                    SearchClass s = new SearchClass(courseList, studentList, activeUser);
+                    SearchClass s = new SearchClass(courseList, studentList, activeUser, schedule);
                     s.setVisible(true);
                 }
             }
@@ -367,7 +367,7 @@ public class MainGUI extends JFrame implements ActionListener
                 {    
                     FindUser find = new FindUser(activeUser, adminList, studentList, facultyList);
                     Student user = find.findStudent();
-                    DropClass d = new DropClass(user, studentList, courseList);
+                    DropClass d = new DropClass(user, studentList, courseList, schedule);
                     d.setVisible(true);
                 }
             }

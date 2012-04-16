@@ -14,11 +14,12 @@ public class DropClass extends javax.swing.JFrame {
     /**
      * Creates new form DropClass
      */
-    public DropClass(Student user, LinkedList<Student> listStudent, LinkedList<CurrentCourse> course) {
+    public DropClass(Student user, LinkedList<Student> listStudent, LinkedList<CurrentCourse> course, SchedulePanel s) {
         initComponents();
         student = user;
         studentList = listStudent;
         courseList = course;
+        scheduleDisplay = s;
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         resetCurrentSchedule();
     }
@@ -155,6 +156,7 @@ public class DropClass extends javax.swing.JFrame {
      */
     private void dropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropActionPerformed
         ListModel<CurrentCourse> listModel = dropList.getModel();
+        scheduleDisplay.setSchedule(student, 1);
         //gets all course in drop list box
         for (int a = 0; a < listModel.getSize(); a++)
         {
@@ -194,6 +196,7 @@ public class DropClass extends javax.swing.JFrame {
                 }
             }
         }
+        scheduleDisplay.setSchedule(student, 0);
         
         Backup backup = new Backup();
         backup.backupCourses(courseList);
@@ -256,6 +259,7 @@ public class DropClass extends javax.swing.JFrame {
     private LinkedList<Student> studentList;
     private LinkedList<CurrentCourse> courseList;
     private Student student;
+    private SchedulePanel scheduleDisplay;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton clear;
     private javax.swing.JList currentList1;

@@ -11,11 +11,12 @@ public class SearchClass extends javax.swing.JFrame {
      * Creates new form SearchClass
      */
    
-    public SearchClass(LinkedList<CurrentCourse> course, LinkedList<Student> student, User person) {
+    public SearchClass(LinkedList<CurrentCourse> course, LinkedList<Student> student, User person, SchedulePanel s) {
         initComponents();
         user = person;
         courseList = course;
         studentList = student;
+        scheduleDisplay = s;
         setDefaultCloseOperation(HIDE_ON_CLOSE);
     }
     
@@ -187,6 +188,7 @@ public class SearchClass extends javax.swing.JFrame {
      */
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         
+        scheduleDisplay.setSchedule(user, 1);
         SearchCourse search = new SearchCourse(courseList);
         LinkedList<CurrentCourse> searchList = null;
          DefaultListModel listModel; 
@@ -386,11 +388,11 @@ public class SearchClass extends javax.swing.JFrame {
 
             }
         }
-        //back up student list
         Backup backup = new Backup();
         backup.backupStudents(studentList);
         backup.backupCourses(courseList);
-        
+        //back up student list
+        scheduleDisplay.setSchedule(user, 0);
         clear();
     }//GEN-LAST:event_addButtonActionPerformed
 
@@ -431,6 +433,7 @@ public class SearchClass extends javax.swing.JFrame {
     private LinkedList<Student> studentList;
     private User user;
     private LinkedList<CurrentCourse> courseList;
+    private SchedulePanel scheduleDisplay;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
     private javax.swing.JList addCourseList;
