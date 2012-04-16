@@ -40,10 +40,11 @@ public class SchedulePanel extends javax.swing.JPanel {
     }
     
     // Print schedule information for faculty and students
-    public void setSchedule(User user)
+    public void setSchedule(User user, int clear)
     {
         String className = user.getClass().getName();
-        System.out.println("Class Name:" + className);
+        System.out.println("Model: " + scheduleTable.getModel());
+        
         if(className.equals("Student") || className.equals("Faculty"))
         {
             
@@ -154,11 +155,20 @@ public class SchedulePanel extends javax.swing.JPanel {
                 }
                 
                 // Print the class to the table
-                if(row != -1)   // Don't print anything if a timeslot wasn't found
-                {
+                if(row != -1 && clear == 0)   // Don't print anything if a timeslot wasn't found
+                {                
                     for(int i = 0; i < columns.size(); i++)
                     {
                         scheduleTable.setValueAt(current.getTitle(), row, columns.get(i).intValue());
+                    }
+                }
+                // If clear == 1, delete the timeslots that were filled by this user's schedule. 
+                // Clearing the schdedule this way prevents a threading error in swing
+                else    
+                {
+                    for(int i = 0; i < columns.size(); i++)
+                    {
+                        scheduleTable.setValueAt(" ", row, columns.get(i).intValue());
                     }
                 }
                 columns.clear();
@@ -212,7 +222,6 @@ public class SchedulePanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        scheduleTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         scheduleTable.setRowHeight(32);
         jScrollPane1.setViewportView(scheduleTable);
         scheduleTable.getColumnModel().getColumn(0).setResizable(false);

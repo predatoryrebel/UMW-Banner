@@ -17,7 +17,6 @@ public class SearchClass extends javax.swing.JFrame {
         courseList = course;
         studentList = student;
         setDefaultCloseOperation(HIDE_ON_CLOSE);
-      
     }
     
     /**
@@ -320,7 +319,7 @@ public class SearchClass extends javax.swing.JFrame {
                         {
                            courseAlreadyTaken = true;
                             JFrame frame = new JFrame();
-                            JOptionPane.showMessageDialog(frame, "You are already taken " + course.getName() );
+                            JOptionPane.showMessageDialog(frame, "You are already taking " + course.getName() );
                         }
                     }    
                    

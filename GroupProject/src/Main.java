@@ -105,6 +105,7 @@ public class Main {
         
 
         // Create MainGUI here and pass Login parameters to it
+        
         MainGUI mainWindow = new MainGUI(studentList, courseList, facultyList, userList, adminList, pastCourseList);
         mainWindow.setVisible(true);
 

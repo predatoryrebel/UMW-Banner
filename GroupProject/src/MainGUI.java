@@ -69,7 +69,7 @@ public class MainGUI extends JFrame implements ActionListener
 	public MainGUI(LinkedList<Student> student, LinkedList<CurrentCourse> course, LinkedList<Faculty> faculty, LinkedList<User> user,
                 LinkedList<Admin> admin, LinkedList<PastCourse> past)
 	{
-		setSize(1000,450);
+		setSize(1050,450);
                 setResizable(false);
 		contentPane = getContentPane();
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -252,9 +252,15 @@ public class MainGUI extends JFrame implements ActionListener
                 gpaLabel.setText("<html><b>GPA:</b>  " + s.getGPA() + "</html>");
                 gpaLabel.setVisible(true);
                 academicPanel.setVisible(true);
-                
+                /*
                 // Set up the schedule
-                schedule.setSchedule(activeUser);
+                SwingUtilities.invokeLater(new Runnable(){
+                    public void run(){
+                        clearSchedule();
+                    }
+                }); */
+                //schedule.setSchedule(activeUser, 1);
+                schedule.setSchedule(activeUser, 0);
             }
             
             if (activeUser.getPermission() == 1)
@@ -271,8 +277,13 @@ public class MainGUI extends JFrame implements ActionListener
                 editMenu.remove(editMinor);
                 academicPanel.setVisible(false);
                 majorLabel.setVisible(false);
+               /* SwingUtilities.invokeLater(new Runnable(){
+                    public void run(){
+                        clearSchedule();
+                    }
+                }); */
                 
-                schedule.setSchedule(activeUser);
+                schedule.setSchedule(activeUser, 0);
             }
             contentPane.add(profile, BorderLayout.WEST);
             contentPane.add(schedulePanel, BorderLayout.CENTER);
@@ -314,8 +325,10 @@ public class MainGUI extends JFrame implements ActionListener
                 mainMenu.remove(searchMenu);
                 mainMenu.remove(editMenu);
                 this.setTitle("");
+                // Clear the schedule
+                schedule.setSchedule(activeUser, 1);
                 contentPane.setVisible(false);
-                               
+                                       
                 Backup backup = new Backup();
                 backup.backupAll(courseList, studentList, facultyList, adminList, pastList);
                 this.activeUser = null;
