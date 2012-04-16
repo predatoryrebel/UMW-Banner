@@ -17,10 +17,13 @@ public class Login extends javax.swing.JFrame {
      */
     
    
-    public Login(LinkedList<User> user, MainGUI mw) {
+    public Login(LinkedList<User> user, MainGUI mw, LinkedList<Student> student, LinkedList<Admin> admin, LinkedList<Faculty> faculty) {
         initComponents();
         userList = user;
         mainWindow = mw;    // The Main GUI. mainWindow can be used to call methods in the MainGUI object.
+        facultyList = faculty;
+        studentList = student;
+        adminList = admin;
         setDefaultCloseOperation(HIDE_ON_CLOSE);
     }
    
@@ -155,13 +158,16 @@ public class Login extends javax.swing.JFrame {
      * @param evt 
      */
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
-        Register registerPanel = new Register(userList);
+        Register registerPanel = new Register(userList, studentList, adminList, facultyList);
         registerPanel.setVisible(true);
         
     }//GEN-LAST:event_registerButtonActionPerformed
 
     
     private LinkedList<User> userList;
+    private LinkedList<Student> studentList;
+    private LinkedList<Admin> adminList;
+    private LinkedList<Faculty> facultyList;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton LoginButton;
     private javax.swing.JScrollPane jScrollPane1;

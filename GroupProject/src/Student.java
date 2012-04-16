@@ -25,6 +25,8 @@ public class Student extends User {
     Student(String id)
     {
             idNumber = id;
+            currentSchudule = new LinkedList<CurrentCourse>();
+            pastCourses = new LinkedList<PastCourse>();
     }        
             
    
@@ -188,7 +190,7 @@ public class Student extends User {
     {
         int totalCredits = 0;
         ListIterator<PastCourse> it = pastCourses.listIterator();
-        
+
         while(it.hasNext())
         {
             PastCourse course = it.next();

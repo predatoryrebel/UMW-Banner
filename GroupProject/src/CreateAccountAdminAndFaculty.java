@@ -185,7 +185,8 @@ public class CreateAccountAdminAndFaculty extends javax.swing.JFrame {
             Faculty faculty = new Faculty(username, password, yourEmail, yourFirstName, yourLastName, yourOffice, yourPhone);
             facultyList.add(faculty);
             JFrame frame = new JFrame();
-            JOptionPane.showMessageDialog(frame, yourFirstName + " " + yourLastName + " has created a faculty account");
+            JOptionPane.showMessageDialog(frame, yourFirstName + " " + yourLastName + " has created a faculty account. Please login.");
+            this.setVisible(false);
         }
         //create and add admin
         if (user.getPermission() == 2)
@@ -193,7 +194,8 @@ public class CreateAccountAdminAndFaculty extends javax.swing.JFrame {
             Admin admin = new Admin(username, password, yourEmail, yourFirstName, yourLastName, yourOffice,yourPhone);
             adminList.add(admin);
             JFrame frame = new JFrame();
-            JOptionPane.showMessageDialog(frame, yourFirstName + " " + yourLastName + " has created an admin account");
+            JOptionPane.showMessageDialog(frame, yourFirstName + " " + yourLastName + " has created an admin account. Please login.");
+            this.setVisible(false);
         }
         
         

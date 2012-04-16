@@ -69,8 +69,6 @@ public class CreateAccount extends javax.swing.JFrame {
 
         jLabel3.setText("Email");
 
-        jLabel4.setText("Major");
-
         jLabel5.setText("Minor");
 
         jLabel9.setText("Max Credits for a Semester");
@@ -245,7 +243,7 @@ public class CreateAccount extends javax.swing.JFrame {
         studentList.add(student);
         
         JFrame frame = new JFrame();
-        JOptionPane.showMessageDialog(frame, yourFirstName + " " + yourLastName + " account has been created.");
+        JOptionPane.showMessageDialog(frame, yourFirstName + " " + yourLastName + " account has been created. Please login");
         this.setVisible(false);
     }//GEN-LAST:event_createAccountActionPerformed
 

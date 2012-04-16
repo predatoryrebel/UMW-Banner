@@ -11,10 +11,13 @@ public class Register extends javax.swing.JFrame {
     /**
      * Creates new form Register
      */
-    public Register(LinkedList<User> user) {
+    public Register(LinkedList<User> user,  LinkedList<Student> student, LinkedList<Admin> admin, LinkedList<Faculty> faculty) {
         initComponents();
         userList = user;
         person = null;
+        facultyList = faculty;
+        studentList = student;
+        adminList = admin;
         setDefaultCloseOperation(HIDE_ON_CLOSE);
     }
 
@@ -205,15 +208,27 @@ public class Register extends javax.swing.JFrame {
             userList.add(person);
             
             if (student.isSelected() == true)
+            {
                 person.setPermission(0);
+                CreateAccount account = new CreateAccount(person, studentList);
+                this.setVisible(false);
+                account.setVisible(true);
+            }
             if (administrator.isSelected() == true)
+            {
                 person.setPermission(2);
+                CreateAccountAdminAndFaculty account = new CreateAccountAdminAndFaculty(person, facultyList, adminList);
+                this.setVisible(false);
+                account.setVisible(true);
+            }
             if (faculty.isSelected() == true)
+            {
                 person.setPermission(1);
-            //displays mesage confirming user
-            JFrame frame = new JFrame();
-            JOptionPane.showMessageDialog(frame, userNameTextBox.getText() + " has been created. Please login.");
-            this.setVisible(false);
+                CreateAccountAdminAndFaculty account = new CreateAccountAdminAndFaculty(person, facultyList, adminList);
+                this.setVisible(false);
+                account.setVisible(true);
+            }
+           
         }
             
     }//GEN-LAST:event_registerButtonActionPerformed
@@ -228,6 +243,9 @@ public class Register extends javax.swing.JFrame {
     
     private LinkedList<User> userList;
     private User person;
+    private LinkedList<Student> studentList;
+    private LinkedList<Admin> adminList;
+    private LinkedList<Faculty> facultyList;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton administrator;
     private javax.swing.ButtonGroup buttonGroup1;
