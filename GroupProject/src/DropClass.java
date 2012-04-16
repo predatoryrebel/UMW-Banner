@@ -248,6 +248,9 @@ public class DropClass extends javax.swing.JFrame {
         resetCurrentSchedule();
     }//GEN-LAST:event_clearActionPerformed
 
+    /**
+     * clear all list boxes
+     */
     private void clear()
     {
         DefaultListModel listModel = new DefaultListModel();

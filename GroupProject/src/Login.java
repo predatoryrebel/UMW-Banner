@@ -15,8 +15,6 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
-    
-   
     public Login(LinkedList<User> user, MainGUI mw, LinkedList<Student> student, LinkedList<Admin> admin, LinkedList<Faculty> faculty) {
         initComponents();
         userList = user;

@@ -292,6 +292,9 @@ public class DropAStudentAdmin extends javax.swing.JFrame {
         reset();
     }//GEN-LAST:event_clearActionPerformed
 
+    /**
+     * clears all list boxes
+     */
     private void clear()
     {
         DefaultListModel listModel = new DefaultListModel();

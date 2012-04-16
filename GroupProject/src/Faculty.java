@@ -1,5 +1,8 @@
 import java.util.*;
-
+/**
+ * 
+ * @author cjoyner
+ */
 public class Faculty extends User {
 
     /**

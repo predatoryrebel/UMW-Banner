@@ -1,6 +1,9 @@
-/*
- * Holds course and related course details
+/**
+ * 
+ * @author cjoyner
  */
+ //Holds course and related course details
+
 public class PastCourse extends Course {
     /* Parameter constructor */
     PastCourse(String aCRN, String aCourse, int aSection, String theTitle, int numCredits, String theProfessor, String yourGrade,

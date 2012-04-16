@@ -22,6 +22,9 @@ public class CreateAccount extends javax.swing.JFrame {
         reset();
     }
 
+    /**
+     * method that adds information to the lastname, firstname and email text box
+     */
     private void reset(){
         lastName.setText(user.getLastName());
         firstName.setText(user.getFirstName());
@@ -197,13 +200,21 @@ public class CreateAccount extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Exits when button is clicked
+     * @param evt 
+     */
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_exitActionPerformed
 
+    /**
+     * Creates account when button is clicked
+     * @param evt 
+     */
     private void createAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAccountActionPerformed
         
+        //set information from textboxs to variables
         String yourMajor = major.getText();
         String yourMinor = minor.getText();
         String yourMaxCredits = maxCredits.getText();
@@ -215,6 +226,8 @@ public class CreateAccount extends javax.swing.JFrame {
         String yourFirstName = firstName.getText();
         String yourLastName = lastName.getText();
         String yourEmail = email.getText();
+        
+        //sets holds
         boolean holds;
         if (no.isSelected())
         {
@@ -223,9 +236,11 @@ public class CreateAccount extends javax.swing.JFrame {
         else
             holds = true;
         
+        //finds new id number
         String yourID = "";
         ListIterator<Student> iterator = studentList.listIterator();
         int checkID = 1;
+        //check other id number to find unique id number
         while (checkID != 0)
         {
             checkID = 0;

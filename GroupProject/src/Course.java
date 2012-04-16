@@ -1,7 +1,9 @@
 import java.util.*;
-/*
- * Holds course and related course details
+/**
+ * 
+ * @author cjoyner
  */
+//Holds course and related course details
 public class Course implements  Comparable<Course>{
  
     /**

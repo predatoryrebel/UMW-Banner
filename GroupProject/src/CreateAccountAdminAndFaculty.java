@@ -21,7 +21,9 @@ public class CreateAccountAdminAndFaculty extends javax.swing.JFrame {
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         reset();
     }
-    
+    /**
+    *set information in lastname, firstname and email text boxes 
+    */
      private void reset(){
         lastName.setText(user.getLastName());
         firstName.setText(user.getFirstName());
@@ -169,10 +171,18 @@ public class CreateAccountAdminAndFaculty extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_firstNameActionPerformed
 
+    /**
+     * Exits when button is clicked
+     * @param evt 
+     */
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
        this.setVisible(false);
     }//GEN-LAST:event_exitActionPerformed
-
+    
+    /**
+     * creates an account when button is clicked
+     * @param evt 
+     */
     private void createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createActionPerformed
         //set variables
         String username = user.getUserName();

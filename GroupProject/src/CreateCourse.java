@@ -3,10 +3,7 @@ import java.util.*;
 import java.util.ListIterator;
 import javax.swing.DefaultListModel;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 
 /*
  * CreateCourse.java

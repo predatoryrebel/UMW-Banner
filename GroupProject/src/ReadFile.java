@@ -1,14 +1,25 @@
 
 import java.io.*;
 import java.util.*;
-
+/**
+ * 
+ * @author cjoyner
+ */
 public class ReadFile{
     
+    /**
+     * Constructs a read file
+     */
     ReadFile()
     {
         
     }
     
+    /**
+     * reads faculty list file
+     * @return LinkedList<Faculty>
+     * @throws FileNotFoundException 
+     */
     public LinkedList<Faculty> readFacultyList()throws FileNotFoundException{
         FileInputStream fstream = new FileInputStream("facultyList.csv");
         LinkedList<Faculty> facultyList = new LinkedList<Faculty>();
@@ -17,6 +28,7 @@ public class ReadFile{
         
         try
         {
+            //reads file
             while (input.hasNext())
             {
                 String firstName = input.next();
@@ -26,7 +38,7 @@ public class ReadFile{
                 String email = input.next();
                 String office = input.next();
                 String phoneNumber = input.nextLine();
-                
+                //creates faculty member
                 Faculty newFaculty = new Faculty(userName, password, email, firstName, lastName, office, phoneNumber);
                 
                 facultyList.add(newFaculty);
@@ -43,6 +55,11 @@ public class ReadFile{
         return facultyList;
     }
     
+    /**
+     * reads student list file
+     * @return LinkedList<Student>
+     * @throws FileNotFoundException 
+     */
     public LinkedList<Student> readStudentList() throws FileNotFoundException{
         FileInputStream fstream = new FileInputStream("studentList.csv");
         LinkedList<Student> studentList = new LinkedList<Student>();
@@ -51,6 +68,7 @@ public class ReadFile{
         
         try
         {
+            //reads file
             while (input.hasNext())
             {
                 String idNumber = input.next();
@@ -72,7 +90,8 @@ public class ReadFile{
                     holds = true;
                 else
                     holds = false;
-                    
+                
+                //creates student
                 Student newStudent = new Student(idNumber,firstName,lastName, userName,password,email,major,minor,approvedCredits,creditHoursEnrolled,
                         currentSchudule, holds);
                 
@@ -91,7 +110,12 @@ public class ReadFile{
         
         return studentList;
     }
-            
+      
+    /**
+     * reads course list file
+     * @return LinkedList<CurrentCourse>
+     * @throws FileNotFoundException 
+     */
     public LinkedList<CurrentCourse> readCourseList() throws FileNotFoundException{
         FileInputStream fstream = new FileInputStream("courseList.csv");
         LinkedList<CurrentCourse> courseList = new LinkedList<CurrentCourse>();
@@ -100,6 +124,7 @@ public class ReadFile{
         input.useDelimiter(",");
         try
         {
+            //read file
             while (input.hasNextLine())
             {
 
@@ -120,6 +145,7 @@ public class ReadFile{
                 String professor = input.nextLine();
                 professor = professor.substring(1, professor.length());
                 
+                //create current course
                 CurrentCourse newCourse = new CurrentCourse(crn, course, section, title, prer,credits, time, days, building, room, professor,
                     totalSeats, filledSeats, tempWaiting);
                      
@@ -142,6 +168,11 @@ public class ReadFile{
             return courseList;
     }
     
+    /**
+     * reads past course list file
+     * @return LinkedList<PastCourse>
+     * @throws FileNotFoundException 
+     */
     public LinkedList<PastCourse> readPastCourseList() throws FileNotFoundException{
         FileInputStream fstream = new FileInputStream("pastCourses.csv");
         LinkedList<PastCourse> courseList = new LinkedList<PastCourse>();
@@ -150,6 +181,7 @@ public class ReadFile{
         input.useDelimiter(",");
         try
         {
+            //read files
             while (input.hasNextLine())
             {
 
@@ -164,6 +196,7 @@ public class ReadFile{
                 String user = input.nextLine();
                 user = user.substring(1, user.length());
                 
+                //creates past course list
                 PastCourse pastCourse = new PastCourse(crn, course, section, title, credits, professor, grade, user);
                      
                 courseList.add(pastCourse);
@@ -198,6 +231,7 @@ public class ReadFile{
 
         try
         {
+            //reads file
             while (input.hasNext())
             {
                 String firstName = input.next();
@@ -208,6 +242,7 @@ public class ReadFile{
                 String office = input.next();
                 String phoneNumber = input.nextLine();
 
+                //creates admin
                 Admin newAdmin = new Admin(userName, password, email, firstName, lastName, office, phoneNumber);
 
                 adminList.add(newAdmin);
