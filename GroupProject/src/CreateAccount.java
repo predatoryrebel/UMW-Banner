@@ -71,6 +71,12 @@ public class CreateAccount extends javax.swing.JFrame {
 
         jLabel5.setText("Minor");
 
+        firstName.setEditable(false);
+
+        lastName.setEditable(false);
+
+        email.setEditable(false);
+
         jLabel9.setText("Max Credits for a Semester");
 
         jLabel7.setText("Do you have holds?");
@@ -201,7 +207,9 @@ public class CreateAccount extends javax.swing.JFrame {
         String yourMajor = major.getText();
         String yourMinor = minor.getText();
         String yourMaxCredits = maxCredits.getText();
-        int maxHours = Integer.parseInt(yourMaxCredits);
+        int maxHours = 0;
+        if (!maxCredits.getText().isEmpty())
+            maxHours = Integer.parseInt(yourMaxCredits);
         String username = user.getUserName();
         String password = user.getPassword();
         String yourFirstName = firstName.getText();

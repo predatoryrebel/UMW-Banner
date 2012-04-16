@@ -50,7 +50,7 @@ public class Main {
         while (siterator.hasNext())
         {
             Student element = siterator.next();
-            element.buildCurrentScudule(courseList);
+            element.buildCurrentSchedule(courseList);
         }
 
         ListIterator<CurrentCourse> citerator = courseList.listIterator();

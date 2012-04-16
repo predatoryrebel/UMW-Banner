@@ -58,6 +58,7 @@ public class CreateAccountAdminAndFaculty extends javax.swing.JFrame {
 
         jLabel2.setText("First Name:");
 
+        firstName.setEditable(false);
         firstName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 firstNameActionPerformed(evt);
@@ -66,6 +67,7 @@ public class CreateAccountAdminAndFaculty extends javax.swing.JFrame {
 
         jLabel3.setText("Last Name:");
 
+        lastName.setEditable(false);
         lastName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lastNameActionPerformed(evt);
@@ -73,6 +75,8 @@ public class CreateAccountAdminAndFaculty extends javax.swing.JFrame {
         });
 
         jLabel4.setText("Email:");
+
+        email.setEditable(false);
 
         jLabel5.setText("Office:");
 

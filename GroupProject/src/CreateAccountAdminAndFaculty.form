@@ -102,6 +102,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="firstName">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="firstNameActionPerformed"/>
       </Events>
@@ -112,6 +115,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="lastName">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lastNameActionPerformed"/>
       </Events>
@@ -122,6 +128,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="email">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
