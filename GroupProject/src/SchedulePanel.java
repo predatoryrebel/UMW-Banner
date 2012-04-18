@@ -168,7 +168,8 @@ public class SchedulePanel extends javax.swing.JPanel {
                 {
                     for(int i = 0; i < columns.size(); i++)
                     {
-                        scheduleTable.setValueAt(" ", row, columns.get(i).intValue());
+                        if (row != -1)
+                            scheduleTable.setValueAt(" ", row, columns.get(i).intValue());
                     }
                 }
                 columns.clear();

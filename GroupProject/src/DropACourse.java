@@ -185,6 +185,7 @@ public class DropACourse extends javax.swing.JFrame {
                 student.getCurrentSchudule().remove(course);
                 student.setCreditHoursEnrolled(student.getCreditHoursEnrolled() - course.getCredits());
             }
+            
             //drop course from course list
             courseList.remove(course);
             //display a successful drop

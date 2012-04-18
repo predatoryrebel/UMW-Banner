@@ -401,7 +401,7 @@ public class MainGUI extends JFrame implements ActionListener
             {
                 if ((activeUser.getPermission() == 2) || (activeUser.getPermission() == 1))
                 {
-                    CreateCourse d = new CreateCourse(courseList);
+                    CreateCourse d = new CreateCourse(courseList, facultyList);
                     d.setVisible(true);
                 }
             }

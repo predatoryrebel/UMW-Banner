@@ -1,6 +1,8 @@
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.ListIterator;
+import java.util.Random;
 import javax.swing.DefaultListModel;
 
 
@@ -18,8 +20,9 @@ import javax.swing.DefaultListModel;
 public class CreateCourse extends javax.swing.JFrame {
 
     /** Creates new form CreateCourse */
-    public CreateCourse(LinkedList<CurrentCourse> courses) {
+    public CreateCourse(LinkedList<CurrentCourse> courses, LinkedList<Faculty> faculty) {
         courselist = courses;
+        facultyList = faculty;
         initComponents();
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         resetCurrentSchedule();
@@ -295,9 +298,21 @@ public class CreateCourse extends javax.swing.JFrame {
 
         /* Add the new course to the current course list */
         courselist.add(addCourse);
+        
+        /*Add course to facultty member*/
+        
+        ListIterator<Faculty> fiterator = facultyList.listIterator();
+        //adds courses to faculty member 
+        while (fiterator.hasNext())
+        {
+            Faculty element = fiterator.next();
+            element.buildCourseList(courselist);
+        }
 
         /* And refresh the current course list in the list window on the form */
         resetCurrentSchedule();
+        
+        
         
         }
     }//GEN-LAST:event_addButtonActionPerformed
@@ -305,6 +320,7 @@ public class CreateCourse extends javax.swing.JFrame {
     
 
     LinkedList<CurrentCourse> courselist;
+    LinkedList<Faculty> facultyList;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Requirements;
     private javax.swing.JButton addButton;
