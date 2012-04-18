@@ -15,10 +15,11 @@ public class DropACourse extends javax.swing.JFrame {
      /**
      * Creates new form DropACourse
      */
-    public DropACourse(LinkedList<CurrentCourse> course, LinkedList<Student> student) {
+    public DropACourse(LinkedList<CurrentCourse> course, LinkedList<Student> student, LinkedList<Faculty> faculty) {
         initComponents();
         courseList = course;
         listStudent = student;
+        facultyList = faculty;
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         reset();
     }
@@ -188,12 +189,31 @@ public class DropACourse extends javax.swing.JFrame {
             
             //drop course from course list
             courseList.remove(course);
+            
+            //drop course from faculty course list
+            ListIterator<Faculty> fIterator = facultyList.listIterator();
+            while (fIterator.hasNext())
+            {
+                Faculty element = fIterator.next();
+                ListIterator<CurrentCourse> cIterator = element.getCourses().listIterator();
+                
+                //find course in professor course list
+                while (cIterator.hasNext())
+                {
+                    CurrentCourse facultyCourse = cIterator.next();
+                    
+                    //removes course from faculty course list if CRN match
+                    if (course.getCRN().equalsIgnoreCase(facultyCourse.getCRN()))
+                        element.getCourses().remove(facultyCourse);
+                }
+            }
             //display a successful drop
             JFrame frame = new JFrame();
             JOptionPane.showMessageDialog(frame, course.getName() +  " has been removed." );
             Backup backup = new Backup();
             backup.backupCourses(courseList);
             backup.backupStudents(listStudent);
+            backup.backupFaculty(facultyList);
         }
         clear();
         reset();
@@ -227,6 +247,7 @@ public class DropACourse extends javax.swing.JFrame {
     }//GEN-LAST:event_exitActionPerformed
 
    private LinkedList<Student> listStudent;
+   private LinkedList<Faculty> facultyList;
    private LinkedList<CurrentCourse> courseList;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton clear;

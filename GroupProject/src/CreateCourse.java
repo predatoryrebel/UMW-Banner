@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.Random;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 
 
@@ -294,7 +295,122 @@ public class CreateCourse extends javax.swing.JFrame {
            String theDays, String theBuilding, String theRoom, String theProfessor, int totalSeatNumber, int theFilledSeats,
            String tempList)
              */
-        addCourse = new CurrentCourse(("" + randomCRN), coursefield.getText(), Integer.parseInt(sectionField.getText()), courseTitle.getText(), Requirements.getText(), Integer.parseInt(creditsField.getText()), time.getText(), days.getText(), building.getText(), room.getText(), professorField.getText(), Integer.parseInt(seats.getText()), 0, "" );
+        //check course name    
+        while (coursefield.getText().isEmpty())
+        {
+            coursefield.setText(JOptionPane.showInputDialog("Enter a course name."));
+        }
+        
+        //check course title
+        while (courseTitle.getText().isEmpty())
+        {
+            courseTitle.setText(JOptionPane.showInputDialog("Enter course title."));
+        }
+        
+        //check professor
+        while (professorField.getText().isEmpty())
+        {
+            professorField.setText(JOptionPane.showInputDialog("Enter professor's last name followed by first initial."));
+        }
+        
+        int section = 0;
+        boolean correct = false;
+        //fill in an empty section number
+        while (sectionField.getText().isEmpty() && correct == false )    
+        {
+            try 
+            {
+            sectionField.setText(JOptionPane.showInputDialog("Give a correct section number"));
+            section = Integer.parseInt(sectionField.getText());
+            
+            correct = true;
+            }
+            catch (Exception e)
+            {
+                sectionField.setText("");
+            }
+        }   
+        //check a section number
+        while (!correct)
+        {
+            try 
+            {
+                section = Integer.parseInt(sectionField.getText());
+                correct = true;
+            }
+            catch (Exception e)
+            {
+                sectionField.setText(JOptionPane.showInputDialog("Give a correct section number"));
+            }
+        }
+        
+        int credits = 0;
+        correct = false;
+        while (creditsField.getText().isEmpty()  && correct == false)
+        {
+            try
+            {
+            creditsField.setText(JOptionPane.showInputDialog("Give a correct number of credits"));
+            credits = Integer.parseInt(creditsField.getText());
+            
+            if (credits > 0)
+                correct = true;
+            }
+            catch (Exception e)
+            {
+                creditsField.setText("");
+            }
+        }
+        
+        while (!correct)
+        {
+            try
+            {
+                 credits = Integer.parseInt(creditsField.getText());
+                 if (credits > 0)
+                    correct = true;
+            }
+            catch (Exception e)
+            {
+                 creditsField.setText(JOptionPane.showInputDialog("Give a correct number of credits"));
+            }
+        }
+        
+        
+        
+        int numberOfSeats = 0;
+        correct = false;
+        while (seats.getText().isEmpty() && correct == false)
+        {
+            try 
+            {
+                seats.setText(JOptionPane.showInputDialog("Give a correct number of seats"));
+                numberOfSeats = Integer.parseInt(seats.getText());
+                
+                if (numberOfSeats > 0)
+                    correct = true;
+            }
+            catch (Exception e)
+            {
+                seats.setText("");
+            }
+        }
+        
+        while (!correct)
+        {
+            try
+            {
+                 numberOfSeats = Integer.parseInt(seats.getText());
+                 if (numberOfSeats > 0)
+                    correct = true;
+            }
+            catch (Exception e)
+            {
+                 seats.setText(JOptionPane.showInputDialog("Give a correct number of seats"));
+            }
+        }
+        
+        addCourse = new CurrentCourse(("" + randomCRN), coursefield.getText(),section , courseTitle.getText(), Requirements.getText(),credits , time.getText(), days.getText(), building.getText(), room.getText(), professorField.getText(),numberOfSeats , 0, "" );
 
         /* Add the new course to the current course list */
         courselist.add(addCourse);
