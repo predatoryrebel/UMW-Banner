@@ -110,8 +110,7 @@ public class Main {
         mainWindow.setVisible(true);
 
         backup.backupAll(courseList, studentList, facultyList, adminList, pastCourseList);
-        System.out.println("BACKED UP");
-       
+               
 
         
     }

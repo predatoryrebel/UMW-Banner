@@ -43,7 +43,6 @@ public class SchedulePanel extends javax.swing.JPanel {
     public void setSchedule(User user, int clear)
     {
         String className = user.getClass().getName();
-        System.out.println("Model: " + scheduleTable.getModel());
         
         if(className.equals("Student") || className.equals("Faculty"))
         {
@@ -65,6 +64,7 @@ public class SchedulePanel extends javax.swing.JPanel {
             
             CurrentCourse current;
             String timeString, dayString;
+            
             // If row is still -1 at the end of the method, do nothing
             int row = -1;
             int mIndex;
@@ -73,7 +73,6 @@ public class SchedulePanel extends javax.swing.JPanel {
             while(it.hasNext())
             {
                 current = it.next();
-                System.out.println("getTime: " + current.getTime());
                 mIndex = current.getTime().indexOf("m");
                 timeString = current.getTime().substring(0, mIndex + 1);
                 dayString = current.getDays();
