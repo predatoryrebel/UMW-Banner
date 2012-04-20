@@ -5,11 +5,13 @@ import java.awt.event.*;
 import javax.swing.border.*;
 
 /**
+ * Main window class.
  * @author Stephen Schmith
  */
- 
+
 public class MainGUI extends JFrame implements ActionListener
 {
+        // GUI components
 	public JMenuBar mainMenu;
 	public JMenu fileMenu;
         public JMenu editMenu;
@@ -31,8 +33,7 @@ public class MainGUI extends JFrame implements ActionListener
         public JMenuItem dropACourse;
         public JMenuItem addGrade;
 	public Container contentPane;
-        //public HomePanel homePanel;
-                
+                       
         // Display components
         // User Profile
         public JPanel profile;
@@ -55,9 +56,11 @@ public class MainGUI extends JFrame implements ActionListener
         public JPanel schedulePanel;
         public SchedulePanel schedule;
         public JLabel placeholder;
-        // Organize scheduling info here
-        
+       
+        // Login object
         public Login login;
+        
+        // Data members
         private User activeUser;
         private LinkedList<Student> studentList;
         private LinkedList<CurrentCourse> courseList;
@@ -69,6 +72,7 @@ public class MainGUI extends JFrame implements ActionListener
 	public MainGUI(LinkedList<Student> student, LinkedList<CurrentCourse> course, LinkedList<Faculty> faculty, LinkedList<User> user,
                 LinkedList<Admin> admin, LinkedList<PastCourse> past)
 	{
+                // Set screen properties
 		setSize(1050,450);
                 setResizable(false);
 		contentPane = getContentPane();
@@ -99,6 +103,7 @@ public class MainGUI extends JFrame implements ActionListener
                 searchForClassesItem = new JMenuItem("Search For Classes");
                 searchForClassesItem.addActionListener(this);
                 
+                // Edit Menu
                 editMenu = new JMenu("Edit");
                 editLastName = new JMenuItem("Edit Last Name");
                 editLastName.addActionListener(this);
@@ -115,7 +120,6 @@ public class MainGUI extends JFrame implements ActionListener
 		
 		// Add items to the file menu
 		fileMenu.add(loginItem);
-                //fileMenu.add(createAccount);
 		fileMenu.add(exitItem);
                 
                 // Add Items to the search menu
@@ -160,7 +164,7 @@ public class MainGUI extends JFrame implements ActionListener
                 majorLabel = new JLabel("Major:");
                 majorLabel.setFont(null);
                 
-                
+                // Add items to the personal info panel
                 personalPanel.add(nameLabel);
                 personalPanel.add(emailLabel);
                 personalPanel.add(majorLabel);
@@ -212,7 +216,7 @@ public class MainGUI extends JFrame implements ActionListener
             mainMenu.add(editMenu);
             mainMenu.add(searchMenu);
             
-            // Set basic information
+            // Set name and email for all users
             nameLabel.setText("<html><b>Name:</b>  " + activeUser.getFirstName() + " " + activeUser.getLastName() + "</html>");
             emailLabel.setText("<html><b>Email:  </b>" + activeUser.getEmail() + "</html>");    
             
@@ -232,6 +236,7 @@ public class MainGUI extends JFrame implements ActionListener
                 academicPanel.setVisible(false);
                 majorLabel.setVisible(false);
             }
+            // If the user is a student
             if (activeUser.getPermission() == 0)
             {
                 //fileMenu.add(createAccount);
@@ -256,20 +261,12 @@ public class MainGUI extends JFrame implements ActionListener
                 gpaLabel.setText("<html><b>GPA:</b>  " + s.getGPA() + "</html>");
                 gpaLabel.setVisible(true);
                 academicPanel.setVisible(true);
-                /*
-                // Set up the schedule
-                SwingUtilities.invokeLater(new Runnable(){
-                    public void run(){
-                        clearSchedule();
-                    }
-                }); */
-                //schedule.setSchedule(activeUser, 1);
                 schedule.setSchedule(activeUser, 0);
             }
             
+            // If Faculty
             if (activeUser.getPermission() == 1)
             {
-                //fileMenu.add(createAccount);
                 searchMenu.add(dropAStudent);
                 searchMenu.add(addGrade);
                 searchMenu.remove(dropItem);
@@ -281,11 +278,6 @@ public class MainGUI extends JFrame implements ActionListener
                 editMenu.remove(editMinor);
                 academicPanel.setVisible(false);
                 majorLabel.setVisible(false);
-               /* SwingUtilities.invokeLater(new Runnable(){
-                    public void run(){
-                        clearSchedule();
-                    }
-                }); */
                 
                 schedule.setSchedule(activeUser, 0);
             }
@@ -315,13 +307,12 @@ public class MainGUI extends JFrame implements ActionListener
             
             if(action.equals("Login"))
             {
-                // Create Login window
                 login.clearText();
                 login.setVisible(true);
             }
             
             // Change the GUI to logged out status.
-            // Current user set to NULL
+            // activeUser set to NULL
             if(action.equals("Logout"))
             {
                 fileMenu.remove(logoutItem);
@@ -329,8 +320,10 @@ public class MainGUI extends JFrame implements ActionListener
                 mainMenu.remove(searchMenu);
                 mainMenu.remove(editMenu);
                 this.setTitle("");
+                
                 // Clear the schedule
-                schedule.setSchedule(activeUser, 1);
+                schedule.setSchedule(activeUser, 1);  
+                
                 contentPane.setVisible(false);
                                        
                 Backup backup = new Backup();
@@ -356,6 +349,7 @@ public class MainGUI extends JFrame implements ActionListener
             
             if(action.equals("Search For Classes"))
             {
+                // Only search if the user is a student
                 if (activeUser.getPermission() == 0)
                 {
                     SearchClass s = new SearchClass(courseList, studentList, activeUser, schedule);

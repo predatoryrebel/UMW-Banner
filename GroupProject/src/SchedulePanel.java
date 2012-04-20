@@ -6,7 +6,7 @@ import java.util.*;
 import java.awt.*;
 /**
  *
- * @author Steve
+ * @author Stephen Schmith
  */
 public class SchedulePanel extends javax.swing.JPanel {
 
@@ -15,9 +15,10 @@ public class SchedulePanel extends javax.swing.JPanel {
      */
     public SchedulePanel() {
         initComponents();
-        int time = 8;
+        int time = 8;  // The earliest available time for a class is 8:00 am
         scheduleTable.setFont(new Font("SansSerif", Font.PLAIN, 9));
         
+        // Set the schedule labels.
         for(int i = 0; i < scheduleTable.getRowCount(); i++)
         {
             if(time < 12)
@@ -39,16 +40,21 @@ public class SchedulePanel extends javax.swing.JPanel {
         }
     }
     
-    // Print schedule information for faculty and students
+    /**
+     * Set the schedule for faculty and students.
+     * @param user the User whose schedule is being printed.
+     * @param clear if clear == 1, setScehdule clears the schedule table. Otherwise, it prints the schedule normally.
+     */
     public void setSchedule(User user, int clear)
     {
         String className = user.getClass().getName();
         
+        // Only print the schedule for Students and Faculty
         if(className.equals("Student") || className.equals("Faculty"))
-        {
-            
+        {            
             LinkedList<CurrentCourse> courses = new LinkedList<CurrentCourse>();
             
+            // Get the course list
             if(className.equals("Student"))
             {
                 Student s = (Student)user;
@@ -63,20 +69,21 @@ public class SchedulePanel extends javax.swing.JPanel {
             ListIterator<CurrentCourse> it = courses.listIterator();
             
             CurrentCourse current;
-            String timeString, dayString;
+            String timeString, dayString;   // timeString: class meeting time in 12 hour format.
+                                            // dayString: class meeting days in MTWRF format.
             
-            // If row is still -1 at the end of the method, do nothing
+            // If row is still -1 at the end of the method, do nothing.
             int row = -1;
             int mIndex;
                        
             while(it.hasNext())
             {
                 current = it.next();
-                mIndex = current.getTime().indexOf("m");
+                mIndex = current.getTime().indexOf("m");    // Parse for the value of time string
                 timeString = current.getTime().substring(0, mIndex + 1);
                 dayString = current.getDays();
                                 
-                // Find the row value
+                // Rows represent time slots and start at 8:00 am.
                 switch(timeString)
                 {
                     case "8:00 am":
@@ -126,7 +133,7 @@ public class SchedulePanel extends javax.swing.JPanel {
                         break;
                 }
                 
-                // Find the column values
+                // Days are represented by the columns.
                 int[] columns = new int[dayString.length()];
                 char c;
                 
@@ -134,6 +141,7 @@ public class SchedulePanel extends javax.swing.JPanel {
                 {
                     c = dayString.charAt(i);
                     
+                    // Assign column values. Columns start at Monday == 1.
                     switch(c)
                     {
                         case 'M':
@@ -155,7 +163,7 @@ public class SchedulePanel extends javax.swing.JPanel {
                 }
                 
                 // Print the class to the table
-                if(row != -1 && clear == 0)   // Don't print anything if a timeslot wasn't found
+                if(row != -1 && clear != 1)   // Don't print anything if a timeslot wasn't found
                 {                
                     for(int i = 0; i < columns.length; i++)
                     {

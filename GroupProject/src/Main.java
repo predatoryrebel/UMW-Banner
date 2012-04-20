@@ -7,6 +7,7 @@ public class Main {
 
     public static void main(String[] args) throws FileNotFoundException {
         
+        // Load application data
         ReadFile start = new ReadFile();
         LinkedList<CurrentCourse> courseList = new LinkedList<CurrentCourse>();
         LinkedList<Student> studentList = new LinkedList<Student>();
@@ -23,6 +24,7 @@ public class Main {
         
         ListIterator<Student> siterator = studentList.listIterator();
         
+        // Build the user lists
         while (siterator.hasNext())
         {
             User element = siterator.next();
@@ -46,6 +48,7 @@ public class Main {
         }
         
          siterator = studentList.listIterator(0);
+         
         //adds courses to a student
         while (siterator.hasNext())
         {
@@ -54,6 +57,7 @@ public class Main {
         }
 
         ListIterator<CurrentCourse> citerator = courseList.listIterator();
+        
         //adds students to a course
         while (citerator.hasNext())
         {
@@ -63,6 +67,7 @@ public class Main {
         }
         
         fiterator = facultyList.listIterator(0);
+        
         //adds courses to faculty member 
         while (fiterator.hasNext())
         {
@@ -105,14 +110,10 @@ public class Main {
         
 
         // Create MainGUI here and pass Login parameters to it
-        
         MainGUI mainWindow = new MainGUI(studentList, courseList, facultyList, userList, adminList, pastCourseList);
         mainWindow.setVisible(true);
 
-        backup.backupAll(courseList, studentList, facultyList, adminList, pastCourseList);
-               
-
-        
+        backup.backupAll(courseList, studentList, facultyList, adminList, pastCourseList);      
     }
 
 
