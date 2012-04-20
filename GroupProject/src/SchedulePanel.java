@@ -68,15 +68,14 @@ public class SchedulePanel extends javax.swing.JPanel {
             // If row is still -1 at the end of the method, do nothing
             int row = -1;
             int mIndex;
-            ArrayList<Integer> columns = new ArrayList<Integer>();
-            
+                       
             while(it.hasNext())
             {
                 current = it.next();
                 mIndex = current.getTime().indexOf("m");
                 timeString = current.getTime().substring(0, mIndex + 1);
                 dayString = current.getDays();
-                
+                                
                 // Find the row value
                 switch(timeString)
                 {
@@ -128,27 +127,29 @@ public class SchedulePanel extends javax.swing.JPanel {
                 }
                 
                 // Find the column values
+                int[] columns = new int[dayString.length()];
                 char c;
-                for(int i = 0; i < dayString.length(); i++)
+                
+                for(int i = 0; i < columns.length; i++)
                 {
                     c = dayString.charAt(i);
                     
                     switch(c)
                     {
                         case 'M':
-                            columns.add(new Integer(1));
+                            columns[i] = 1;
                             break;
                         case 'T':
-                            columns.add(new Integer(2));
+                            columns[i] = 2;
                             break;
                         case 'W':
-                            columns.add(new Integer(3));
+                            columns[i] = 3;
                             break;
                         case 'R':
-                            columns.add(new Integer(4));
+                            columns[i] = 4;
                             break;
                         case 'F':
-                            columns.add(new Integer(5));
+                            columns[i] = 5;
                             break;
                     }
                 }
@@ -156,22 +157,21 @@ public class SchedulePanel extends javax.swing.JPanel {
                 // Print the class to the table
                 if(row != -1 && clear == 0)   // Don't print anything if a timeslot wasn't found
                 {                
-                    for(int i = 0; i < columns.size(); i++)
+                    for(int i = 0; i < columns.length; i++)
                     {
-                        scheduleTable.setValueAt(current.getTitle(), row, columns.get(i).intValue());
+                        scheduleTable.setValueAt(current.getTitle(), row, columns[i]);
                     }
                 }
                 // If clear == 1, delete the timeslots that were filled by this user's schedule. 
                 // Clearing the schdedule this way prevents a threading error in swing
                 else    
                 {
-                    for(int i = 0; i < columns.size(); i++)
+                    for(int i = 0; i < columns.length; i++)
                     {
                         if (row != -1)
-                            scheduleTable.setValueAt(" ", row, columns.get(i).intValue());
+                            scheduleTable.setValueAt(" ", row, columns[i]);
                     }
                 }
-                columns.clear();
             }
         }
     }

@@ -199,6 +199,7 @@ public class MainGUI extends JFrame implements ActionListener
                 contentPane.add(profile, BorderLayout.WEST);
                 contentPane.add(schedulePanel, BorderLayout.CENTER);
                 contentPane.setVisible(false);
+                this.setTitle("Banner Course Registration System");
 	}
         
         // Change the GUI to logged in state
@@ -335,6 +336,7 @@ public class MainGUI extends JFrame implements ActionListener
                 Backup backup = new Backup();
                 backup.backupAll(courseList, studentList, facultyList, adminList, pastList);
                 this.activeUser = null;
+                this.setTitle("Banner Course Registration System");
             }
             
             if(action.equals("Create Account"))
